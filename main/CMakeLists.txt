@@ -1,0 +1,80 @@
+idf_component_register(
+
+    SRCS "waveshare_rgb_lcd_port.c" "main.c" "lvgl_port.c"
+        "../components/ui_files/ui.c"
+        "display_manager.c"
+       
+        "settings_page.c"
+    "../components/ui_files/ui_scrWallpaper.c"
+    "../components/ui_files/ui_scrTheme.c"
+    "../components/ui_files/ui_scrSettings.c"
+    "../components/ui_files/ui_scrRGB.c"
+    "../components/ui_files/ui_scrPanelSettings.c"
+    "../components/ui_files/ui_scrPages.c"
+    "../components/ui_files/ui_scrMain.c"
+    "../components/ui_files/ui_scrInit.c"
+    "../components/ui_files/ui_scrDimsandSensorsandWaters.c"
+    "../components/ui_files/ui_scrCalibration.c"
+    "../components/ui_files/ui_img_wifi3_png.c"
+    "../components/ui_files/ui_img_weatherforecast2_png.c"
+    "../components/ui_files/ui_img_water_png.c"
+    "../components/ui_files/ui_img_waterlevel_png.c"
+    "../components/ui_files/ui_img_usb_png.c"
+    "../components/ui_files/ui_img_tv_png.c"
+    "../components/ui_files/ui_img_toilet_png.c"
+    "../components/ui_files/ui_img_theme_png.c"
+    "../components/ui_files/ui_img_tempicon_png.c"
+    "../components/ui_files/ui_img_snotconnected_png.c"
+    "../components/ui_files/ui_img_sliderpassive_png.c"
+    "../components/ui_files/ui_img_slideractivee_png.c"
+    "../components/ui_files/ui_img_settingsicon_png.c"
+    "../components/ui_files/ui_img_sensors_png.c"
+    "../components/ui_files/ui_img_sconnected_png.c"
+    "../components/ui_files/ui_img_rgbcontrol_png.c"
+    "../components/ui_files/ui_img_refrigerator_png.c"
+    "../components/ui_files/ui_img_readinglamp_png.c"
+    "../components/ui_files/ui_img_oven_png.c"
+    "../components/ui_files/ui_img_outlet_png.c"
+    "../components/ui_files/ui_img_outcontrols_png.c"
+    "../components/ui_files/ui_img_outcontrols2_png.c"
+    "../components/ui_files/ui_img_logo3_png.c"
+    "../components/ui_files/ui_img_lamp_png.c"
+    "../components/ui_files/ui_img_heater_png.c"
+    "../components/ui_files/ui_img_connectioncontrol_png.c"
+    "../components/ui_files/ui_img_caravan_logo_png.c"
+    "../components/ui_files/ui_img_calibration_png.c"
+    "../components/ui_files/ui_img_button_up_png.c"
+    "../components/ui_files/ui_img_button_down_png.c"
+    "../components/ui_files/ui_img_btnsettings2_png.c"
+    "../components/ui_files/ui_img_btnotconnected_png.c"
+    "../components/ui_files/ui_img_btconnected_png.c"
+    "../components/ui_files/ui_img_arcdesign_png.c"
+    "../components/ui_files/ui_img_arcdesign2_png.c"
+    "../components/ui_files/ui_img_arc1_png.c"
+    "../components/ui_files/ui_img_ac_png.c"
+    "../components/ui_files/ui_img_1542361832.c"
+    "../components/ui_files/ui_img_1096609443.c"
+    "../components/ui_files/ui_helpers.c"
+    "../components/ui_files/ui_events.c"
+    "../components/ui_files/ui_comp_hook.c"
+    "../components/ui_files/ui.c"
+
+    
+        INCLUDE_DIRS "."
+        "../components/ui_files"
+        
+        REQUIRES
+        hexnet
+        bt
+        nvs_flash
+        esp_wifi
+        esp_event
+        json
+
+)
+# Set compile options for lvgl component after component registration
+idf_component_get_property(lvgl_lib lvgl__lvgl COMPONENT_LIB)
+
+
+
+target_compile_options(${lvgl_lib} PRIVATE -Wno-format)
