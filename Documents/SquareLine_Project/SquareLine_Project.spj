@@ -48,7 +48,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -485,
-                  -316
+                  -277
                 ],
                 "InheritedType": 7
               },
@@ -194,8 +194,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -452,
-                  -16
+                  -451,
+                  37
                 ],
                 "InheritedType": 7
               },
@@ -510,8 +510,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -450,
-                  -14
+                  -447,
+                  38
                 ],
                 "InheritedType": 7
               },
@@ -650,8 +650,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -451,
-                  42
+                  -453,
+                  94
                 ],
                 "InheritedType": 7
               },
@@ -776,7 +776,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -360,
-                  -18
+                  38
                 ],
                 "InheritedType": 7
               },
@@ -1080,8 +1080,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -356,
-                  -17
+                  -358,
+                  34
                 ],
                 "InheritedType": 7
               },
@@ -1220,8 +1220,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -354,
-                  44
+                  -357,
+                  93
                 ],
                 "InheritedType": 7
               },
@@ -1498,8 +1498,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -2,
-                  320
+                  0,
+                  277
                 ],
                 "InheritedType": 7
               },
@@ -1789,7 +1789,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -448,
-                  284
+                  240
                 ],
                 "InheritedType": 7
               },
@@ -2118,8 +2118,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -213,
-                  11
+                  -215,
+                  83
                 ],
                 "InheritedType": 7
               },
@@ -2264,8 +2264,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -171,
-                  12
+                  -181,
+                  78
                 ],
                 "InheritedType": 7
               },
@@ -2389,8 +2389,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -264,
-                  16
+                  -261,
+                  80
                 ],
                 "InheritedType": 7
               },
@@ -2514,8 +2514,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -267,
-                  -42
+                  -263,
+                  22
                 ],
                 "InheritedType": 7
               },
@@ -2639,8 +2639,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -170,
-                  -38
+                  -173,
+                  17
                 ],
                 "InheritedType": 7
               },
@@ -2764,8 +2764,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -213,
-                  -40
+                  -209,
+                  17
                 ],
                 "InheritedType": 7
               },
@@ -2910,8 +2910,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  97,
-                  -65
+                  111,
+                  -55
                 ],
                 "InheritedType": 7
               },
@@ -3080,8 +3080,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  479,
-                  -314
+                  480,
+                  -274
                 ],
                 "InheritedType": 7
               },
@@ -3225,8 +3225,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -407,
-                  -317
+                  -408,
+                  -275
                 ],
                 "InheritedType": 7
               },
@@ -3365,8 +3365,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  426,
-                  -314
+                  421,
+                  -275
                 ],
                 "InheritedType": 7
               },
@@ -3810,8 +3810,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -205,
-                  -315
+                  -204,
+                  -272
                 ],
                 "InheritedType": 7
               },
@@ -3956,7 +3956,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   101,
-                  -314
+                  -278
                 ],
                 "InheritedType": 7
               },
@@ -4095,8 +4095,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -327,
-                  -173
+                  -315,
+                  -156
                 ],
                 "InheritedType": 7
               },
@@ -4259,8 +4259,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -135,
-                  -315
+                  -137,
+                  -276
                 ],
                 "InheritedType": 7
               },
@@ -5209,8 +5209,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -441,
-                  138
+                  -421,
+                  143
                 ],
                 "InheritedType": 7
               },
@@ -5220,7 +5220,7 @@
                 "strtype": "OBJECT/Size",
                 "intarray": [
                   100,
-                  72
+                  30
                 ],
                 "InheritedType": 7
               },
@@ -5374,8 +5374,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -329,
-                  139
+                  -278,
+                  151
                 ],
                 "InheritedType": 7
               },
@@ -5539,8 +5539,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -222,
-                  138
+                  -170,
+                  152
                 ],
                 "InheritedType": 7
               },
@@ -24210,7 +24210,7 @@
     "uiExportFolderPath": "C:\\Users\\nakau\\Desktop\\VanGo5\\Vango_ESPIDF\\Documents\\SquareLine_Project\\UI_Files",
     "projectExportFolderPath": "C:\\Users\\nakau\\Desktop\\VanGo5\\Vango_ESPIDF\\Documents\\SquareLine_Project",
     "custom_variable_prefix": "uic",
-    "backup_cnt": 5545,
+    "backup_cnt": 5546,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.11",
     "callfuncsexport": "C_FILE",
