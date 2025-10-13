@@ -26,6 +26,8 @@
  
  #include "driver/i2c.h" 
  #include "esp_lcd_touch_gt911.h"
+
+
  #include "hexnet_bluetooth.h"
  #include "hexnet_wifi.h"
  #include "hexnet_nvs.h"

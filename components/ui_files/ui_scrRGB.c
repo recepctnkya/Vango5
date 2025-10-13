@@ -13,8 +13,8 @@ void ui_scrRGB_screen_init(void)
     ui_swRGBTurnON = lv_switch_create(ui_scrRGB);
     lv_obj_set_width(ui_swRGBTurnON, 109);
     lv_obj_set_height(ui_swRGBTurnON, 64);
-    lv_obj_set_x(ui_swRGBTurnON, -375);
-    lv_obj_set_y(ui_swRGBTurnON, -273);
+    lv_obj_set_x(ui_swRGBTurnON, -370);
+    lv_obj_set_y(ui_swRGBTurnON, -219);
     lv_obj_set_align(ui_swRGBTurnON, LV_ALIGN_CENTER);
 
 
@@ -40,8 +40,8 @@ void ui_scrRGB_screen_init(void)
     ui_Panel3 = lv_obj_create(ui_scrRGB);
     lv_obj_set_width(ui_Panel3, 1027);
     lv_obj_set_height(ui_Panel3, 42);
-    lv_obj_set_x(ui_Panel3, -2);
-    lv_obj_set_y(ui_Panel3, 320);
+    lv_obj_set_x(ui_Panel3, 0);
+    lv_obj_set_y(ui_Panel3, 281);
     lv_obj_set_align(ui_Panel3, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Panel3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_Panel3, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -73,8 +73,8 @@ void ui_scrRGB_screen_init(void)
     ui_Button7 = lv_btn_create(ui_scrRGB);
     lv_obj_set_width(ui_Button7, 136);
     lv_obj_set_height(ui_Button7, 114);
-    lv_obj_set_x(ui_Button7, -451);
-    lv_obj_set_y(ui_Button7, 283);
+    lv_obj_set_x(ui_Button7, -448);
+    lv_obj_set_y(ui_Button7, 248);
     lv_obj_set_align(ui_Button7, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Button7, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Button7, LV_OBJ_FLAG_SCROLLABLE);      /// Flags

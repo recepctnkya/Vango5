@@ -65,18 +65,18 @@ extern lv_obj_t * ui_Button22;
 // SCREEN: ui_scrPanelSettings
 void ui_scrPanelSettings_screen_init(void);
 extern lv_obj_t * ui_scrPanelSettings;
-void ui_event_Button5(lv_event_t * e);
-extern lv_obj_t * ui_Button5;
-extern lv_obj_t * ui_lblLock4;
-void ui_event_Button3(lv_event_t * e);
-extern lv_obj_t * ui_Button3;
-extern lv_obj_t * ui_lblSettings2;
 extern lv_obj_t * ui_pnlSaveConfigs;
 extern lv_obj_t * ui_Label12;
 extern lv_obj_t * ui_Label9;
 extern lv_obj_t * ui_pbSaveConfigs;
 extern lv_obj_t * ui_Panel10;
 extern lv_obj_t * ui_lblHexnetTechnology8;
+void ui_event_Button3(lv_event_t * e);
+extern lv_obj_t * ui_Button3;
+extern lv_obj_t * ui_lblSettings2;
+void ui_event_Button5(lv_event_t * e);
+extern lv_obj_t * ui_Button5;
+extern lv_obj_t * ui_lblLock4;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_scrWallpaper

@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include "lvgl_port.h"
 
-void update_display_with_data(const uint8_t *data, int length);
+void update_display_with_data();
 void display_manager_init();
 void apply_screen_temperature_textbox(int sicaklik1_value, int sicaklik2_value);
 

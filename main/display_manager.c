@@ -194,7 +194,6 @@ extern const lv_img_dsc_t ui_img_heater_png;
 
 // Voltage and Current
 #define VOLTAGE_INDIS 1
-#define CURRENT_INDIS 2
 
 // Control Registers
 #define RESET_INDIS 3
@@ -372,7 +371,7 @@ void parse_read_data(cJSON* json);
 void parse_write_data(cJSON* json);
 void parse_configuration_data(cJSON* json);
 void parse_rules_data(cJSON* json);
-char* create_json_data_packet(const uint16_t* regs_data, int numOfOutputs, int numOfDims, int numOfSensors, bool slaveConnectionStatus, int themeType, int numberOfNotifications, cJSON* notifications);
+char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors, bool slaveConnectionStatus, int themeType, int numberOfNotifications, cJSON* notifications);
 void parse_ble_data(const char* json_data);
 
 
@@ -446,7 +445,6 @@ void my_btnThemeWhiteFunc(void)
     lv_obj_set_style_text_color(ui_lblSettingsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     
     // Add missing widgets for white theme
-    lv_obj_set_style_text_color(ui_lblLock, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -526,7 +524,6 @@ void my_btnBlackThemeFunc(void)
     lv_obj_set_style_text_color(ui_lblSettingsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     
     // Add missing widgets for black theme
-    lv_obj_set_style_text_color(ui_lblLock, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -643,12 +640,12 @@ void dim_events(lv_event_t* e) {
 // Function to create the UI dynamically based on numOfOutputs
 void create_dynamic_ui(lv_obj_t* parent) {
 
-    int btn_width = 100;
-    int btn_height = 150;
-    int btn_x_offset = 106; // btn_width + 1 for spacing
-    int btn_y_offset = 191; // btn_height + 1 for spacing
-    int x_start = 14;
-    int y_start = -102;
+    int btn_width = 145;
+    int btn_height = 230;
+    int btn_x_offset = 150; // btn_width + 1 for spacing
+    int btn_y_offset = 235; // btn_height + 1 for spacing
+    int x_start = -40;
+    int y_start = -125;
 
     // Apply numOfOutputs and outputsBuffer to swO1-swO16 and cbxO1-cbxO16
     lv_obj_t* switches[16] = {ui_swO1, ui_swO2, ui_swO3, ui_swO4, ui_swO5, ui_swO6, ui_swO7, ui_swO8, ui_swO9, ui_swO10, ui_swO11, ui_swO12, ui_swO13, ui_swO14, ui_swO15, ui_swO16};
@@ -660,11 +657,11 @@ void create_dynamic_ui(lv_obj_t* parent) {
 
     // Adjust button size and spacing if numOfOutputs is greater than 8
     if (numOfOutputs > 8) {
-        btn_width = 100;
-        btn_height = 90;
-        btn_x_offset = 106; // btn_width + 1 for spacing
-        btn_y_offset = 96; // btn_height + 1 for spacing
-        y_start = -150;
+        btn_width = 145;
+        btn_height = 110;
+        btn_x_offset = 150; // btn_width + 1 for spacing
+        btn_y_offset = 115; // btn_height + 1 for spacing
+        y_start = -170;
     }
 
     for (int i = 0; i < numOfOutputs; i++) {
@@ -691,7 +688,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
 
         if (numOfOutputs > 8) {
             lv_obj_set_align(lblIO[i], LV_ALIGN_BOTTOM_MID);
-            lv_obj_set_y(lblIO[i], btn_height / 2 - 35); // Adjust y position to align at the bottom mid
+            lv_obj_set_y(lblIO[i], btn_height / 2 - 50); // Adjust y position to align at the bottom mid
         }
         else {
 
@@ -916,9 +913,8 @@ static void timer_updateTimer_callback(lv_timer_t * timer) {
         }
         initCounter = 11;
         // Your code here, e.g., update display with new data
-        const uint16_t* regs_data = 0;
-        if (regs_data != NULL) {
-            update_display_with_data((const uint8_t*)regs_data, 70);
+        {
+            update_display_with_data();
         }
     }
     initCounter++;
@@ -1006,10 +1002,10 @@ void set_button_color(lv_obj_t *btn, uint16_t value, int connected) {
     }
 }
 
-void get_data_json_format(const uint16_t* regs_data, int txPacketType, char** json_str)  {
+void get_data_json_format(int txPacketType, char** json_str)  {
 
     // Call create_json_data_packet function
-    *json_str = create_json_data_packet(regs_data, numOfOutputs, numOfDims, numOfSensors, slaveConnectionStatus, panelThemeType, numberOfNotifications, notifications);
+    *json_str = create_json_data_packet(numOfOutputs, numOfDims, numOfSensors, slaveConnectionStatus, panelThemeType, numberOfNotifications, notifications);
     // Check if notifications is not NULL before deleting
     if (notifications != NULL) {
         cJSON_Delete(notifications);
@@ -1022,8 +1018,7 @@ void get_data_json_format(const uint16_t* regs_data, int txPacketType, char** js
 
 
 // Function to update display with new data
-void update_display_with_data(const uint8_t *data, int length) {
-    const uint16_t* regs_data = (const uint16_t*)data;
+void update_display_with_data() {
 
     // Fetch data from registers
     uint16_t analog_input_1 = get_analog_input(0);
@@ -1032,7 +1027,8 @@ void update_display_with_data(const uint8_t *data, int length) {
     uint16_t analog_input_4 = get_analog_input(3);
     uint16_t analog_input_5 = get_analog_input(4);
     batarya_volt = get_voltage() / 100.0;
-    float amper = regs_data[CURRENT_INDIS] / 100.0;
+    // Current calculation removed - was using regs_data[CURRENT_INDIS]
+    float amper = 0.0; // Set to 0 or get from another source if needed
 
     // Convert voltage to string with comma
     char batarya_volt_str[20];
@@ -1098,7 +1094,7 @@ void update_display_with_data(const uint8_t *data, int length) {
     }
     else{
         char* converted_json_data;
-        get_data_json_format(regs_data, 0, &converted_json_data);
+        get_data_json_format(0, &converted_json_data);
         set_converted_json_data(converted_json_data);
     }
 
@@ -1134,7 +1130,7 @@ void update_display_with_data(const uint8_t *data, int length) {
 //###################################### JSON DATA PACKET FUNCTIONS ####################################################
 
 // Example function to create JSON data packet as a C string
-char* create_json_data_packet(const uint16_t* regs_data, int numOfOutputs, int numOfDims, int numOfSensors, bool slaveConnectionStatus, int themeType, int numberOfNotifications, cJSON* notifications) {
+char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors, bool slaveConnectionStatus, int themeType, int numberOfNotifications, cJSON* notifications) {
     // Create a JSON object
     cJSON *json = cJSON_CreateObject();
 

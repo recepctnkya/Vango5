@@ -59,18 +59,18 @@ lv_obj_t * ui_Button22;
 // SCREEN: ui_scrPanelSettings
 void ui_scrPanelSettings_screen_init(void);
 lv_obj_t * ui_scrPanelSettings;
-void ui_event_Button5(lv_event_t * e);
-lv_obj_t * ui_Button5;
-lv_obj_t * ui_lblLock4;
-void ui_event_Button3(lv_event_t * e);
-lv_obj_t * ui_Button3;
-lv_obj_t * ui_lblSettings2;
 lv_obj_t * ui_pnlSaveConfigs;
 lv_obj_t * ui_Label12;
 lv_obj_t * ui_Label9;
 lv_obj_t * ui_pbSaveConfigs;
 lv_obj_t * ui_Panel10;
 lv_obj_t * ui_lblHexnetTechnology8;
+void ui_event_Button3(lv_event_t * e);
+lv_obj_t * ui_Button3;
+lv_obj_t * ui_lblSettings2;
+void ui_event_Button5(lv_event_t * e);
+lv_obj_t * ui_Button5;
+lv_obj_t * ui_lblLock4;
 // CUSTOM VARIABLES
 
 
@@ -325,21 +325,21 @@ void ui_event_Button10(lv_event_t * e)
     }
 }
 
-void ui_event_Button5(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_scrMain, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_scrMain_screen_init);
-    }
-}
-
 void ui_event_Button3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
         savePanelSettings(e);
+    }
+}
+
+void ui_event_Button5(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_scrMain, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_scrMain_screen_init);
     }
 }
 

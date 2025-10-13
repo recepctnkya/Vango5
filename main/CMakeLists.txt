@@ -1,6 +1,6 @@
 idf_component_register(
 
-    SRCS "waveshare_rgb_lcd_port.c" "main.c" "lvgl_port.c"
+    SRCS  "waveshare_rgb_lcd_port.c" "main.c" "lvgl_port.c"
         "../components/ui_files/ui.c"
         "display_manager.c"
        
