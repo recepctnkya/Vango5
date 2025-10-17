@@ -450,10 +450,8 @@ void my_btnThemeWhiteFunc(void)
 
 
 
-    lv_obj_set_style_text_color(ui_Label2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label6, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Label7, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label8, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label9, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     
@@ -526,10 +524,8 @@ void my_btnBlackThemeFunc(void)
     // Add missing widgets for black theme
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Label2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label6, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Label7, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label8, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label9, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -703,15 +699,19 @@ void create_dynamic_ui(lv_obj_t* parent) {
 
         imgIO[i] = lv_img_create(btnIO[i]);
         lv_img_set_src(imgIO[i], get_image_for_button(outputsBuffer[i] - 1));
+        
         lv_obj_set_width(imgIO[i], LV_SIZE_CONTENT);   /// 1
         lv_obj_set_height(imgIO[i], LV_SIZE_CONTENT);    /// 1
         lv_obj_set_x(imgIO[i], 0);
         lv_obj_set_y(imgIO[i], 5);
+        
         if(numOfOutputs > 8) {
             lv_obj_set_align(imgIO[i], LV_ALIGN_TOP_MID);
+            lv_img_set_zoom(imgIO[i], 384); // 256 = 1x (normal size)
         }
         else {
             lv_obj_set_align(imgIO[i], LV_ALIGN_CENTER);
+            lv_img_set_zoom(imgIO[i], 512); // 256 = 1x (normal size)
         }
         
         lv_obj_add_flag(imgIO[i], LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
@@ -728,7 +728,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
         lv_obj_set_width(sldDims[i], 305);
         lv_obj_set_height(sldDims[i], 14);
         lv_obj_set_x(sldDims[i], -6);
-        lv_obj_set_y(sldDims[i], -56 + i * 40); // Adjust y position dynamically
+        lv_obj_set_y(sldDims[i], -56 + i * 50); // Adjust y position dynamically
         lv_obj_set_align(sldDims[i], LV_ALIGN_CENTER);
 
         // Make bar non-clickable
@@ -741,9 +741,10 @@ void create_dynamic_ui(lv_obj_t* parent) {
         lv_obj_set_width(lblDims[i], LV_SIZE_CONTENT);
         lv_obj_set_height(lblDims[i], LV_SIZE_CONTENT);
         lv_obj_set_x(lblDims[i], -135);
-        lv_obj_set_y(lblDims[i], -77 + i * 40); // Adjust y position dynamically
+        lv_obj_set_y(lblDims[i], -77 + i * 50); // Adjust y position dynamically
         lv_obj_set_align(lblDims[i], LV_ALIGN_RIGHT_MID);
         lv_label_set_text_fmt(lblDims[i], "%s:", lblBtnNames[dimsBuffer[i] - 1]);
+        lv_obj_set_style_text_font(lblDims[i], &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
     }
 
 

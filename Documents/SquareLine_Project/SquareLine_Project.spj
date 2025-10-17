@@ -194,8 +194,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -451,
-                  37
+                  -449,
+                  38
                 ],
                 "InheritedType": 7
               },
@@ -510,8 +510,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -447,
-                  38
+                  -449,
+                  41
                 ],
                 "InheritedType": 7
               },
@@ -650,8 +650,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -453,
-                  94
+                  -450,
+                  99
                 ],
                 "InheritedType": 7
               },
@@ -726,7 +726,22 @@
               },
               {
                 "part": "lv.PART.MAIN",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 10450,
+                        "strtype": "_style/Text_Font",
+                        "strval": "montserrat_20",
+                        "InheritedType": 3
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": 1714690801,
                 "strtype": "LABEL/Style_main",
                 "strval": "lv.PART.MAIN, Text, Rectangle, Pad, Transform",
@@ -775,8 +790,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -360,
-                  38
+                  -314,
+                  41
                 ],
                 "InheritedType": 7
               },
@@ -1080,8 +1095,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -358,
-                  34
+                  -311,
+                  40
                 ],
                 "InheritedType": 7
               },
@@ -1220,8 +1235,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -357,
-                  93
+                  -311,
+                  103
                 ],
                 "InheritedType": 7
               },
@@ -1296,7 +1311,22 @@
               },
               {
                 "part": "lv.PART.MAIN",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 10450,
+                        "strtype": "_style/Text_Font",
+                        "strval": "montserrat_20",
+                        "InheritedType": 3
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": 1599418451,
                 "strtype": "LABEL/Style_main",
                 "strval": "lv.PART.MAIN, Text, Rectangle, Pad, Transform",
@@ -2118,8 +2148,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -214,
-                  93
+                  -208,
+                  28
                 ],
                 "InheritedType": 7
               },
@@ -2264,8 +2294,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -180,
-                  92
+                  -173,
+                  28
                 ],
                 "InheritedType": 7
               },
@@ -2340,7 +2370,22 @@
               },
               {
                 "part": "lv.PART.MAIN",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 10450,
+                        "strtype": "_style/Text_Font",
+                        "strval": "montserrat_20",
+                        "InheritedType": 3
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": -1183708764,
                 "strtype": "LABEL/Style_main",
                 "strval": "lv.PART.MAIN, Text, Rectangle, Pad, Transform",
@@ -2389,8 +2434,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -262,
-                  92
+                  -187,
+                  62
                 ],
                 "InheritedType": 7
               },
@@ -2465,7 +2510,22 @@
               },
               {
                 "part": "lv.PART.MAIN",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 10450,
+                        "strtype": "_style/Text_Font",
+                        "strval": "montserrat_20",
+                        "InheritedType": 3
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": 1769016234,
                 "strtype": "LABEL/Style_main",
                 "strval": "lv.PART.MAIN, Text, Rectangle, Pad, Transform",
@@ -2514,8 +2574,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -259,
-                  41
+                  -187,
+                  156
                 ],
                 "InheritedType": 7
               },
@@ -2590,7 +2650,22 @@
               },
               {
                 "part": "lv.PART.MAIN",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 10450,
+                        "strtype": "_style/Text_Font",
+                        "strval": "montserrat_20",
+                        "InheritedType": 3
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": 1807057193,
                 "strtype": "LABEL/Style_main",
                 "strval": "lv.PART.MAIN, Text, Rectangle, Pad, Transform",
@@ -2639,8 +2714,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -180,
-                  41
+                  -173,
+                  126
                 ],
                 "InheritedType": 7
               },
@@ -2715,7 +2790,22 @@
               },
               {
                 "part": "lv.PART.MAIN",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 10450,
+                        "strtype": "_style/Text_Font",
+                        "strval": "montserrat_20",
+                        "InheritedType": 3
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": 1071302135,
                 "strtype": "LABEL/Style_main",
                 "strval": "lv.PART.MAIN, Text, Rectangle, Pad, Transform",
@@ -2764,8 +2854,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -213,
-                  42
+                  -204,
+                  122
                 ],
                 "InheritedType": 7
               },
@@ -2982,41 +3072,6 @@
                           255,
                           255,
                           255
-                        ],
-                        "InheritedType": 7
-                      },
-                      {
-                        "nid": -1093518904,
-                        "strtype": "_style/Border width",
-                        "integer": 1,
-                        "InheritedType": 6
-                      },
-                      {
-                        "nid": 10910,
-                        "strtype": "_style/Shadow_Color",
-                        "intarray": [
-                          0,
-                          0,
-                          0,
-                          50
-                        ],
-                        "InheritedType": 7
-                      },
-                      {
-                        "nid": 10920,
-                        "strtype": "_style/Shadow_params",
-                        "intarray": [
-                          2,
-                          2
-                        ],
-                        "InheritedType": 7
-                      },
-                      {
-                        "nid": 10930,
-                        "strtype": "_style/Shadow_offset",
-                        "intarray": [
-                          5,
-                          5
                         ],
                         "InheritedType": 7
                       }
@@ -3810,7 +3865,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -287,
+                  -312,
                   -273
                 ],
                 "InheritedType": 7
@@ -3955,8 +4010,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  78,
-                  -271
+                  121,
+                  -274
                 ],
                 "InheritedType": 7
               },
@@ -4040,7 +4095,7 @@
                       {
                         "nid": 10450,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_14",
+                        "strval": "montserrat_20",
                         "InheritedType": 3
                       }
                     ],
@@ -4169,35 +4224,6 @@
                           255
                         ],
                         "InheritedType": 7
-                      },
-                      {
-                        "nid": 10910,
-                        "strtype": "_style/Shadow_Color",
-                        "intarray": [
-                          0,
-                          0,
-                          0,
-                          50
-                        ],
-                        "InheritedType": 7
-                      },
-                      {
-                        "nid": 10920,
-                        "strtype": "_style/Shadow_params",
-                        "intarray": [
-                          2,
-                          2
-                        ],
-                        "InheritedType": 7
-                      },
-                      {
-                        "nid": 10930,
-                        "strtype": "_style/Shadow_offset",
-                        "intarray": [
-                          5,
-                          5
-                        ],
-                        "InheritedType": 7
                       }
                     ],
                     "InheritedType": 1
@@ -4259,8 +4285,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -220,
-                  -273
+                  -229,
+                  -274
                 ],
                 "InheritedType": 7
               },
@@ -4344,7 +4370,7 @@
                       {
                         "nid": 10450,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_14",
+                        "strval": "montserrat_20",
                         "InheritedType": 3
                       }
                     ],
@@ -5209,8 +5235,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -427,
-                  141
+                  -446,
+                  149
                 ],
                 "InheritedType": 7
               },
@@ -5282,6 +5308,7 @@
                       {
                         "nid": 10510,
                         "strtype": "_style/Bg_Radius",
+                        "integer": 10,
                         "InheritedType": 6
                       },
                       {
@@ -5374,8 +5401,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -304,
-                  215
+                  -290,
+                  221
                 ],
                 "InheritedType": 7
               },
@@ -5539,8 +5566,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -200,
-                  216
+                  -186,
+                  221
                 ],
                 "InheritedType": 7
               },
