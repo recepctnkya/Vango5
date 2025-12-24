@@ -287,7 +287,7 @@ static SemaphoreHandle_t lvgl_mux = NULL;
 static lv_timer_t * comm_animation_timer = NULL;
 
 // Forward declaration for animation function
-void commScreen_Animation(lv_obj_t * TargetObject, int delay);
+
 
 // Custom opacity animation callback
 static void set_opacity_cb(void * var, int32_t val) {
@@ -394,6 +394,7 @@ static void example_lvgl_touch_cb(lv_indev_drv_t * drv, lv_indev_data_t * data)
         data->point.y = touchpad_y[0];
         data->state = LV_INDEV_STATE_PR;
         panelWallpaperEnableCounter = 0;
+        ESP_LOGI(DISPLAY_TAG, "Touch detected at (%d, %d)", data->point.x, data->point.y);
     } else {
         data->state = LV_INDEV_STATE_REL;
     }
@@ -439,6 +440,7 @@ void my_btnThemeWhiteFunc(void)
 
 
     lv_obj_set_style_text_color(ui_lblSelectTheme, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblWallpaper, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_set_style_text_color(ui_lblWeather, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblDateAndTime, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -450,7 +452,6 @@ void my_btnThemeWhiteFunc(void)
 
 
 
-    lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label6, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label8, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label9, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -516,6 +517,7 @@ void my_btnBlackThemeFunc(void)
     lv_obj_set_style_text_color(ui_lblVangoText, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_set_style_text_color(ui_lblSelectTheme, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblWallpaper, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_set_style_text_color(ui_lblWeather, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblDateAndTime, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -524,7 +526,6 @@ void my_btnBlackThemeFunc(void)
     // Add missing widgets for black theme
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label6, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label8, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label9, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -923,22 +924,6 @@ static void timer_updateTimer_callback(lv_timer_t * timer) {
 }
 
 
-static void wallpaper_update_timer_callback(lv_timer_t * timer) {
-    if (panelWallpaperEnable) {
-        if (panelWallpaperEnableCounter == panelWallpaperTime) {
-            // Check if ui_scrWallpaper is valid before loading it
-            if (ui_scrWallpaper != NULL) {
-                //lv_scr_load(ui_scrWallpaper);
-            }
-        }
-        panelWallpaperEnableCounter++;
-    }
-    else {
-        panelWallpaperEnableCounter = 0;
-    }
-    
-}
-
 // Timer callback for communication animation
 static void comm_animation_timer_callback(lv_timer_t * timer) {
     static bool comm_animation_started = false;
@@ -987,6 +972,21 @@ static void comm_animation_timer_callback(lv_timer_t * timer) {
         lv_obj_set_style_bg_color(ui_Panel1, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
 }
+
+static void wallpaper_update_timer_callback(lv_timer_t * timer) {
+    if (panelWallpaperEnable) {
+        if (panelWallpaperEnableCounter == panelWallpaperTime) {
+            lv_scr_load(ui_scrWallpaper);
+
+        }
+        panelWallpaperEnableCounter++;
+    }
+    else {
+        panelWallpaperEnableCounter = 0;
+    }
+    
+}
+
 
 // Function to set the button color based on the value
 void set_button_color(lv_obj_t *btn, uint16_t value, int connected) {
@@ -1101,10 +1101,6 @@ void update_display_with_data() {
 
 
 
-    parse_ble_data((const char*)get_spp_cmd_buff());
-    reset_spp_cmd_buff();
-
-
     // Ensure create_dynamic_ui is called only once
     static int ui_initialized = 0;
     if (ui_initialized==2) {
@@ -1131,31 +1127,32 @@ void update_display_with_data() {
 //###################################### JSON DATA PACKET FUNCTIONS ####################################################
 
 // Example function to create JSON data packet as a C string
-char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors, bool slaveConnectionStatus, int themeType, int numberOfNotifications, cJSON* notifications) {
+char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors, bool slaveConnectionStatus, int themeType, int numberOfNotifications, cJSON* notifications)
+{
     // Create a JSON object
     cJSON *json = cJSON_CreateObject();
 
     // Add number of outputs, dims, sensors, slave connection status, and theme type to the JSON object
     cJSON_AddStringToObject(json, "slvConn", slaveConnectionStatus ? "Yes" : "No");
-    cJSON_AddNumberToObject(json, "numOfOutputs", numOfOutputs);
-    cJSON_AddNumberToObject(json, "numOfDims", numOfDims);
-    cJSON_AddNumberToObject(json, "numOfSensors", numOfSensors);
-    cJSON_AddStringToObject(json, "RGBEnabled", "yes");
-    cJSON_AddNumberToObject(json, "Theme", themeType);
+    cJSON_AddNumberToObject(json, "numOfO", numOfOutputs);
+    cJSON_AddNumberToObject(json, "numOfD", numOfDims);
+    cJSON_AddNumberToObject(json, "numOfS", numOfSensors);
+    cJSON_AddStringToObject(json, "RGBE", "yes");
+    cJSON_AddNumberToObject(json, "Th", themeType);
     cJSON_AddNumberToObject(json, "volt", batarya_volt);
 
 
     // Add outputsBuffer to the JSON object
     cJSON *outputnames = cJSON_CreateIntArray(outputsBuffer, numOfOutputs);
-    cJSON_AddItemToObject(json, "outputsNameBuffer", outputnames);
+    cJSON_AddItemToObject(json, "outNB", outputnames);
 
     // Add dimsBuffer to the JSON object
     cJSON *dimnames = cJSON_CreateIntArray(dimsBuffer, numOfDims);
-    cJSON_AddItemToObject(json, "DimsNameBuffer", dimnames);
+    cJSON_AddItemToObject(json, "dimNB", dimnames);
 
     // Add sensorsBuffer to the JSON object
     cJSON *sensornames = cJSON_CreateIntArray(sensorsBuffer, 5);
-    cJSON_AddItemToObject(json, "SensorsEnabledBuffer", sensornames);
+    cJSON_AddItemToObject(json, "senNB", sensornames);
 
 
     // Fetch outputsBuffer from regs_data
@@ -1164,14 +1161,14 @@ char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors,
         buf[i] = get_outputs() >> i & 0x01; // Get the output state from the bitmask
     }
     cJSON *outputs = cJSON_CreateIntArray(buf, numOfOutputs);
-    cJSON_AddItemToObject(json, "outputsDataBuffer", outputs);
+    cJSON_AddItemToObject(json, "outDB", outputs);
 
     // Fetch dimsBuffer from regs_data
     for (int i = 0; i < numOfDims; i++) {
         buf[i] = get_dimmable_output(i);
     }
     cJSON *dims = cJSON_CreateIntArray(buf, numOfDims);
-    cJSON_AddItemToObject(json, "DimsDataBuffer", dims);
+    cJSON_AddItemToObject(json, "dDB", dims);
 
 
     // Fetch sensorsBuffer from regs_data
@@ -1179,16 +1176,17 @@ char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors,
         buf[i] = get_analog_input(i);
     }
     cJSON *sensors = cJSON_CreateIntArray(buf, numOfSensors);
-    cJSON_AddItemToObject(json, "SensorsDataBuffer", sensors);
+    cJSON_AddItemToObject(json, "sDB", sensors);
 
 
     rgbBuffer[0] = get_rgb_value(0);
     rgbBuffer[1] = get_rgb_value(1);
     rgbBuffer[2] = get_rgb_value(2);
-    ESP_LOGI(DISPLAY_TAG, "RGB Values: %d, %d, %d", get_rgb_value(0), get_rgb_value(1), get_rgb_value(2));
+    //rgbBuffer[3] = rgbEna;
+    //ESP_LOGI(TAG, "RGB Values: %d, %d, %d", get_rgb_value(0), get_rgb_value(1), get_rgb_value(2));
     // Add rgbBuffer to the JSON object
     cJSON *rgb = cJSON_CreateIntArray(rgbBuffer, 3);
-    cJSON_AddItemToObject(json, "RGBDataBuffer", rgb);
+    cJSON_AddItemToObject(json, "RGBDB", rgb);
     
 
 
@@ -1203,6 +1201,7 @@ char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors,
 
     return json_str; // Caller is responsible for freeing the returned string
 }
+
 
 
 
@@ -1254,7 +1253,10 @@ void parse_ble_data(const char* json_data) {
         return;
     }
 
+    ESP_LOGI("PARSE_BLE_DATA", "MessageType found: '%s'", messageType->valuestring);
+
     if (strcmp(messageType->valuestring, "Read") == 0) {
+        ESP_LOGI("PARSE_BLE_DATA", "Calling parse_read_data");
         parse_read_data(json);
     } else if (strcmp(messageType->valuestring, "Write") == 0) {
         parse_write_data(json);
@@ -1270,6 +1272,75 @@ void parse_ble_data(const char* json_data) {
 }
 
 
+// Function to check if string contains only English alphabet characters
+bool is_english_alphabet(const char* str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        char c = str[i];
+        // Check if character is not a letter (A-Z, a-z) and not a space
+        if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == ' ')) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Function to convert location name to English alphabet
+void convert_location_to_english(const char* input, char* output, size_t output_size) {
+    // Simple conversion mapping for common non-English characters
+    const char* replacements[][2] = {
+        {"ö", "o"}, {"Ö", "O"},
+        {"ü", "u"}, {"Ü", "U"},
+        {"ä", "a"}, {"Ä", "A"},
+        {"å", "a"}, {"Å", "A"},
+        {"ç", "c"}, {"Ç", "C"},
+        {"ş", "s"}, {"Ş", "S"},
+        {"ğ", "g"}, {"Ğ", "G"},
+        {"ı", "i"}, {"İ", "I"},
+        {"ñ", "n"}, {"Ñ", "N"},
+        {"é", "e"}, {"É", "E"},
+        {"è", "e"}, {"È", "E"},
+        {"ê", "e"}, {"Ê", "E"},
+        {"ë", "e"}, {"Ë", "E"},
+        {"à", "a"}, {"À", "A"},
+        {"á", "a"}, {"Á", "A"},
+        {"â", "a"}, {"Â", "A"},
+        {"ã", "a"}, {"Ã", "A"},
+        {"ô", "o"}, {"Ô", "O"},
+        {"ò", "o"}, {"Ò", "O"},
+        {"ó", "o"}, {"Ó", "O"},
+        {"õ", "o"}, {"Õ", "O"},
+        {"ù", "u"}, {"Ù", "U"},
+        {"ú", "u"}, {"Ú", "U"},
+        {"û", "u"}, {"Û", "U"},
+        {"ý", "y"}, {"Ý", "Y"},
+        {"ÿ", "y"}, {"Ÿ", "Y"},
+        {"ß", "ss"},
+        {"æ", "ae"}, {"Æ", "AE"},
+        {"œ", "oe"}, {"Œ", "OE"}
+    };
+    
+    strncpy(output, input, output_size - 1);
+    output[output_size - 1] = '\0';
+    
+    // Apply character replacements
+    for (int i = 0; i < sizeof(replacements) / sizeof(replacements[0]); i++) {
+        char* pos = strstr(output, replacements[i][0]);
+        while (pos != NULL) {
+            size_t len = strlen(replacements[i][0]);
+            size_t replacement_len = strlen(replacements[i][1]);
+            
+            // Check if replacement fits
+            if (strlen(output) - len + replacement_len < output_size) {
+                memmove(pos + replacement_len, pos + len, strlen(pos + len) + 1);
+                memcpy(pos, replacements[i][1], replacement_len);
+                pos = strstr(pos + replacement_len, replacements[i][0]);
+            } else {
+                break;
+            }
+        }
+    }
+}
+
 // Function to parse Read data
 void parse_read_data(cJSON* json) {
     cJSON* time = cJSON_GetObjectItem(json, "Time");
@@ -1277,6 +1348,7 @@ void parse_read_data(cJSON* json) {
     cJSON* weather = cJSON_GetObjectItem(json, "Weather");
     cJSON* location = cJSON_GetObjectItem(json, "Location");
     cJSON* temper = cJSON_GetObjectItem(json, "Temperature");
+    ESP_LOGI("PARSE_READ_DATA", "Parsing Read Data...");
 
     if (time && cJSON_IsString(time)) {
         ESP_LOGI("PARSE_READ_DATA", "Time: %s", time->valuestring);
@@ -1296,13 +1368,31 @@ void parse_read_data(cJSON* json) {
     }
 
     // Merge time, date, and batarya_volt
-    char merged_str[64];
-    snprintf(merged_str, sizeof(merged_str), "Date: %s  Time: %s  Battery: %.2fV", date->valuestring, time->valuestring, batarya_volt);
+    char merged_str[128];
+    snprintf(merged_str, sizeof(merged_str), "Battery:  %.2fV  Date:  %s   Time:  %s",batarya_volt, date->valuestring, time->valuestring);
 
     // Set the combined value to ui_lblDateAndTime
     lv_label_set_text(ui_lblDateAndTime, merged_str);
 
-    snprintf(merged_str, sizeof(merged_str), "%s %s°C", location->valuestring, temper->valuestring);
+    // Process location name - check if it's English alphabet, convert if needed
+    char processed_location[64];
+    if (location && cJSON_IsString(location)) {
+        if (is_english_alphabet(location->valuestring)) {
+            // Location is already in English alphabet
+            strncpy(processed_location, location->valuestring, sizeof(processed_location) - 1);
+            processed_location[sizeof(processed_location) - 1] = '\0';
+            ESP_LOGI("PARSE_READ_DATA", "Location (English): %s", processed_location);
+        } else {
+            // Convert location to English alphabet
+            convert_location_to_english(location->valuestring, processed_location, sizeof(processed_location));
+            ESP_LOGI("PARSE_READ_DATA", "Location converted from '%s' to '%s'", location->valuestring, processed_location);
+        }
+    } else {
+        strcpy(processed_location, "Unknown");
+    }
+
+    snprintf(merged_str, sizeof(merged_str), "%s %s°C", processed_location, temper->valuestring);
+    merged_str[sizeof(merged_str) - 1] = '\0'; // Ensure null termination
     lv_label_set_text(ui_lblWeather, merged_str);
 
     // Set the weather icon based on the weather condition
@@ -1318,6 +1408,8 @@ void parse_read_data(cJSON* json) {
         } else if (strcmp(weather->valuestring, "Snowy") == 0) {
             set_weather_icon(WEATHER_SNOWY);
         } else if (strcmp(weather->valuestring, "Cloudy") == 0) {
+            set_weather_icon(WEATHER_CLOUDY);
+        } else if (strcmp(weather->valuestring, "scattered clouds") == 0) {
             set_weather_icon(WEATHER_CLOUDY);
         } else {
             ESP_LOGI("PARSE_READ_DATA", "Unknown weather condition: %s", weather->valuestring);
@@ -1363,6 +1455,7 @@ void parse_write_data(cJSON* json) {
                 can_data[1] = (uint8_t)cJSON_GetArrayItem(rgbArray, 1)->valueint; // Green
                 can_data[2] = (uint8_t)cJSON_GetArrayItem(rgbArray, 2)->valueint; // Blue
                 ESP_LOGI("PARSE_WRITE_DATA", "RGB Values: R=%d, G=%d, B=%d", can_data[0], can_data[1], can_data[2]);
+                can_data[3] = 1;
                 send_can_frame(0x740, can_data);  // RGB için CAN ID: 0x740
             } else {
                 ESP_LOGE("PARSE_WRITE_DATA", "RGB writeData must be an array of 3 values.");
@@ -1744,6 +1837,40 @@ void save_panel_settings()
 
 void save_theme_settings()
 {
+
+    uint16_t selected_index = 0;
+    static char selected_text[32];  // Buffer to store text
+
+    selected_index = lv_roller_get_selected(ui_rlrTime);
+    // Get the selected item text
+    lv_roller_get_selected_str(ui_rlrTime, selected_text, sizeof(selected_text));
+    // Check if switch is enabled (ON)
+    if (lv_obj_has_state(ui_swEnableWallpaper, LV_STATE_CHECKED)) {
+        // Get the selected roller item index
+        panelWallpaperEnable = 1;  // Enable wallpaper
+        // Print the selected roller item
+        ESP_LOGI(TAG, "Wallpaper Enabled, Selected Time: %s-----index = %d", selected_text, selected_index);
+    } else {
+        panelWallpaperEnable = 0;  // Disable wallpaper
+        ESP_LOGI(TAG, "Wallpaper Disabled");
+    }
+
+    // Set panelWallpaperTime based on the selected index
+    switch (selected_index) {
+        case 0: { panelWallpaperTime = 30;  break;}
+        case 1: { panelWallpaperTime = 60;  break;}
+        case 2: { panelWallpaperTime = 120; break;}
+        case 3: { panelWallpaperTime = 300; break;}
+        case 4: { panelWallpaperTime = 600; break;}
+        default:
+            {
+                ESP_LOGW(TAG, "Invalid roller index: %d, setting default to 30", selected_index);
+                panelWallpaperTime = 30;  // Default if index is out of range
+                break;
+            }
+    }
+    ESP_LOGI(TAG, "Wallpaper Enabled, Selected Time: %s-----index = %d panelThemeType =%d panelWallpaperEnable =%d panelWallpaperTime =%d ", selected_text, selected_index,
+             panelThemeType, panelWallpaperEnable, panelWallpaperTime);
     save_theme_configuration_to_nvs((int16_t*)&panelThemeType, (uint16_t*)&panelWallpaperEnable, (uint16_t*)&panelWallpaperTime);
 }
 
@@ -1751,6 +1878,36 @@ void save_theme_settings()
 void apply_theme_settings()
 {
     // Apply theme enabled status to the switch
+    // Apply theme enabled status to the switch
+    if (panelWallpaperEnable) {
+        lv_obj_add_state(ui_swEnableWallpaper, LV_STATE_CHECKED);
+        lv_obj_clear_flag(ui_rlrTime, LV_OBJ_FLAG_HIDDEN);     /// Flags
+    } else {
+        lv_obj_clear_state(ui_swEnableWallpaper, LV_STATE_CHECKED);
+        lv_obj_add_flag(ui_rlrTime, LV_OBJ_FLAG_HIDDEN);     /// Flags
+    }
+
+    // Map panelWallpaperTime to the roller index
+    uint16_t roller_index = 0;
+
+    switch (panelWallpaperTime) {
+        case 30:  roller_index = 0; break;
+        case 60:  roller_index = 1; break;
+        case 120: roller_index = 2; break;
+        case 300: roller_index = 3; break;
+        case 600: roller_index = 4; break;
+        default:
+            ESP_LOGW(TAG, "Invalid panelWallpaperTime: %d, setting default to 30s", panelWallpaperTime);
+            roller_index = 0;  // Default to first option
+            break;
+    }
+
+    // Set roller selection
+    lv_roller_set_selected(ui_rlrTime, roller_index, LV_ANIM_OFF);
+
+    // Log applied settings
+    ESP_LOGI(TAG, " ############################Applied Theme Settings:panelThemeType = %d panelWallpaperEnable=%d, WallpaperTimeIndex=%d",panelThemeType, panelWallpaperEnable, roller_index);
+
 }
 
 

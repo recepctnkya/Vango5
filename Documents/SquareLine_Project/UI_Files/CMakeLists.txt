@@ -42,14 +42,10 @@ SET(SOURCES ui_scrMain.c
     ui_img_outcontrols_png.c
     ui_img_theme_png.c
     ui_img_connectioncontrol_png.c
-    ui_img_calibration_png.c
     ui_img_btnsettings2_png.c
     ui_img_sensors_png.c
     ui_img_waterlevel_png.c
     ui_img_rgbcontrol_png.c
-    ui_img_settingsicon_png.c
-    ui_img_arc1_png.c
-    ui_img_outcontrols2_png.c
-    ui_img_wifi3_png.c)
+    ui_img_settingsicon_png.c)
 
 add_library(ui ${SOURCES})
