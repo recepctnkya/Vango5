@@ -70,6 +70,9 @@ void waveshare_esp32_s3_touch_reset()
 
 #endif
 
+
+
+
 // Initialize RGB LCD
 esp_err_t waveshare_esp32_s3_rgb_lcd_init()
 {
@@ -175,6 +178,7 @@ esp_err_t waveshare_esp32_s3_rgb_lcd_init()
 #endif                                                                               // CONFIG_EXAMPLE_LCD_TOUCH_CONTROLLER_GT911
 
     ESP_ERROR_CHECK(lvgl_port_init(panel_handle, tp_handle)); // Initialize LVGL with the panel and touch handles
+    
 
     // Register callbacks for RGB panel events
     esp_lcd_rgb_panel_event_callbacks_t cbs = {
@@ -248,10 +252,13 @@ static void add_data(lv_timer_t *timer) // Timer callback to add data to the cha
     lv_chart_set_next_value2(chart, lv_chart_get_series_next(chart, NULL), lv_rand(0, 200), lv_rand(0, 1000)); // Add random data to the chart
 }
 
+
+
+
 // This demo UI is adapted from LVGL official example: https://docs.lvgl.io/master/examples.html#scatter-chart
 void example_lvgl_demo_ui() // LVGL demo UI initialization function
 {
-    lv_obj_t *scr = lv_scr_act();                                              // Get the current active screen
+    lv_obj_t *scr = lv_scr_act();   
     lv_obj_t *chart = lv_chart_create(scr);                                    // Create a chart object
     lv_obj_set_size(chart, 200, 150);                                          // Set chart size
     lv_obj_align(chart, LV_ALIGN_CENTER, 0, 0);                                // Center the chart on the screen

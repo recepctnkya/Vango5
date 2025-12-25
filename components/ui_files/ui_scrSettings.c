@@ -13,9 +13,9 @@ lv_obj_t * ui_Panel5 = NULL;
 lv_obj_t * ui_lblHexnetTechnology5 = NULL;
 lv_obj_t * ui_Button18 = NULL;
 lv_obj_t * ui_lblLock5 = NULL;
-lv_obj_t * ui_Label10 = NULL;
-lv_obj_t * ui_Label11 = NULL;
-lv_obj_t * ui_Label13 = NULL;
+lv_obj_t * ui_lblPanelSettingsB = NULL;
+lv_obj_t * ui_lblThemeSettingsB = NULL;
+lv_obj_t * ui_lblConnectionSettingsB = NULL;
 // event funtions
 void ui_event_Button4(lv_event_t * e)
 {
@@ -163,32 +163,32 @@ void ui_scrSettings_screen_init(void)
     lv_obj_set_style_text_opa(ui_lblLock5, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_lblLock5, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label10 = lv_label_create(ui_scrSettings);
-    lv_obj_set_width(ui_Label10, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label10, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label10, -366);
-    lv_obj_set_y(ui_Label10, 145);
-    lv_obj_set_align(ui_Label10, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label10, "PANEL\nSETTINGS");
-    lv_obj_set_style_text_font(ui_Label10, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_lblPanelSettingsB = lv_label_create(ui_scrSettings);
+    lv_obj_set_width(ui_lblPanelSettingsB, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblPanelSettingsB, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblPanelSettingsB, -366);
+    lv_obj_set_y(ui_lblPanelSettingsB, 145);
+    lv_obj_set_align(ui_lblPanelSettingsB, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblPanelSettingsB, "PANEL\nSETTINGS");
+    lv_obj_set_style_text_font(ui_lblPanelSettingsB, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label11 = lv_label_create(ui_scrSettings);
-    lv_obj_set_width(ui_Label11, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label11, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label11, 12);
-    lv_obj_set_y(ui_Label11, 142);
-    lv_obj_set_align(ui_Label11, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label11, "THEME\nSETTINGS");
-    lv_obj_set_style_text_font(ui_Label11, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_lblThemeSettingsB = lv_label_create(ui_scrSettings);
+    lv_obj_set_width(ui_lblThemeSettingsB, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblThemeSettingsB, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblThemeSettingsB, 12);
+    lv_obj_set_y(ui_lblThemeSettingsB, 142);
+    lv_obj_set_align(ui_lblThemeSettingsB, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblThemeSettingsB, "THEME\nSETTINGS");
+    lv_obj_set_style_text_font(ui_lblThemeSettingsB, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label13 = lv_label_create(ui_scrSettings);
-    lv_obj_set_width(ui_Label13, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label13, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label13, 330);
-    lv_obj_set_y(ui_Label13, 143);
-    lv_obj_set_align(ui_Label13, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label13, "CONNECTION\nSETTINGS");
-    lv_obj_set_style_text_font(ui_Label13, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_lblConnectionSettingsB = lv_label_create(ui_scrSettings);
+    lv_obj_set_width(ui_lblConnectionSettingsB, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblConnectionSettingsB, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblConnectionSettingsB, 330);
+    lv_obj_set_y(ui_lblConnectionSettingsB, 143);
+    lv_obj_set_align(ui_lblConnectionSettingsB, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblConnectionSettingsB, "CONNECTION\nSETTINGS");
+    lv_obj_set_style_text_font(ui_lblConnectionSettingsB, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Button4, ui_event_Button4, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button8, ui_event_Button8, LV_EVENT_ALL, NULL);
@@ -210,8 +210,8 @@ void ui_scrSettings_screen_destroy(void)
     ui_lblHexnetTechnology5 = NULL;
     ui_Button18 = NULL;
     ui_lblLock5 = NULL;
-    ui_Label10 = NULL;
-    ui_Label11 = NULL;
-    ui_Label13 = NULL;
+    ui_lblPanelSettingsB = NULL;
+    ui_lblThemeSettingsB = NULL;
+    ui_lblConnectionSettingsB = NULL;
 
 }

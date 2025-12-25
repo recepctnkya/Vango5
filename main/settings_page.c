@@ -74,7 +74,6 @@ lv_obj_t * ui_Checkbox2;
 lv_obj_t * ui_Checkbox3;
 lv_obj_t * ui_Checkbox4;
 lv_obj_t * ui_Checkbox5;
-lv_obj_t * ui_Checkbox6;
 
 lv_obj_t * ui_lblSensors;
 lv_obj_t * ui_lblDimmableOutputs;
@@ -1120,16 +1119,6 @@ void ui_scrPanelSettings_IO_Dim_init(void)
     lv_obj_set_y(ui_Checkbox5, -76);
     lv_obj_set_align(ui_Checkbox5, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Checkbox5, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-
-    ui_Checkbox6 = lv_checkbox_create(ui_scrPanelSettings);
-    lv_checkbox_set_text(ui_Checkbox6, "RGB Control");
-    lv_obj_set_width(ui_Checkbox6, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Checkbox6, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Checkbox6, 201);
-    lv_obj_set_y(ui_Checkbox6, -50);
-    lv_obj_set_align(ui_Checkbox6, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Checkbox6, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-
  
 
     ui_lblSensors = lv_label_create(ui_scrPanelSettings);

@@ -344,6 +344,10 @@ const char* lblBtnNames[18] = {
     "LAMP", "TOILET", "KITCHEN", "BEDROOM", "CORRIDOR", "STEP", "AC", "USB", "REGRIGE.", "WATER P.", "OUTLET", "OVEN", "TV", "EX.LIGHT", "EX.OUTLET", "HEATER", "SPOT", "READING L."
 };
 
+const char* lblDimBtnNames[8] = {
+    "LAMP", "TOILET", "KITCHEN", "BEDROOM", "CORRIDOR", "STEP", "EX. LIGHT", "SPOT"
+};
+
 
 
 // Example data to save
@@ -470,6 +474,14 @@ void my_btnThemeWhiteFunc(void)
     lv_obj_set_style_text_color(ui_lblUnderArcWater1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblUnderArcWater2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    lv_obj_set_style_text_color(ui_lblDimmableOutputsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblPanelSettingsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblThemeSettingsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblConnectionSettingsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblSensorsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblWaterLevelsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblRGBsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+
     for (int i = 0; i < numOfDims; i++) {
         lv_obj_set_style_text_color(lblDims[i], lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
@@ -545,6 +557,14 @@ void my_btnBlackThemeFunc(void)
     lv_obj_set_style_text_color(ui_lblUnderArcWater1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblUnderArcWater2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    lv_obj_set_style_text_color(ui_lblDimmableOutputsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblPanelSettingsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblThemeSettingsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblConnectionSettingsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblSensorsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblWaterLevelsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblRGBsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+
     for (int i = 0; i < numOfDims; i++) {
         lv_obj_set_style_text_color(lblDims[i], lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
@@ -586,6 +606,7 @@ const void* get_image_for_button(int outputBufferIndex) {
         return NULL; // No matching image found
     }
 }
+
 
 
 
@@ -744,7 +765,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
         lv_obj_set_x(lblDims[i], -135);
         lv_obj_set_y(lblDims[i], -77 + i * 50); // Adjust y position dynamically
         lv_obj_set_align(lblDims[i], LV_ALIGN_RIGHT_MID);
-        lv_label_set_text_fmt(lblDims[i], "%s:", lblBtnNames[dimsBuffer[i] - 1]);
+        lv_label_set_text_fmt(lblDims[i], "%s:", lblDimBtnNames[dimsBuffer[i] - 1]);
         lv_obj_set_style_text_font(lblDims[i], &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
     }
 
@@ -827,6 +848,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
         my_btnThemeWhiteFunc();
     }
     apply_theme_settings();
+    
 
 }
 
@@ -1395,26 +1417,41 @@ void parse_read_data(cJSON* json) {
     merged_str[sizeof(merged_str) - 1] = '\0'; // Ensure null termination
     lv_label_set_text(ui_lblWeather, merged_str);
 
-    // Set the weather icon based on the weather condition
     if (weather && cJSON_IsString(weather)) {
-        if (strcmp(weather->valuestring, "Sunny") == 0) {
-            set_weather_icon(WEATHER_SUNNY);
-        } else if (strcmp(weather->valuestring, "P. Cloudy") == 0) {
-            set_weather_icon(WEATHER_PARTLY_SUNNY);
-        } else if (strcmp(weather->valuestring, "Thunder") == 0) {
+
+        const char *w = weather->valuestring;
+
+        /* ⛈ thunder */
+        if (strcasestr(w, "thunder")) {
             set_weather_icon(WEATHER_THUNDER);
-        } else if (strcmp(weather->valuestring, "Rainy") == 0) {
+        }
+
+        /* 🌧 rain */
+        else if (strcasestr(w, "rain")) {
             set_weather_icon(WEATHER_RAINY);
-        } else if (strcmp(weather->valuestring, "Snowy") == 0) {
+        }
+
+        /* ❄️ snow */
+        else if (strcasestr(w, "snow")) {
             set_weather_icon(WEATHER_SNOWY);
-        } else if (strcmp(weather->valuestring, "Cloudy") == 0) {
+        }
+
+        /* ☀️ sun / clear */
+        else if (strcasestr(w, "sun")) {
+            set_weather_icon(WEATHER_SUNNY);
+        }
+
+        /* ☁️ cloud */
+        else if (strcasestr(w, "cloud")) {
             set_weather_icon(WEATHER_CLOUDY);
-        } else if (strcmp(weather->valuestring, "scattered clouds") == 0) {
-            set_weather_icon(WEATHER_CLOUDY);
-        } else {
-            ESP_LOGI("PARSE_READ_DATA", "Unknown weather condition: %s", weather->valuestring);
+        }
+
+        else {
+                    set_weather_icon(WEATHER_PARTLY_SUNNY);
         }
     }
+
+
 }
 
 
@@ -1972,29 +2009,38 @@ void initialize_dim_widgets_visibility(void)
     lv_obj_add_flag(ui_lblDim2, LV_OBJ_FLAG_HIDDEN);
     lv_obj_add_flag(ui_lblDim3, LV_OBJ_FLAG_HIDDEN);
     lv_obj_add_flag(ui_lblDim4, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel1, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel3, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel4, LV_OBJ_FLAG_HIDDEN);
+
     
     // Unhide only the number of dims specified by numOfDims and add event callbacks
     if (numOfDims >= 1) {
         lv_obj_clear_flag(ui_slDim1, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDim1, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(ui_lblDimLevel1, LV_OBJ_FLAG_HIDDEN);
         lv_label_set_text_fmt(ui_lblDim1, "%s:", lblBtnNames[dimsBuffer[0] - 1]);
         lv_obj_add_event_cb(ui_slDim1, dim_events, LV_EVENT_RELEASED, (void*)0);
     }
     if (numOfDims >= 2) {
         lv_obj_clear_flag(ui_slDim2, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDim2, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(ui_lblDimLevel2, LV_OBJ_FLAG_HIDDEN);
         lv_label_set_text_fmt(ui_lblDim2, "%s:", lblBtnNames[dimsBuffer[1] - 1]);
         lv_obj_add_event_cb(ui_slDim2, dim_events, LV_EVENT_RELEASED, (void*)1);
     }
     if (numOfDims >= 3) {
         lv_obj_clear_flag(ui_slDim3, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDim3, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(ui_lblDimLevel3, LV_OBJ_FLAG_HIDDEN);
         lv_label_set_text_fmt(ui_lblDim3, "%s:", lblBtnNames[dimsBuffer[2] - 1]);
         lv_obj_add_event_cb(ui_slDim3, dim_events, LV_EVENT_RELEASED, (void*)2);
     }
     if (numOfDims >= 4) {
         lv_obj_clear_flag(ui_slDim4, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDim4, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(ui_lblDimLevel4, LV_OBJ_FLAG_HIDDEN);
         lv_label_set_text_fmt(ui_lblDim4, "%s:", lblBtnNames[dimsBuffer[3] - 1]);
         lv_obj_add_event_cb(ui_slDim4, dim_events, LV_EVENT_RELEASED, (void*)3);
     }
@@ -2156,12 +2202,6 @@ void display_manager_init() {
     ESP_LOGI(DISPLAY_TAG, "Display LVGL Scatter Chart");
     // Lock the mutex due to the LVGL APIs are not thread-safe
     if (lvgl_port_lock(-1)) {
-         //example_lvgl_demo_ui(disp);
-        //lv_demo_widgets();
-        // lv_demo_benchmark();
-        // lv_demo_music();
-        // lv_demo_stress();
-        // Release the mutex
         ui_init();
         lv_scr_load(ui_scrInit);
         ui_scrPanelSettings_IO_Dim_init();

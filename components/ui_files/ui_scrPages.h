@@ -29,10 +29,10 @@ extern lv_obj_t * ui_Button12;
 extern void ui_event_Button19(lv_event_t * e);
 extern lv_obj_t * ui_Button19;
 extern lv_obj_t * ui_lblLock6;
-extern lv_obj_t * ui_Label15;
-extern lv_obj_t * ui_Label14;
-extern lv_obj_t * ui_Label16;
-extern lv_obj_t * ui_Label17;
+extern lv_obj_t * ui_lblDimmableOutputsB;
+extern lv_obj_t * ui_lblSensorsB;
+extern lv_obj_t * ui_lblWaterLevelsB;
+extern lv_obj_t * ui_lblRGBsB;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus

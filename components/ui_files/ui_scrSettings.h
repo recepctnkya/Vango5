@@ -25,9 +25,9 @@ extern lv_obj_t * ui_lblHexnetTechnology5;
 extern void ui_event_Button18(lv_event_t * e);
 extern lv_obj_t * ui_Button18;
 extern lv_obj_t * ui_lblLock5;
-extern lv_obj_t * ui_Label10;
-extern lv_obj_t * ui_Label11;
-extern lv_obj_t * ui_Label13;
+extern lv_obj_t * ui_lblPanelSettingsB;
+extern lv_obj_t * ui_lblThemeSettingsB;
+extern lv_obj_t * ui_lblConnectionSettingsB;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus

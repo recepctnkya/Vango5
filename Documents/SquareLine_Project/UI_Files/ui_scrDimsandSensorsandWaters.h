@@ -19,9 +19,13 @@ extern lv_obj_t * ui_lblHexnetTechnology3;
 extern void ui_event_Button21(lv_event_t * e);
 extern lv_obj_t * ui_Button21;
 extern lv_obj_t * ui_lblLock8;
+extern void ui_event_slDim1(lv_event_t * e);
 extern lv_obj_t * ui_slDim1;
+extern void ui_event_slDim2(lv_event_t * e);
 extern lv_obj_t * ui_slDim2;
+extern void ui_event_slDim3(lv_event_t * e);
 extern lv_obj_t * ui_slDim3;
+extern void ui_event_slDim4(lv_event_t * e);
 extern lv_obj_t * ui_slDim4;
 extern lv_obj_t * ui_lblDim1;
 extern lv_obj_t * ui_lblDim2;
@@ -41,6 +45,10 @@ extern lv_obj_t * ui_lblUnderArcWater1;
 extern lv_obj_t * ui_lblUnderArcWater2;
 extern lv_obj_t * ui_imgTemp1;
 extern lv_obj_t * ui_imgTemp2;
+extern lv_obj_t * ui_lblDimLevel1;
+extern lv_obj_t * ui_lblDimLevel2;
+extern lv_obj_t * ui_lblDimLevel3;
+extern lv_obj_t * ui_lblDimLevel4;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus

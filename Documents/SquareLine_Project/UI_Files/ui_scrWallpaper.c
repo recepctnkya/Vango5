@@ -41,8 +41,8 @@ void ui_scrWallpaper_screen_init(void)
     ui_Label3 = lv_label_create(ui_scrWallpaper);
     lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label3, -10);
-    lv_obj_set_y(ui_Label3, -58);
+    lv_obj_set_x(ui_Label3, -5);
+    lv_obj_set_y(ui_Label3, -70);
     lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label3, "20:30\n");
     lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0xF9F9F9), LV_PART_MAIN | LV_STATE_DEFAULT);

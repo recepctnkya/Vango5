@@ -15,10 +15,10 @@ lv_obj_t * ui_lblHexnetTechnology6 = NULL;
 lv_obj_t * ui_Button12 = NULL;
 lv_obj_t * ui_Button19 = NULL;
 lv_obj_t * ui_lblLock6 = NULL;
-lv_obj_t * ui_Label15 = NULL;
-lv_obj_t * ui_Label14 = NULL;
-lv_obj_t * ui_Label16 = NULL;
-lv_obj_t * ui_Label17 = NULL;
+lv_obj_t * ui_lblDimmableOutputsB = NULL;
+lv_obj_t * ui_lblSensorsB = NULL;
+lv_obj_t * ui_lblWaterLevelsB = NULL;
+lv_obj_t * ui_lblRGBsB = NULL;
 // event funtions
 void ui_event_btnDims(lv_event_t * e)
 {
@@ -225,41 +225,41 @@ void ui_scrPages_screen_init(void)
     lv_obj_set_style_text_opa(ui_lblLock6, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_lblLock6, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label15 = lv_label_create(ui_scrPages);
-    lv_obj_set_width(ui_Label15, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label15, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label15, -365);
-    lv_obj_set_y(ui_Label15, 145);
-    lv_obj_set_align(ui_Label15, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label15, "DIMMABLE\nOUTPUTS");
-    lv_obj_set_style_text_font(ui_Label15, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_lblDimmableOutputsB = lv_label_create(ui_scrPages);
+    lv_obj_set_width(ui_lblDimmableOutputsB, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblDimmableOutputsB, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblDimmableOutputsB, -365);
+    lv_obj_set_y(ui_lblDimmableOutputsB, 145);
+    lv_obj_set_align(ui_lblDimmableOutputsB, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblDimmableOutputsB, "DIMMABLE\nOUTPUTS");
+    lv_obj_set_style_text_font(ui_lblDimmableOutputsB, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label14 = lv_label_create(ui_scrPages);
-    lv_obj_set_width(ui_Label14, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label14, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label14, -130);
-    lv_obj_set_y(ui_Label14, 141);
-    lv_obj_set_align(ui_Label14, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label14, "SENSORS");
-    lv_obj_set_style_text_font(ui_Label14, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_lblSensorsB = lv_label_create(ui_scrPages);
+    lv_obj_set_width(ui_lblSensorsB, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblSensorsB, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblSensorsB, -130);
+    lv_obj_set_y(ui_lblSensorsB, 141);
+    lv_obj_set_align(ui_lblSensorsB, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblSensorsB, "SENSORS");
+    lv_obj_set_style_text_font(ui_lblSensorsB, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label16 = lv_label_create(ui_scrPages);
-    lv_obj_set_width(ui_Label16, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label16, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label16, 94);
-    lv_obj_set_y(ui_Label16, 145);
-    lv_obj_set_align(ui_Label16, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label16, "WATER\nLEVELS");
-    lv_obj_set_style_text_font(ui_Label16, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_lblWaterLevelsB = lv_label_create(ui_scrPages);
+    lv_obj_set_width(ui_lblWaterLevelsB, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblWaterLevelsB, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblWaterLevelsB, 94);
+    lv_obj_set_y(ui_lblWaterLevelsB, 145);
+    lv_obj_set_align(ui_lblWaterLevelsB, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblWaterLevelsB, "WATER\nLEVELS");
+    lv_obj_set_style_text_font(ui_lblWaterLevelsB, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label17 = lv_label_create(ui_scrPages);
-    lv_obj_set_width(ui_Label17, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label17, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label17, 331);
-    lv_obj_set_y(ui_Label17, 150);
-    lv_obj_set_align(ui_Label17, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label17, "RGB");
-    lv_obj_set_style_text_font(ui_Label17, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_lblRGBsB = lv_label_create(ui_scrPages);
+    lv_obj_set_width(ui_lblRGBsB, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblRGBsB, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblRGBsB, 331);
+    lv_obj_set_y(ui_lblRGBsB, 150);
+    lv_obj_set_align(ui_lblRGBsB, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblRGBsB, "RGB");
+    lv_obj_set_style_text_font(ui_lblRGBsB, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_btnDims, ui_event_btnDims, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_btnTemperatures, ui_event_btnTemperatures, LV_EVENT_ALL, NULL);
@@ -285,9 +285,9 @@ void ui_scrPages_screen_destroy(void)
     ui_Button12 = NULL;
     ui_Button19 = NULL;
     ui_lblLock6 = NULL;
-    ui_Label15 = NULL;
-    ui_Label14 = NULL;
-    ui_Label16 = NULL;
-    ui_Label17 = NULL;
+    ui_lblDimmableOutputsB = NULL;
+    ui_lblSensorsB = NULL;
+    ui_lblWaterLevelsB = NULL;
+    ui_lblRGBsB = NULL;
 
 }
