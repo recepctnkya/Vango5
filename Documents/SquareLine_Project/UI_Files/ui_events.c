@@ -149,3 +149,8 @@ void sldBrightnessAdjustCallback(lv_event_t * e)
 {
 	// Your code here
 }
+
+void selectLanguagecallback(lv_event_t * e)
+{
+	// Your code here
+}

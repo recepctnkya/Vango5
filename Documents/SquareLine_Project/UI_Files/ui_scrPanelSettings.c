@@ -80,7 +80,7 @@ void ui_scrPanelSettings_screen_init(void)
     lv_obj_set_x(ui_Label9, -2);
     lv_obj_set_y(ui_Label9, 25);
     lv_obj_set_align(ui_Label9, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label9, "CLOSE");
+    lv_label_set_text(ui_Label9, "");
     lv_obj_set_style_text_color(ui_Label9, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Label9, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Label9, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -163,7 +163,7 @@ void ui_scrPanelSettings_screen_init(void)
     lv_obj_set_x(ui_lblLock4, 1);
     lv_obj_set_y(ui_lblLock4, 0);
     lv_obj_set_align(ui_lblLock4, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_lblLock4, "Return");
+    lv_label_set_text(ui_lblLock4, "Back");
     lv_obj_set_style_text_color(ui_lblLock4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_lblLock4, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_lblLock4, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);

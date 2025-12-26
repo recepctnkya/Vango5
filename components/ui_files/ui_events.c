@@ -270,3 +270,8 @@ void btnBrightnessOffCallback(lv_event_t * e)
 {
 
 }
+
+void selectLanguagecallback(lv_event_t * e)
+{
+	save_theme_settings();
+}	

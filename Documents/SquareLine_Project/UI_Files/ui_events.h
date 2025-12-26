@@ -16,6 +16,7 @@ void btnDimsCallbackFunc(lv_event_t * e);
 void btnWatersCallbackFunc(lv_event_t * e);
 void savePanelSettings(lv_event_t * e);
 void btnReturnfromscrDimsandSensorstoscrMainCallback(lv_event_t * e);
+void selectLanguagecallback(lv_event_t * e);
 void enRGBTurnONFunc(lv_event_t * e);
 void enRGBTurnOFFFunc(lv_event_t * e);
 void applyRGBColor(lv_event_t * e);

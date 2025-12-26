@@ -28,6 +28,9 @@ extern lv_obj_t * ui_lblLock5;
 extern lv_obj_t * ui_lblPanelSettingsB;
 extern lv_obj_t * ui_lblThemeSettingsB;
 extern lv_obj_t * ui_lblConnectionSettingsB;
+extern void ui_event_cbLanguage(lv_event_t * e);
+extern lv_obj_t * ui_cbLanguage;
+extern lv_obj_t * ui_lblLanguage;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus

@@ -114,3 +114,7 @@ def btnReturnfromscrDimsandSensorstoscrMainCallback(event_struct):
 def sldBrightnessAdjustCallback(event_struct):
     return
 
+
+def selectLanguagecallback(event_struct):
+    return
+

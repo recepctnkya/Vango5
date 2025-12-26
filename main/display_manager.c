@@ -102,6 +102,8 @@ extern lv_obj_t* ui_slDim2;
 extern lv_obj_t* ui_slDim3;
 extern lv_obj_t* ui_slDim4;
 
+extern lv_obj_t * ui_cbLanguage;
+
 // Missing extern declarations for theme functions
 extern lv_obj_t * ui_Label9;
 extern lv_obj_t * ui_Label12;
@@ -348,6 +350,14 @@ const char* lblDimBtnNames[8] = {
     "LAMP", "TOILET", "KITCHEN", "BEDROOM", "CORRIDOR", "STEP", "EX. LIGHT", "SPOT"
 };
 
+//define turkish version og lblBtnNames and lblDimBtnNames
+const char* lblBtnNames_TR[18] = {
+    "LAMBA", "TUVALET", "MUTFAK", "YATAK OD.", "KORIDOR", "MERDIVEN", "KLIMA", "USB", "BUZDOLABI", "SU POMPASI", "PRIZ", "FIRIN", "TV", "DIS. LAMBA", "DIS. PRIZ", "ISI TICICI", "SPOT", "OKUMA L."
+};
+const char* lblDimBtnNames_TR[8] = {
+    "LAMBA", "TUVALET", "MUTFAK", "YATAK OD.", "KORIDOR", "MERDIVEN", "DIS. LAMBA", "SPOT"
+};
+
 
 
 // Example data to save
@@ -369,6 +379,7 @@ int rgbBuffer[3] = {0};
 int btn_index = 0;
 uint8_t rgbEna = 0; // RGB LED enable variable
 int panelWallpaperEnableCounter = 1;
+int panelLanguageType = 0; // 
 
 
 void parse_read_data(cJSON* json);
@@ -848,6 +859,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
         my_btnThemeWhiteFunc();
     }
     apply_theme_settings();
+    apply_language_settings();
     
 
 }
@@ -1057,7 +1069,7 @@ void update_display_with_data() {
     char batarya_volt_str[20];
     if (batarya_volt < 7.0 || batarya_volt > 16.0) {
         //ESP_LOGW(DISPLAY_TAG, "Voltage out of range: %.2fV", batarya_volt);
-        snprintf(batarya_volt_str, sizeof(batarya_volt_str), "Fail");
+        snprintf(batarya_volt_str, sizeof(batarya_volt_str), "-");
     } else {
         int before_comma_volt = (int)batarya_volt;
         int after_comma_volt = (int)((batarya_volt - before_comma_volt) * 100);
@@ -1068,7 +1080,7 @@ void update_display_with_data() {
     char amper_str[10];
     if (amper < 0 || amper > 100.0) {
         //ESP_LOGW(DISPLAY_TAG, "Current out of range: %.2fA", amper);
-        snprintf(amper_str, sizeof(amper_str), "Fail");
+        snprintf(amper_str, sizeof(amper_str), "-");
     } else {
         int before_comma_amper = (int)amper;
         int after_comma_amper = (int)((amper - before_comma_amper) * 100);
@@ -1671,7 +1683,7 @@ void save_panel_configuration_to_nvs(int totalOutps, int buffer1[16], int totalS
     }
 }
 
-void save_theme_configuration_to_nvs(int16_t* themeType, uint16_t* wallpaperEnabled, uint16_t* wallpaperTimeIndex){
+void save_theme_configuration_to_nvs(int16_t* themeType, uint16_t* wallpaperEnabled, uint16_t* wallpaperTimeIndex, int16_t* lngType) {
 
 
     //Save themeType to NVS
@@ -1682,6 +1694,9 @@ void save_theme_configuration_to_nvs(int16_t* themeType, uint16_t* wallpaperEnab
 
     //Save wallpaperTimeIndex to NVS
     nvs_write_int("wllTimI", panelWallpaperTime);
+
+    //save languageType to NVS
+    nvs_write_int("lngTyp", panelLanguageType);
 
 
 }
@@ -1752,7 +1767,7 @@ void load_panel_configuration_from_nvs(int *totalOutpts, int buffer1[16], int *t
 
 
 // Load the theme settings from NVS
-void load_theme_configuration_from_nvs(int* themeType, int* wallpaperEnabled, int* wallpaperTimeIndex) {
+void load_theme_configuration_from_nvs(int* themeType, int* wallpaperEnabled, int* wallpaperTimeIndex, int* panelLanguageType ) {
 
     // Read themeType from NVS
     if (nvs_read_int("thmTyp", themeType) != ESP_OK || *themeType < 0 || *themeType > 1) {
@@ -1770,10 +1785,15 @@ void load_theme_configuration_from_nvs(int* themeType, int* wallpaperEnabled, in
         *wallpaperTimeIndex = 30; // Set to default value if out of range
     }
 
+    // Read wallpaperEnabled from NVS
+    if (nvs_read_int("lngTyp", panelLanguageType) != ESP_OK || *panelLanguageType < 0 || *panelLanguageType > 2) {
+        *panelLanguageType = 0; // Set to default value if out of range
+    }
+
 
     // Log the loaded configuration
-    ESP_LOGI(DISPLAY_TAG, "Loaded Theme Configuration: Theme=%d, WallpaperEnabled=%d, WallpaperTimeIndex=%d",
-             *themeType, *wallpaperEnabled, *wallpaperTimeIndex);
+    ESP_LOGI(DISPLAY_TAG, "Loaded Theme Configuration: Theme=%d, WallpaperEnabled=%d, WallpaperTimeIndex=%d, LanguageType=%d",
+             *themeType, *wallpaperEnabled, *wallpaperTimeIndex, *panelLanguageType);
 
 }
 
@@ -1906,9 +1926,23 @@ void save_theme_settings()
                 break;
             }
     }
-    ESP_LOGI(TAG, "Wallpaper Enabled, Selected Time: %s-----index = %d panelThemeType =%d panelWallpaperEnable =%d panelWallpaperTime =%d ", selected_text, selected_index,
-             panelThemeType, panelWallpaperEnable, panelWallpaperTime);
-    save_theme_configuration_to_nvs((int16_t*)&panelThemeType, (uint16_t*)&panelWallpaperEnable, (uint16_t*)&panelWallpaperTime);
+
+
+    //ui_cbLanguage read current value of that checkbox if checked or not
+    if (!lv_obj_has_state(ui_cbLanguage, LV_STATE_CHECKED)) {
+        panelLanguageType = 1;  // Turkish
+        ESP_LOGI(TAG, "Language set to Turkish");
+        apply_language_settings();
+    } else {
+        panelLanguageType = 0;  // English
+        ESP_LOGI(TAG, "Language set to English");
+        apply_language_settings();
+    }
+
+    
+    ESP_LOGI(TAG, "Wallpaper Enabled, Selected Time: %s-----index = %d panelThemeType =%d panelWallpaperEnable =%d panelWallpaperTime =%d panelLanguageType =%d", selected_text, selected_index,
+             panelThemeType, panelWallpaperEnable, panelWallpaperTime, panelLanguageType);
+    save_theme_configuration_to_nvs((int16_t*)&panelThemeType, (uint16_t*)&panelWallpaperEnable, (uint16_t*)&panelWallpaperTime, (int16_t*)&panelLanguageType);
 }
 
 
@@ -1945,6 +1979,109 @@ void apply_theme_settings()
     // Log applied settings
     ESP_LOGI(TAG, " ############################Applied Theme Settings:panelThemeType = %d panelWallpaperEnable=%d, WallpaperTimeIndex=%d",panelThemeType, panelWallpaperEnable, roller_index);
 
+}
+
+void apply_language_settings()
+{
+    //if 
+    // Apply language settings based on panelLanguage
+    if (panelLanguageType == 0) {
+        // English
+        //if panelLanguageType is 0 make status of ui_cbLanguage unchecked
+        lv_obj_add_state(ui_cbLanguage, LV_STATE_CHECKED);
+        //set ui_lblLanguage to English 
+        lv_label_set_text(ui_lblLanguage, "ENGLISH");
+
+        lv_label_set_text(ui_lblPanelSettingsB, "PANEL\nSETTINGS");
+        lv_label_set_text(ui_lblThemeSettingsB, "THEME\nSETTINGS");
+        lv_label_set_text(ui_lblConnectionSettingsB, "CONNECTION\nSETTINGS");
+        lv_label_set_text(ui_lblDimmableOutputsB, "DIM\nOUTPUTS");
+        lv_label_set_text(ui_lblSensorsB, "SENSORS");
+        lv_label_set_text(ui_lblWaterLevelsB, "WATER\nLEVELS");
+        lv_label_set_text(ui_lblLock6, "Back");
+        lv_label_set_text(ui_lblLock5, "Back");
+        lv_label_set_text(ui_Label2, "Apply");
+        lv_label_set_text(ui_lblLock2, "Back");
+        lv_label_set_text(ui_lblLock4, "Back");
+        lv_label_set_text(ui_lblLock8, "Back");
+        lv_label_set_text(ui_lblLock3, "Back");
+        lv_label_set_text(ui_lblSettings2, "Save");
+        lv_label_set_text(ui_lblLock3, "Save");
+        lv_label_set_text(ui_lblSelectTheme, "Select Theme: ");
+        lv_label_set_text(ui_lblWallpaper, "Wallpaper: ");
+        lv_label_set_text(ui_lblGrup1, "Clean Water");
+        lv_label_set_text(ui_lblGrup2, "Dirty Water");
+        lv_label_set_text(ui_lblPnlGrup1Sicaklik1, "\n\nEx. Temp.");
+        lv_label_set_text(ui_lblPnlGrup1Sicaklik2, "\n\nIn. Temp.");
+        lv_label_set_text(ui_Label12, "SAVING CONFIGURATIONS...\n   DEVICE WILL RESTART");
+        lv_label_set_text(ui_lblPanelSettings, "PANEL SETTINGS");
+        lv_checkbox_set_text(ui_Checkbox1, "An1-Internal Temperature");
+        lv_checkbox_set_text(ui_Checkbox2, "An2-External Temperature");
+        lv_checkbox_set_text(ui_Checkbox3, "An3-Clean Water");
+        lv_checkbox_set_text(ui_Checkbox4, "An4-Gray Water");
+        lv_checkbox_set_text(ui_Checkbox5, "An5-Dirty Water");
+        lv_label_set_text(ui_lblSensors, "Sensors");
+        lv_label_set_text(ui_lblDimmableOutputs, "Dimmable Outputs");
+
+        //set lblBtnNames_TR with for loop that has numberofOutputs
+        for (int i = 0; i < numOfOutputs; i++) {
+            lv_label_set_text(lblIO[i], lblBtnNames[outputsBuffer[i] - 1]);
+        }
+
+        //do it for dims as well
+        for (int i = 0; i < numOfDims; i++) {
+            lv_label_set_text(lblDims[i], lblDimBtnNames[dimsBuffer[i] - 1]);
+        }
+
+        set_language_for_dropdowns();
+
+    } else if (panelLanguageType == 1) {
+        // Turkish
+
+        lv_label_set_text(ui_lblPanelSettingsB, "PANEL\nAYARLARI");
+        lv_label_set_text(ui_lblThemeSettingsB, "TEMA\nAYARLARI");
+        lv_label_set_text(ui_lblConnectionSettingsB, "BAGLANTI\nAYARLARI");
+        lv_label_set_text(ui_lblDimmableOutputsB, "DIM\nCIKISLARI");
+        lv_label_set_text(ui_lblSensorsB, "SENSORLER");
+        lv_label_set_text(ui_lblWaterLevelsB, "SU\nSEVIYELERI");
+        lv_label_set_text(ui_lblLock6, "Geri");
+        lv_label_set_text(ui_lblLock5, "Geri");
+        lv_label_set_text(ui_Label2, "Uygula");
+        lv_label_set_text(ui_lblLock2, "Geri");
+        lv_label_set_text(ui_lblLock4, "Geri");
+        lv_label_set_text(ui_lblLock8, "Geri");
+        lv_label_set_text(ui_lblLock3, "Geri");
+        lv_label_set_text(ui_lblSettings2, "Kaydet");
+        lv_label_set_text(ui_lblLock3, "Kaydet");
+        lv_label_set_text(ui_lblSelectTheme, "Tema Sec: ");
+        lv_label_set_text(ui_lblWallpaper, "Duvar Kagidi: ");
+        lv_label_set_text(ui_lblGrup1, "Temiz Su");
+        lv_label_set_text(ui_lblGrup2, "Kirli Su");
+        lv_label_set_text(ui_lblPnlGrup1Sicaklik1, "\n\nIc Sicak.");
+        lv_label_set_text(ui_lblPnlGrup1Sicaklik2, "\n\nDis Sicak.");
+        lv_label_set_text(ui_Label12, "AYARLAR KAYDEDILIYOR...\nCIHAZ YENIDEN BASLAYACAK");
+        lv_label_set_text(ui_lblPanelSettings, "PANEL AYARLARI");
+        lv_checkbox_set_text(ui_Checkbox1, "An1-Ic Sicaklik");
+        lv_checkbox_set_text(ui_Checkbox2, "An2-Dis Sicaklik");
+        lv_checkbox_set_text(ui_Checkbox3, "An3-Temiz Su");
+        lv_checkbox_set_text(ui_Checkbox4, "An4-Gri Su");
+        lv_checkbox_set_text(ui_Checkbox5, "An5-Kirli Su");
+        lv_label_set_text(ui_lblSensors, "Sensorler");
+        lv_label_set_text(ui_lblDimmableOutputs, "Dim Cikislari");
+
+        //set lblBtnNames_TR with for loop that has numberofOutputs
+        for (int i = 0; i < numOfOutputs; i++) {
+            lv_label_set_text(lblIO[i], lblBtnNames_TR[outputsBuffer[i] - 1]);
+        }
+
+        //do it for dims as well
+        for (int i = 0; i < numOfDims; i++) {
+            lv_label_set_text(lblDims[i], lblDimBtnNames_TR[dimsBuffer[i] - 1]);
+        }
+        set_language_for_dropdowns_TR();
+
+
+    }
 }
 
 
@@ -2176,7 +2313,7 @@ void display_manager_init() {
     comm_animation_timer = lv_timer_create(comm_animation_timer_callback, 1000, NULL);
 
      load_panel_configuration_from_nvs(&numOfOutputs, outputsBuffer, &numOfSensors, sensorsBuffer, &numOfDims, dimsBuffer);
-     load_theme_configuration_from_nvs(&panelThemeType, &panelWallpaperEnable, &panelWallpaperTime);
+     load_theme_configuration_from_nvs(&panelThemeType, &panelWallpaperEnable, &panelWallpaperTime, &panelLanguageType);
 
             // Debug log the loaded configuration
     ESP_LOGW(DISPLAY_TAG, "Loaded Panel Configuration:");

@@ -16,6 +16,8 @@ lv_obj_t * ui_lblLock5 = NULL;
 lv_obj_t * ui_lblPanelSettingsB = NULL;
 lv_obj_t * ui_lblThemeSettingsB = NULL;
 lv_obj_t * ui_lblConnectionSettingsB = NULL;
+lv_obj_t * ui_cbLanguage = NULL;
+lv_obj_t * ui_lblLanguage = NULL;
 // event funtions
 void ui_event_Button4(lv_event_t * e)
 {
@@ -50,6 +52,21 @@ void ui_event_Button18(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_scrPages, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_scrPages_screen_init);
+    }
+}
+
+void ui_event_cbLanguage(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
+        _ui_checked_set_text_value(ui_lblLanguage, target, "ENGLISH", "TURKISH");
+        selectLanguagecallback(e);
+    }
+    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
+        _ui_checked_set_text_value(ui_lblLanguage, target, "ENGLISH	", "TURKCE");
+        selectLanguagecallback(e);
     }
 }
 
@@ -158,7 +175,7 @@ void ui_scrSettings_screen_init(void)
     lv_obj_set_x(ui_lblLock5, -1);
     lv_obj_set_y(ui_lblLock5, 5);
     lv_obj_set_align(ui_lblLock5, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_lblLock5, "Return");
+    lv_label_set_text(ui_lblLock5, "Back");
     lv_obj_set_style_text_color(ui_lblLock5, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_lblLock5, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_lblLock5, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -190,10 +207,32 @@ void ui_scrSettings_screen_init(void)
     lv_label_set_text(ui_lblConnectionSettingsB, "CONNECTION\nSETTINGS");
     lv_obj_set_style_text_font(ui_lblConnectionSettingsB, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_cbLanguage = lv_switch_create(ui_scrSettings);
+    lv_obj_set_width(ui_cbLanguage, 116);
+    lv_obj_set_height(ui_cbLanguage, 68);
+    lv_obj_set_x(ui_cbLanguage, 414);
+    lv_obj_set_y(ui_cbLanguage, -234);
+    lv_obj_set_align(ui_cbLanguage, LV_ALIGN_CENTER);
+
+    lv_obj_set_style_bg_color(ui_cbLanguage, lv_color_hex(0x38FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_cbLanguage, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_cbLanguage, lv_color_hex(0xFF0000), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_cbLanguage, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
+
+    ui_lblLanguage = lv_label_create(ui_scrSettings);
+    lv_obj_set_width(ui_lblLanguage, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblLanguage, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblLanguage, 285);
+    lv_obj_set_y(ui_lblLanguage, -235);
+    lv_obj_set_align(ui_lblLanguage, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblLanguage, "TURKCE");
+    lv_obj_set_style_text_font(ui_lblLanguage, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_Button4, ui_event_Button4, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button8, ui_event_Button8, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button9, ui_event_Button9, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button18, ui_event_Button18, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_cbLanguage, ui_event_cbLanguage, LV_EVENT_ALL, NULL);
 
 }
 
@@ -213,5 +252,7 @@ void ui_scrSettings_screen_destroy(void)
     ui_lblPanelSettingsB = NULL;
     ui_lblThemeSettingsB = NULL;
     ui_lblConnectionSettingsB = NULL;
+    ui_cbLanguage = NULL;
+    ui_lblLanguage = NULL;
 
 }

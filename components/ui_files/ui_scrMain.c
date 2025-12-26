@@ -483,7 +483,7 @@ void ui_scrMain_screen_init(void)
     lv_obj_set_x(ui_Label6, -2);
     lv_obj_set_y(ui_Label6, 25);
     lv_obj_set_align(ui_Label6, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label6, "CLOSE");
+    lv_label_set_text(ui_Label6, "");
     lv_obj_set_style_text_color(ui_Label6, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Label6, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Label6, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);

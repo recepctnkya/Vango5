@@ -138,7 +138,7 @@ void ui_scrRGB_screen_init(void)
     lv_obj_set_x(ui_lblLock2, -6);
     lv_obj_set_y(ui_lblLock2, 5);
     lv_obj_set_align(ui_lblLock2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_lblLock2, "Return");
+    lv_label_set_text(ui_lblLock2, "Back");
     lv_obj_set_style_text_color(ui_lblLock2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_lblLock2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_lblLock2, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);

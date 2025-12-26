@@ -1268,3 +1268,89 @@ void ui_scrPanelSettings_IO_Dim_init(void)
     lv_obj_add_event_cb(ui_swDim4, ui_event_swDim4, LV_EVENT_ALL, NULL);
 
 }
+
+
+void set_language_for_dropdowns()
+{
+    lv_dropdown_set_options(ui_cbxO1,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO2,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO3,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO4,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO5,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO6,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO7,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO8,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO9,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO10,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO11,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO12,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO13,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO14,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO15,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+    lv_dropdown_set_options(ui_cbxO16,
+                            "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nAC\nUSB\nREGRIGE.\nWATER P.\nOUTLET\nOVEN\nTV\nEX. LIGHT\nEX. OUTLE\nHEATER\nSPOT\nREADING L.");
+
+    lv_dropdown_set_options(ui_cbxDim1, "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nEX. LIGHT\nSPOT");
+    lv_dropdown_set_options(ui_cbxDim2, "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nEX. LIGHT\nSPOT");
+    lv_dropdown_set_options(ui_cbxDim3, "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nEX. LIGHT\nSPOT");
+    lv_dropdown_set_options(ui_cbxDim4, "LAMP\nTOILET\nKITCHEN\nBEDROOM\nCORRIDOR\nSTEP\nEX. LIGHT\nSPOT"); 
+}
+
+//convert dropdown options to Turkish
+void set_language_for_dropdowns_TR()
+{
+    //"LAMBA", "TUVALET", "MUTFAK", "YATAK OD.", "KORIDOR", "MERDIVEN", "KLIMA", "USB", "BUZDOLABI", "SU POMPASI", "PRIZ", "FIRIN", "TV", "DIS. LAMBA", "DIS. PRIZ", "ISI TICICI", "SPOT", "OKUMA L."
+    lv_dropdown_set_options(ui_cbxO1,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO2,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO3,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO4,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO5,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO6,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO7,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO8,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO9,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO10,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO11,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO12,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO13,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO14,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO15,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+    lv_dropdown_set_options(ui_cbxO16,
+                            "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nKLIMA\nUSB\nBUZDOLABI\nSU POMPASI\nPRIZ\nFIRIN\nTV\nDIS. LAMBA\nDIS. PRIZ\nISI TICICI\nSPOT\nOKUMA L.");
+
+    //"LAMBA", "TUVALET", "MUTFAK", "YATAK OD.", "KORIDOR", "MERDIVEN", "DIS. LAMBA", "SPOT"
+    lv_dropdown_set_options(ui_cbxDim1, "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nDIS. LAMBA\nSPOT");
+    lv_dropdown_set_options(ui_cbxDim2, "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nDIS. LAMBA\nSPOT");
+    lv_dropdown_set_options(ui_cbxDim3, "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nDIS. LAMBA\nSPOT");
+    lv_dropdown_set_options(ui_cbxDim4, "LAMBA\nTUVALET\nMUTFAK\nYATAK OD.\nKORIDOR\nMERDIVEN\nDIS. LAMBA\nSPOT");
+}

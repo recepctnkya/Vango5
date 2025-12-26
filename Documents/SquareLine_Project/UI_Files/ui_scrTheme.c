@@ -110,7 +110,7 @@ void ui_scrTheme_screen_init(void)
     lv_obj_set_x(ui_lblLock3, 1);
     lv_obj_set_y(ui_lblLock3, 0);
     lv_obj_set_align(ui_lblLock3, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_lblLock3, "Save");
+    lv_label_set_text(ui_lblLock3, "Back");
     lv_obj_set_style_text_color(ui_lblLock3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_lblLock3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_lblLock3, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);
