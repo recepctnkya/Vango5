@@ -99,24 +99,28 @@ void btnDimsCallbackFunc(lv_event_t * e)
 	if (numOfDims >= 1) {
 		lv_obj_clear_flag(ui_slDim1, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(ui_lblDim1, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_lblDimLevel1, LV_OBJ_FLAG_HIDDEN);
 		lv_label_set_text_fmt(ui_lblDim1, "%s:", lblDimBtnNames[dimsBuffer[0] - 1]);
 		lv_obj_add_event_cb(ui_slDim1, dim_events, LV_EVENT_RELEASED, (void*)0);
 	}
 	if (numOfDims >= 2) {
 		lv_obj_clear_flag(ui_slDim2, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(ui_lblDim2, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_lblDimLevel2, LV_OBJ_FLAG_HIDDEN);
 		lv_label_set_text_fmt(ui_lblDim2, "%s:", lblDimBtnNames[dimsBuffer[1] - 1]);
 		lv_obj_add_event_cb(ui_slDim2, dim_events, LV_EVENT_RELEASED, (void*)1);
 	}
 	if (numOfDims >= 3) {
 		lv_obj_clear_flag(ui_slDim3, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(ui_lblDim3, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_lblDimLevel3, LV_OBJ_FLAG_HIDDEN);
 		lv_label_set_text_fmt(ui_lblDim3, "%s:", lblDimBtnNames[dimsBuffer[2] - 1]);
 		lv_obj_add_event_cb(ui_slDim3, dim_events, LV_EVENT_RELEASED, (void*)2);
 	}
 	if (numOfDims >= 4) {
 		lv_obj_clear_flag(ui_slDim4, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(ui_lblDim4, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_lblDimLevel4, LV_OBJ_FLAG_HIDDEN);
 		lv_label_set_text_fmt(ui_lblDim4, "%s:", lblDimBtnNames[dimsBuffer[3] - 1]);
 		lv_obj_add_event_cb(ui_slDim4, dim_events, LV_EVENT_RELEASED, (void*)3);
 	}
@@ -170,6 +174,10 @@ void btnOutputsCallbackFunc(lv_event_t * e)
 	lv_obj_add_flag(ui_lblWater2, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_add_flag(ui_lblUnderArcWater1, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_add_flag(ui_lblUnderArcWater2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel1, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel3, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel4, LV_OBJ_FLAG_HIDDEN);
 	
 }
 
@@ -200,6 +208,10 @@ void btnTemperaturesCallbackFunc(lv_event_t * e)
 	lv_obj_add_flag(ui_lblWater2, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_add_flag(ui_lblUnderArcWater1, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_add_flag(ui_lblUnderArcWater2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel1, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel3, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel4, LV_OBJ_FLAG_HIDDEN);
 	
 }
 
@@ -232,6 +244,10 @@ void btnWatersCallbackFunc(lv_event_t * e)
 	lv_obj_clear_flag(ui_lblWater2, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_clear_flag(ui_lblUnderArcWater1, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_clear_flag(ui_lblUnderArcWater2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel1, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel3, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_lblDimLevel4, LV_OBJ_FLAG_HIDDEN);
 	
 }
 
