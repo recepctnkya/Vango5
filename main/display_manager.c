@@ -840,7 +840,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
     }
     apply_theme_settings();
     apply_language_settings();
-    lv_obj_set_style_transform_zoom(ui_Label3, 1024, 0); // 256 = 1x, 512 = 2x
+    lv_obj_set_style_transform_zoom(ui_lblScreenClock, 1024, 0); // 256 = 1x, 512 = 2x
     
 
 }
@@ -1018,6 +1018,7 @@ static void wallpaper_update_timer_callback(lv_timer_t * timer) {
     if (panelWallpaperEnable) {
         if (panelWallpaperEnableCounter == panelWallpaperTime) {
             lv_scr_load(ui_scrWallpaper);
+            panelWallpaperEnableCounter = 0;
 
         }
         panelWallpaperEnableCounter++;
@@ -1133,11 +1134,16 @@ void update_display_with_data() {
         //If there is no connection, the time and date will not be updated. Only Battery voltage will be updated.
         lv_label_set_text(ui_lblDateAndTime, batarya_volt_str);
         lv_obj_add_flag(ui_imgWForecast, LV_OBJ_FLAG_HIDDEN);     /// Flags
+        lv_obj_add_flag(ui_lblScreenClock, LV_OBJ_FLAG_HIDDEN);     /// Flags
+        lv_obj_clear_flag(ui_imgScreenLogo, LV_OBJ_FLAG_HIDDEN);     /// Flags
+
     }
     else{
         char* converted_json_data;
         get_data_json_format(0, &converted_json_data);
         set_converted_json_data(converted_json_data);
+        lv_obj_clear_flag(ui_lblScreenClock, LV_OBJ_FLAG_HIDDEN);     /// Flags
+        lv_obj_add_flag(ui_imgScreenLogo, LV_OBJ_FLAG_HIDDEN);     /// Flags
     }
 
 
@@ -1410,6 +1416,7 @@ void parse_read_data(cJSON* json) {
 
     // Merge time, date, and batarya_volt
     char merged_str[128];
+    lv_label_set_text(ui_lblScreenClock, time->valuestring);
     snprintf(merged_str, sizeof(merged_str), "Battery:  %.2fV  Date:  %s   Time:  %s",batarya_volt, date->valuestring, time->valuestring);
 
     // Set the combined value to ui_lblDateAndTime

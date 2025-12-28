@@ -18,6 +18,7 @@ idf_component_register(
     "../components/ui_files/ui_img_weatherforecast2_png.c"
     "../components/ui_files/ui_img_water_png.c"
     "../components/ui_files/ui_img_waterlevel_png.c"
+    "../components/ui_files/ui_img_wallpaperlogo_png.c"
     "../components/ui_files/ui_img_usb_png.c"
     "../components/ui_files/ui_img_tv_png.c"
     "../components/ui_files/ui_img_toilet_png.c"

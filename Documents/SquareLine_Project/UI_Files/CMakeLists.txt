@@ -21,6 +21,7 @@ SET(SOURCES ui_scrMain.c
     ui_img_weatherforecast2_png.c
     ui_img_button_up_png.c
     ui_img_button_down_png.c
+    ui_img_wallpaperlogo_png.c
     ui_img_caravan_logo_png.c
     ui_img_ac_png.c
     ui_img_heater_png.c

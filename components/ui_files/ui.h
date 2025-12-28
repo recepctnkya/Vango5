@@ -47,6 +47,7 @@ LV_IMG_DECLARE(ui_img_btnotconnected_png);    // assets/btnotconnected.png
 LV_IMG_DECLARE(ui_img_weatherforecast2_png);    // assets/weatherforecast2.png
 LV_IMG_DECLARE(ui_img_button_up_png);    // assets/button up.png
 LV_IMG_DECLARE(ui_img_button_down_png);    // assets/button down.png
+LV_IMG_DECLARE(ui_img_wallpaperlogo_png);    // assets/wallpaperLogo.png
 LV_IMG_DECLARE(ui_img_caravan_logo_png);    // assets/caravan logo.png
 LV_IMG_DECLARE(ui_img_ac_png);    // assets/AC.png
 LV_IMG_DECLARE(ui_img_heater_png);    // assets/heater.png

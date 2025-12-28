@@ -14,12 +14,12 @@ extern "C" {
 extern void ui_scrWallpaper_screen_init(void);
 extern void ui_scrWallpaper_screen_destroy(void);
 extern lv_obj_t * ui_scrWallpaper;
-extern lv_obj_t * ui_Label3;
+extern lv_obj_t * ui_lblScreenClock;
 extern void ui_event_btnUnlockScreen(lv_event_t * e);
 extern lv_obj_t * ui_btnUnlockScreen;
-extern lv_obj_t * ui_Label18;
 extern void ui_event_Container2(lv_event_t * e);
 extern lv_obj_t * ui_Container2;
+extern lv_obj_t * ui_imgScreenLogo;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus

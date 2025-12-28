@@ -6,10 +6,10 @@
 #include "ui.h"
 
 lv_obj_t * ui_scrWallpaper = NULL;
-lv_obj_t * ui_Label3 = NULL;
+lv_obj_t * ui_lblScreenClock = NULL;
 lv_obj_t * ui_btnUnlockScreen = NULL;
-lv_obj_t * ui_Label18 = NULL;
 lv_obj_t * ui_Container2 = NULL;
+lv_obj_t * ui_imgScreenLogo = NULL;
 // event funtions
 void ui_event_btnUnlockScreen(lv_event_t * e)
 {
@@ -38,16 +38,16 @@ void ui_scrWallpaper_screen_init(void)
     lv_obj_set_style_bg_color(ui_scrWallpaper, lv_color_hex(0x020202), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_scrWallpaper, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label3 = lv_label_create(ui_scrWallpaper);
-    lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label3, -5);
-    lv_obj_set_y(ui_Label3, -70);
-    lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label3, "20:30\n");
-    lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0xF9F9F9), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Label3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label3, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_lblScreenClock = lv_label_create(ui_scrWallpaper);
+    lv_obj_set_width(ui_lblScreenClock, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_lblScreenClock, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_lblScreenClock, -197);
+    lv_obj_set_y(ui_lblScreenClock, -61);
+    lv_obj_set_align(ui_lblScreenClock, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_lblScreenClock, "\n");
+    lv_obj_set_style_text_color(ui_lblScreenClock, lv_color_hex(0x00AAF6), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_lblScreenClock, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_lblScreenClock, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_btnUnlockScreen = lv_btn_create(ui_scrWallpaper);
     lv_obj_set_width(ui_btnUnlockScreen, 711);
@@ -66,16 +66,6 @@ void ui_scrWallpaper_screen_init(void)
     lv_obj_set_style_shadow_color(ui_btnUnlockScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_opa(ui_btnUnlockScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label18 = lv_label_create(ui_scrWallpaper);
-    lv_obj_set_width(ui_Label18, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label18, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label18, -7);
-    lv_obj_set_y(ui_Label18, 13);
-    lv_obj_set_align(ui_Label18, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label18, "GOTHENBURG 20 *C");
-    lv_obj_set_style_text_color(ui_Label18, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Label18, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     ui_Container2 = lv_obj_create(ui_scrWallpaper);
     lv_obj_remove_style_all(ui_Container2);
     lv_obj_set_width(ui_Container2, 989);
@@ -84,6 +74,17 @@ void ui_scrWallpaper_screen_init(void)
     lv_obj_set_y(ui_Container2, -26);
     lv_obj_set_align(ui_Container2, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Container2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_imgScreenLogo = lv_img_create(ui_scrWallpaper);
+    lv_img_set_src(ui_imgScreenLogo, &ui_img_wallpaperlogo_png);
+    lv_obj_set_width(ui_imgScreenLogo, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_imgScreenLogo, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_imgScreenLogo, -9);
+    lv_obj_set_y(ui_imgScreenLogo, -31);
+    lv_obj_set_align(ui_imgScreenLogo, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_imgScreenLogo, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_imgScreenLogo, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_img_set_zoom(ui_imgScreenLogo, 180);
 
     lv_obj_add_event_cb(ui_btnUnlockScreen, ui_event_btnUnlockScreen, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Container2, ui_event_Container2, LV_EVENT_ALL, NULL);
@@ -96,9 +97,9 @@ void ui_scrWallpaper_screen_destroy(void)
 
     // NULL screen variables
     ui_scrWallpaper = NULL;
-    ui_Label3 = NULL;
+    ui_lblScreenClock = NULL;
     ui_btnUnlockScreen = NULL;
-    ui_Label18 = NULL;
     ui_Container2 = NULL;
+    ui_imgScreenLogo = NULL;
 
 }
