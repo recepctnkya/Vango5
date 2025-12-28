@@ -56,6 +56,8 @@ void ui_scrRGB_screen_init(void)
 {
     ui_scrRGB = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_scrRGB, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_scrRGB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_scrRGB, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_swRGBTurnON = lv_switch_create(ui_scrRGB);
     lv_obj_set_width(ui_swRGBTurnON, 109);

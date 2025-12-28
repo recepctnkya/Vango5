@@ -13,6 +13,10 @@ extern "C" {
 void arcTemizSuValueChanged(lv_event_t * e);
 void btnTemperaturesCallbackFunc(lv_event_t * e);
 void btnDimsCallbackFunc(lv_event_t * e);
+void motorMoveBackwardPressed(lv_event_t * e);
+void motorMoveBackwardReleased(lv_event_t * e);
+void motorMoveForwardPressed(lv_event_t * e);
+void motorMoveForwardReleased(lv_event_t * e);
 void btnWatersCallbackFunc(lv_event_t * e);
 void savePanelSettings(lv_event_t * e);
 void btnReturnfromscrDimsandSensorstoscrMainCallback(lv_event_t * e);

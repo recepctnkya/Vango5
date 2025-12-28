@@ -1075,60 +1075,7 @@ void ui_scrPanelSettings_IO_Dim_init(void)
 
     lv_obj_set_style_radius(ui_swO13, 10, LV_PART_KNOB | LV_STATE_DEFAULT);
 
-    ui_Checkbox1 = lv_checkbox_create(ui_scrPanelSettings);
-    lv_checkbox_set_text(ui_Checkbox1, "An1-Internal Temperature");
-    lv_obj_set_width(ui_Checkbox1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Checkbox1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Checkbox1, 249);
-    lv_obj_set_y(ui_Checkbox1, -172);
-    lv_obj_set_align(ui_Checkbox1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Checkbox1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-
-    ui_Checkbox2 = lv_checkbox_create(ui_scrPanelSettings);
-    lv_checkbox_set_text(ui_Checkbox2, "An2-External Temperature");
-    lv_obj_set_width(ui_Checkbox2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Checkbox2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Checkbox2, 252);
-    lv_obj_set_y(ui_Checkbox2, -149);
-    lv_obj_set_align(ui_Checkbox2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Checkbox2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-
-    ui_Checkbox3 = lv_checkbox_create(ui_scrPanelSettings);
-    lv_checkbox_set_text(ui_Checkbox3, "An3-Clean Water");
-    lv_obj_set_width(ui_Checkbox3, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Checkbox3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Checkbox3, 216);
-    lv_obj_set_y(ui_Checkbox3, -125);
-    lv_obj_set_align(ui_Checkbox3, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Checkbox3, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-
-    ui_Checkbox4 = lv_checkbox_create(ui_scrPanelSettings);
-    lv_checkbox_set_text(ui_Checkbox4, "An4-Gray Water");
-    lv_obj_set_width(ui_Checkbox4, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Checkbox4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Checkbox4, 214);
-    lv_obj_set_y(ui_Checkbox4, -101);
-    lv_obj_set_align(ui_Checkbox4, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Checkbox4, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-
-    ui_Checkbox5 = lv_checkbox_create(ui_scrPanelSettings);
-    lv_checkbox_set_text(ui_Checkbox5, "An5-Dirty Water");
-    lv_obj_set_width(ui_Checkbox5, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Checkbox5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Checkbox5, 214);
-    lv_obj_set_y(ui_Checkbox5, -76);
-    lv_obj_set_align(ui_Checkbox5, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Checkbox5, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
  
-
-    ui_lblSensors = lv_label_create(ui_scrPanelSettings);
-    lv_obj_set_width(ui_lblSensors, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_lblSensors, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_lblSensors, 233);
-    lv_obj_set_y(ui_lblSensors, -202);
-    lv_obj_set_align(ui_lblSensors, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_lblSensors, "Sensors");
-    lv_obj_set_style_text_font(ui_lblSensors, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_lblDimmableOutputs = lv_label_create(ui_scrPanelSettings);
     lv_obj_set_width(ui_lblDimmableOutputs, LV_SIZE_CONTENT);   /// 1

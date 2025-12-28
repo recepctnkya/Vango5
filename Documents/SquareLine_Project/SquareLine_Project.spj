@@ -5739,7 +5739,7 @@
                   {
                     "nid": 1030,
                     "strtype": "LABEL/Text",
-                    "strval": "",
+                    "strval": "OK",
                     "InheritedType": 10
                   },
                   {
@@ -6526,6 +6526,136 @@
                 "strtype": "BUTTON/Style_main",
                 "strval": "lv.PART.MAIN, Rectangle, Pad, Text, Transform",
                 "InheritedType": 11
+              },
+              {
+                "disabled": false,
+                "nid": 1001791,
+                "strtype": "_event/EventHandler",
+                "strval": "PRESSED",
+                "childs": [
+                  {
+                    "nid": 1001792,
+                    "strtype": "_event/name",
+                    "strval": "Event30",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001793,
+                    "strtype": "_event/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001794,
+                    "strtype": "_event/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001795,
+                    "strtype": "_event/action",
+                    "strval": "CALL FUNCTION",
+                    "childs": [
+                      {
+                        "nid": 1001796,
+                        "strtype": "CALL FUNCTION/Name",
+                        "strval": "CALL FUNCTION",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001797,
+                        "strtype": "CALL FUNCTION/Call",
+                        "strval": "<{Function_name}>( event_struct )",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001798,
+                        "strtype": "CALL FUNCTION/CallC",
+                        "strval": "<{Function_name}>( e );",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001799,
+                        "strtype": "CALL FUNCTION/Function_name",
+                        "strval": "motorMoveBackwardPressed",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001800,
+                        "strtype": "CALL FUNCTION/Dont_export_function",
+                        "strval": "False",
+                        "InheritedType": 2
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
+              },
+              {
+                "disabled": false,
+                "nid": 1001811,
+                "strtype": "_event/EventHandler",
+                "strval": "RELEASED",
+                "childs": [
+                  {
+                    "nid": 1001812,
+                    "strtype": "_event/name",
+                    "strval": "Event32",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001813,
+                    "strtype": "_event/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001814,
+                    "strtype": "_event/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001815,
+                    "strtype": "_event/action",
+                    "strval": "CALL FUNCTION",
+                    "childs": [
+                      {
+                        "nid": 1001816,
+                        "strtype": "CALL FUNCTION/Name",
+                        "strval": "CALL FUNCTION",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001817,
+                        "strtype": "CALL FUNCTION/Call",
+                        "strval": "<{Function_name}>( event_struct )",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001818,
+                        "strtype": "CALL FUNCTION/CallC",
+                        "strval": "<{Function_name}>( e );",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001819,
+                        "strtype": "CALL FUNCTION/Function_name",
+                        "strval": "motorMoveBackwardReleased",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001820,
+                        "strtype": "CALL FUNCTION/Dont_export_function",
+                        "strval": "False",
+                        "InheritedType": 2
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
               }
             ],
             "saved_objtypeKey": "BUTTON"
@@ -6709,6 +6839,136 @@
                 "strtype": "BUTTON/Style_main",
                 "strval": "lv.PART.MAIN, Rectangle, Pad, Text, Transform",
                 "InheritedType": 11
+              },
+              {
+                "disabled": false,
+                "nid": 1001801,
+                "strtype": "_event/EventHandler",
+                "strval": "PRESSED",
+                "childs": [
+                  {
+                    "nid": 1001802,
+                    "strtype": "_event/name",
+                    "strval": "Event31",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001803,
+                    "strtype": "_event/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001804,
+                    "strtype": "_event/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001821,
+                    "strtype": "_event/action",
+                    "strval": "CALL FUNCTION",
+                    "childs": [
+                      {
+                        "nid": 1001822,
+                        "strtype": "CALL FUNCTION/Name",
+                        "strval": "CALL FUNCTION",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001823,
+                        "strtype": "CALL FUNCTION/Call",
+                        "strval": "<{Function_name}>( event_struct )",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001824,
+                        "strtype": "CALL FUNCTION/CallC",
+                        "strval": "<{Function_name}>( e );",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001825,
+                        "strtype": "CALL FUNCTION/Function_name",
+                        "strval": "motorMoveForwardPressed",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001826,
+                        "strtype": "CALL FUNCTION/Dont_export_function",
+                        "strval": "False",
+                        "InheritedType": 2
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
+              },
+              {
+                "disabled": false,
+                "nid": 1001827,
+                "strtype": "_event/EventHandler",
+                "strval": "RELEASED",
+                "childs": [
+                  {
+                    "nid": 1001828,
+                    "strtype": "_event/name",
+                    "strval": "Event33",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001829,
+                    "strtype": "_event/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001830,
+                    "strtype": "_event/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001831,
+                    "strtype": "_event/action",
+                    "strval": "CALL FUNCTION",
+                    "childs": [
+                      {
+                        "nid": 1001832,
+                        "strtype": "CALL FUNCTION/Name",
+                        "strval": "CALL FUNCTION",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001833,
+                        "strtype": "CALL FUNCTION/Call",
+                        "strval": "<{Function_name}>( event_struct )",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001834,
+                        "strtype": "CALL FUNCTION/CallC",
+                        "strval": "<{Function_name}>( e );",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001835,
+                        "strtype": "CALL FUNCTION/Function_name",
+                        "strval": "motorMoveForwardReleased",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001836,
+                        "strtype": "CALL FUNCTION/Dont_export_function",
+                        "strval": "False",
+                        "InheritedType": 2
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
               }
             ],
             "saved_objtypeKey": "BUTTON"
@@ -9327,6 +9587,7 @@
               },
               {
                 "nid": 1984372381,
+                "flags": 1048576,
                 "strtype": "LABEL/Label",
                 "InheritedType": 1
               },
@@ -22677,15 +22938,15 @@
             "saved_objtypeKey": "LABEL"
           },
           {
-            "guid": "GUID40344545-373027S9244360",
-            "deepid": -1756237234,
+            "guid": "GUID65111445-943394S7654362",
+            "deepid": -1417032392,
             "dont_export": false,
             "locked": false,
             "properties": [
               {
                 "nid": 10,
                 "strtype": "OBJECT/Name",
-                "strval": "cbLanguage",
+                "strval": "dbLanguage",
                 "InheritedType": 10
               },
               {
@@ -22716,8 +22977,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  414,
-                  -234
+                  376,
+                  -239
                 ],
                 "InheritedType": 7
               },
@@ -22726,8 +22987,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Size",
                 "intarray": [
-                  116,
-                  68
+                  200,
+                  50
                 ],
                 "InheritedType": 7
               },
@@ -22750,403 +23011,12 @@
                 "InheritedType": 1
               },
               {
-                "nid": 300,
-                "strtype": "OBJECT/Scrollbar_mode",
-                "strval": "AUTO",
-                "InheritedType": 3
-              },
-              {
-                "nid": 310,
-                "strtype": "OBJECT/Scroll_direction",
-                "strval": "ALL",
-                "InheritedType": 3
-              },
-              {
-                "nid": 314,
-                "strtype": "OBJECT/Scroll_snap_x",
-                "strval": "NONE",
-                "InheritedType": 3
-              },
-              {
-                "nid": 315,
-                "strtype": "OBJECT/Scroll_snap_y",
-                "strval": "NONE",
-                "InheritedType": 3
-              },
-              {
-                "nid": 320,
-                "flags": 1048576,
-                "strtype": "OBJECT/States",
-                "InheritedType": 1
-              },
-              {
-                "part": "lv.PART.MAIN",
-                "childs": [],
-                "nid": 1010,
-                "strtype": "SWITCH/Style_main",
-                "strval": "lv.PART.MAIN, Rectangle, Pad, Anim1, Transform",
-                "InheritedType": 11
-              },
-              {
-                "part": "lv.PART.INDICATOR",
-                "childs": [
-                  {
-                    "nid": 10000,
-                    "strtype": "_style/StyleState",
-                    "strval": "DEFAULT",
-                    "childs": [
-                      {
-                        "nid": 10520,
-                        "strtype": "_style/Bg_Color",
-                        "intarray": [
-                          56,
-                          255,
-                          0,
-                          255
-                        ],
-                        "InheritedType": 7
-                      }
-                    ],
-                    "InheritedType": 1
-                  },
-                  {
-                    "nid": 20000,
-                    "strtype": "_style/StyleState",
-                    "strval": "CHECKED",
-                    "childs": [
-                      {
-                        "nid": 20520,
-                        "strtype": "_style/Bg_Color",
-                        "intarray": [
-                          255,
-                          0,
-                          0,
-                          255
-                        ],
-                        "InheritedType": 7
-                      }
-                    ],
-                    "InheritedType": 1
-                  }
-                ],
-                "nid": 1020,
-                "strtype": "SWITCH/Style_indicator",
-                "strval": "lv.PART.INDICATOR, Rectangle",
-                "InheritedType": 11
-              },
-              {
-                "part": "lv.PART.KNOB",
-                "childs": [],
-                "nid": 1030,
-                "strtype": "SWITCH/Style_knob",
-                "strval": "lv.PART.KNOB, Rectangle, Pad",
-                "InheritedType": 11
-              },
-              {
-                "disabled": false,
-                "nid": 1001757,
-                "strtype": "_event/EventHandler",
-                "strval": "CHECKED(VALUE_CHANGED)",
-                "childs": [
-                  {
-                    "nid": 1001758,
-                    "strtype": "_event/name",
-                    "strval": "Event28",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1001759,
-                    "strtype": "_event/condition_C",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1001760,
-                    "strtype": "_event/condition_P",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1001761,
-                    "flags": 1048576,
-                    "strtype": "_event/action",
-                    "strval": "SET TEXT VALUE WHEN CHECKED",
-                    "childs": [
-                      {
-                        "nid": 1001762,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/Name",
-                        "strval": "SET TEXT VALUE FROM CHECKED",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001763,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/Call",
-                        "strval": "SetTextValueChecked( <{Target}>, event_struct.get_target(), \"<{On_text}>\", \"<{Off_text}>\")",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001764,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/CallC",
-                        "strval": "_ui_checked_set_text_value( <{Target}>, target, \"<{On_text}>\", \"<{Off_text}>\");",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001765,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/Target",
-                        "strval": "GUID67572263-373029S5924360",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": 1001766,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/On_text",
-                        "strval": "ENGLISH",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001767,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/Off_text",
-                        "strval": "TURKISH",
-                        "InheritedType": 10
-                      }
-                    ],
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1001779,
-                    "flags": 1048576,
-                    "strtype": "_event/action",
-                    "strval": "CALL FUNCTION",
-                    "childs": [
-                      {
-                        "nid": 1001780,
-                        "strtype": "CALL FUNCTION/Name",
-                        "strval": "CALL FUNCTION",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001781,
-                        "strtype": "CALL FUNCTION/Call",
-                        "strval": "<{Function_name}>( event_struct )",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001782,
-                        "strtype": "CALL FUNCTION/CallC",
-                        "strval": "<{Function_name}>( e );",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001783,
-                        "strtype": "CALL FUNCTION/Function_name",
-                        "strval": "selectLanguagecallback",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001784,
-                        "strtype": "CALL FUNCTION/Dont_export_function",
-                        "strval": "False",
-                        "InheritedType": 2
-                      }
-                    ],
-                    "InheritedType": 10
-                  }
-                ],
-                "InheritedType": 4
-              },
-              {
-                "disabled": false,
-                "nid": 1001768,
-                "strtype": "_event/EventHandler",
-                "strval": "UNCHECKED(VALUE_CHANGED)",
-                "childs": [
-                  {
-                    "nid": 1001769,
-                    "strtype": "_event/name",
-                    "strval": "Event29",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1001770,
-                    "strtype": "_event/condition_C",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1001771,
-                    "strtype": "_event/condition_P",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1001772,
-                    "flags": 1048576,
-                    "strtype": "_event/action",
-                    "strval": "SET TEXT VALUE WHEN CHECKED",
-                    "childs": [
-                      {
-                        "nid": 1001773,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/Name",
-                        "strval": "SET TEXT VALUE FROM CHECKED",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001774,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/Call",
-                        "strval": "SetTextValueChecked( <{Target}>, event_struct.get_target(), \"<{On_text}>\", \"<{Off_text}>\")",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001775,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/CallC",
-                        "strval": "_ui_checked_set_text_value( <{Target}>, target, \"<{On_text}>\", \"<{Off_text}>\");",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001776,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/Target",
-                        "strval": "GUID67572263-373029S5924360",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": 1001777,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/On_text",
-                        "strval": "ENGLISH\t",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001778,
-                        "strtype": "SET TEXT VALUE WHEN CHECKED/Off_text",
-                        "strval": "TURKCE",
-                        "InheritedType": 10
-                      }
-                    ],
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1001785,
-                    "flags": 1048576,
-                    "strtype": "_event/action",
-                    "strval": "CALL FUNCTION",
-                    "childs": [
-                      {
-                        "nid": 1001786,
-                        "strtype": "CALL FUNCTION/Name",
-                        "strval": "CALL FUNCTION",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001787,
-                        "strtype": "CALL FUNCTION/Call",
-                        "strval": "<{Function_name}>( event_struct )",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001788,
-                        "strtype": "CALL FUNCTION/CallC",
-                        "strval": "<{Function_name}>( e );",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001789,
-                        "strtype": "CALL FUNCTION/Function_name",
-                        "strval": "selectLanguagecallback",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1001790,
-                        "strtype": "CALL FUNCTION/Dont_export_function",
-                        "strval": "False",
-                        "InheritedType": 2
-                      }
-                    ],
-                    "InheritedType": 10
-                  }
-                ],
-                "InheritedType": 4
-              }
-            ],
-            "saved_objtypeKey": "SWITCH"
-          },
-          {
-            "guid": "GUID67572263-373029S5924360",
-            "deepid": 387076286,
-            "dont_export": false,
-            "locked": false,
-            "properties": [
-              {
-                "nid": 10,
-                "strtype": "OBJECT/Name",
-                "strval": "lblLanguage",
-                "InheritedType": 10
-              },
-              {
-                "nid": 20,
-                "strtype": "OBJECT/Layout",
-                "InheritedType": 1
-              },
-              {
-                "Flow": 0,
-                "Wrap": false,
-                "Reversed": false,
-                "MainAlignment": 0,
-                "CrossAlignment": 0,
-                "TrackAlignment": 0,
-                "LayoutType": 0,
-                "nid": 30,
-                "strtype": "OBJECT/Layout_type",
-                "strval": "No_layout",
-                "InheritedType": 13
-              },
-              {
-                "nid": 40,
-                "strtype": "OBJECT/Transform",
-                "InheritedType": 1
-              },
-              {
-                "nid": 50,
-                "flags": 17,
-                "strtype": "OBJECT/Position",
-                "intarray": [
-                  285,
-                  -235
-                ],
-                "InheritedType": 7
-              },
-              {
-                "nid": 60,
-                "flags": 51,
-                "strtype": "OBJECT/Size",
-                "intarray": [
-                  1,
-                  1
-                ],
-                "InheritedType": 7
-              },
-              {
-                "nid": 70,
-                "strtype": "OBJECT/Align",
-                "strval": "CENTER",
-                "InheritedType": 3
-              },
-              {
-                "nid": 90,
-                "flags": 1048576,
-                "strtype": "OBJECT/Flags",
-                "InheritedType": 1
-              },
-              {
-                "nid": 110,
-                "strtype": "OBJECT/Clickable",
-                "strval": "False",
+                "nid": 260,
+                "strtype": "OBJECT/Scroll_on_focus",
+                "strval": "True",
                 "InheritedType": 2
               },
               {
-                "nid": 225,
-                "flags": 1048576,
-                "strtype": "OBJECT/Scrolling",
-                "InheritedType": 1
-              },
-              {
                 "nid": 300,
                 "strtype": "OBJECT/Scrollbar_mode",
                 "strval": "AUTO",
@@ -23178,26 +23048,32 @@
               },
               {
                 "nid": 1010,
-                "strtype": "LABEL/Label",
+                "strtype": "DROPDOWN/Dropdown",
                 "InheritedType": 1
               },
               {
                 "nid": 1020,
-                "strtype": "LABEL/Long_mode",
-                "strval": "WRAP",
-                "InheritedType": 3
+                "strtype": "DROPDOWN/Options",
+                "strval": "TURKCE\\nENGLISH",
+                "InheritedType": 10
               },
               {
                 "nid": 1030,
-                "strtype": "LABEL/Text",
-                "strval": "TURKCE",
-                "InheritedType": 10
+                "strtype": "DROPDOWN/List_align",
+                "strval": "BOTTOM",
+                "InheritedType": 3
               },
               {
                 "nid": 1040,
-                "strtype": "LABEL/Recolor",
-                "strval": "False",
+                "strtype": "DROPDOWN/Show_selected",
+                "strval": "True",
                 "InheritedType": 2
+              },
+              {
+                "nid": 1050,
+                "strtype": "DROPDOWN/Base_text",
+                "strval": "",
+                "InheritedType": 10
               },
               {
                 "part": "lv.PART.MAIN",
@@ -23217,13 +23093,125 @@
                     "InheritedType": 1
                   }
                 ],
-                "nid": 1050,
-                "strtype": "LABEL/Style_main",
+                "nid": 1060,
+                "strtype": "DROPDOWN/Style_main",
                 "strval": "lv.PART.MAIN, Text, Rectangle, Pad, Transform",
                 "InheritedType": 11
+              },
+              {
+                "part": "lv.PART.INDICATOR",
+                "childs": [],
+                "nid": 1070,
+                "strtype": "DROPDOWN/Style_indicator",
+                "strval": "lv.PART.INDICATOR, Text",
+                "InheritedType": 11
+              },
+              {
+                "part": " lv.PART.MAIN",
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 10450,
+                        "strtype": "_style/Text_Font",
+                        "strval": "montserrat_20",
+                        "InheritedType": 3
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
+                "nid": 1080,
+                "strtype": "DROPDOWN/Style_list_main",
+                "strval": "{\"python\":\"{0}.get_list()\",\"c\":\"lv_dropdown_get_list({0})\"} lv.PART.MAIN, Text, Rectangle, Pad",
+                "InheritedType": 11
+              },
+              {
+                "part": " lv.PART.SCROLLBAR",
+                "childs": [],
+                "nid": 1090,
+                "strtype": "DROPDOWN/Style_list_scrollbar",
+                "strval": "{\"python\":\"{0}.get_list()\",\"c\":\"lv_dropdown_get_list({0})\"} lv.PART.SCROLLBAR, Rectangle, Pad",
+                "InheritedType": 11
+              },
+              {
+                "part": " lv.PART.SELECTED",
+                "childs": [],
+                "nid": 1100,
+                "strtype": "DROPDOWN/Style_list_selected",
+                "strval": "{\"python\":\"{0}.get_list()\",\"c\":\"lv_dropdown_get_list({0})\"} lv.PART.SELECTED, Text, Rectangle",
+                "InheritedType": 11
+              },
+              {
+                "disabled": false,
+                "nid": 1001837,
+                "strtype": "_event/EventHandler",
+                "strval": "VALUE_CHANGED",
+                "childs": [
+                  {
+                    "nid": 1001838,
+                    "strtype": "_event/name",
+                    "strval": "Event28",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001839,
+                    "strtype": "_event/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001840,
+                    "strtype": "_event/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001841,
+                    "strtype": "_event/action",
+                    "strval": "CALL FUNCTION",
+                    "childs": [
+                      {
+                        "nid": 1001842,
+                        "strtype": "CALL FUNCTION/Name",
+                        "strval": "CALL FUNCTION",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001843,
+                        "strtype": "CALL FUNCTION/Call",
+                        "strval": "<{Function_name}>( event_struct )",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001844,
+                        "strtype": "CALL FUNCTION/CallC",
+                        "strval": "<{Function_name}>( e );",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001845,
+                        "strtype": "CALL FUNCTION/Function_name",
+                        "strval": "selectLanguagecallback",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001846,
+                        "strtype": "CALL FUNCTION/Dont_export_function",
+                        "strval": "False",
+                        "InheritedType": 2
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
               }
             ],
-            "saved_objtypeKey": "LABEL"
+            "saved_objtypeKey": "DROPDOWN"
           }
         ],
         "isPage": true,
@@ -25158,7 +25146,27 @@
           },
           {
             "part": "lv.PART.MAIN",
-            "childs": [],
+            "childs": [
+              {
+                "nid": 10000,
+                "strtype": "_style/StyleState",
+                "strval": "DEFAULT",
+                "childs": [
+                  {
+                    "nid": 10520,
+                    "strtype": "_style/Bg_Color",
+                    "intarray": [
+                      255,
+                      255,
+                      255,
+                      255
+                    ],
+                    "InheritedType": 7
+                  }
+                ],
+                "InheritedType": 1
+              }
+            ],
             "nid": 1040,
             "strtype": "SCREEN/Style_main",
             "strval": "lv.PART.MAIN, Rectangle, Pad, Text",
@@ -30708,7 +30716,7 @@
     "theme_color1": 5,
     "theme_color2": 0,
     "custom_variable_prefix": "uic",
-    "backup_cnt": 5579,
+    "backup_cnt": 5587,
     "autosave_cnt": 0,
     "group_color_cnt": 0,
     "lvgl_version": "8.3.11",
@@ -30718,7 +30726,7 @@
     "naming": "Name",
     "naming_force_lowercase": false,
     "naming_add_subcomponent": false,
-    "nidcnt": 1001791,
+    "nidcnt": 1001847,
     "BitDepth": 16,
     "Name": "SquareLine_Project"
   }

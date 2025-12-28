@@ -118,3 +118,23 @@ def sldBrightnessAdjustCallback(event_struct):
 def selectLanguagecallback(event_struct):
     return
 
+
+def motorMoveBackward(event_struct):
+    return
+
+
+def motorMoveBackwardPressed(event_struct):
+    return
+
+
+def motorMoveBackwardReleased(event_struct):
+    return
+
+
+def motorMoveForwardReleased(event_struct):
+    return
+
+
+def motorMoveForwardPressed(event_struct):
+    return
+

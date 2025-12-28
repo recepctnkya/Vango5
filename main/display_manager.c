@@ -102,7 +102,6 @@ extern lv_obj_t* ui_slDim2;
 extern lv_obj_t* ui_slDim3;
 extern lv_obj_t* ui_slDim4;
 
-extern lv_obj_t * ui_cbLanguage;
 
 // Missing extern declarations for theme functions
 extern lv_obj_t * ui_Label9;
@@ -119,6 +118,7 @@ extern lv_obj_t * ui_lblWater1;
 extern lv_obj_t * ui_lblWater2;
 extern lv_obj_t * ui_lblUnderArcWater1;
 extern lv_obj_t * ui_lblUnderArcWater2;
+extern lv_obj_t * ui_Label3;
 
 extern lv_obj_t* ui_Checkbox1;
 extern lv_obj_t* ui_Checkbox2;
@@ -380,6 +380,8 @@ int btn_index = 0;
 uint8_t rgbEna = 0; // RGB LED enable variable
 int panelWallpaperEnableCounter = 1;
 int panelLanguageType = 0; // 
+int motorData = 0;
+int pnlConnectionLostTimeout = 0;
 
 
 void parse_read_data(cJSON* json);
@@ -430,13 +432,8 @@ void my_btnThemeWhiteFunc(void)
 
     
     lv_obj_set_style_text_color(ui_lblPanelSettings, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_lblSensors, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblDimmableOutputs, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox3, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox4, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox5, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+
 
     lv_obj_set_style_text_color(ui_lblPnlGrup1Sicaklik1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1Sicaklik2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -465,9 +462,6 @@ void my_btnThemeWhiteFunc(void)
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
-
-
-    lv_obj_set_style_text_color(ui_Label6, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label8, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label9, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     
@@ -515,13 +509,8 @@ void my_btnBlackThemeFunc(void)
 
     
     lv_obj_set_style_text_color(ui_lblPanelSettings, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_lblSensors, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblDimmableOutputs, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Checkbox5, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+
     // ui_Checkbox6 removed - only 5 checkboxes exist
 
     lv_obj_set_style_text_color(ui_lblPnlGrup1Sicaklik1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -549,7 +538,6 @@ void my_btnBlackThemeFunc(void)
     // Add missing widgets for black theme
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblPnlGrup1SicaklikDeger2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Label6, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label8, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Label9, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -809,14 +797,6 @@ void create_dynamic_ui(lv_obj_t* parent) {
     }
 
 
-    //Function to apply sensorsBuffer to checkboxes
-    for (int i = 0; i < 5; i++) {
-        if (sensorsBuffer[i] == 1) {
-            lv_obj_add_state(checkboxes[i], LV_STATE_CHECKED); // Check the checkbox
-        } else {
-            lv_obj_clear_state(checkboxes[i], LV_STATE_CHECKED); // Uncheck the checkbox
-        }
-    }
 
 
 
@@ -860,18 +840,30 @@ void create_dynamic_ui(lv_obj_t* parent) {
     }
     apply_theme_settings();
     apply_language_settings();
+    lv_obj_set_style_transform_zoom(ui_Label3, 1024, 0); // 256 = 1x, 512 = 2x
     
 
 }
 
+static void connectionLostPopupTimer(lv_timer_t * timer) {
+    lv_obj_add_flag(ui_pnlConnectionLost, LV_OBJ_FLAG_HIDDEN);     /// Flags
+}
 
+
+ lv_timer_t * ConnectionLostPopupTimer = NULL;
 // Function to set the image source based on connection status
 void set_device_image(bool connected) {
     static bool condition = false;
     if (connected) {
         lv_obj_clear_flag(ui_imgsconnected, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(ui_imgsnotconnected, LV_OBJ_FLAG_HIDDEN);
+
+        lv_timer_del(ConnectionLostPopupTimer);
+        ConnectionLostPopupTimer = NULL;   // recommended
+
         condition = true;
+
+
     } else {
         lv_obj_clear_flag(ui_imgsnotconnected, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(ui_imgsconnected, LV_OBJ_FLAG_HIDDEN);
@@ -881,6 +873,7 @@ void set_device_image(bool connected) {
             lv_obj_clear_flag(ui_pnlConnectionLost, LV_OBJ_FLAG_HIDDEN);     /// Flags
             lv_obj_move_foreground(ui_pnlConnectionLost);
             lv_label_set_text(ui_Label1, "IO Module Connection Lost!");
+            ConnectionLostPopupTimer = lv_timer_create(connectionLostPopupTimer, 60000, NULL);
         }
         
     }  
@@ -903,6 +896,8 @@ void set_bluetooth_icon(bool connected) {
             lv_obj_clear_flag(ui_pnlConnectionLost, LV_OBJ_FLAG_HIDDEN);     /// Flags
             lv_obj_move_foreground(ui_pnlConnectionLost);
             lv_label_set_text(ui_Label1, "Bluetooth Connection Lost!");
+            ESP_LOGI(DISPLAY_TAG, "Bluetooth Connection Lost Popup Shown");
+            ConnectionLostPopupTimer = lv_timer_create(connectionLostPopupTimer, 60000, NULL);
         }
     }
 }
@@ -931,6 +926,18 @@ static void init_timer(lv_timer_t * timer) {
     }
     initBarCounter++;
 }
+
+static void sendMotorDataPeriodic_timer(lv_timer_t * timer) {
+    // Check if ui_brInit is valid before using it
+    if (motorData != 0) {
+        uint8_t can_data[8] = {0}; // CAN verisi için buffer
+        can_data[0] = motorData;  // İlk byte veri
+        send_can_frame(0x750, can_data);  // Motor data için CAN ID   
+        ESP_LOGI(DISPLAY_TAG, "Motor Data Sent: %d", motorData);
+    }
+}
+
+
 
 // Timer callback function
 static void timer_updateTimer_callback(lv_timer_t * timer) {
@@ -1103,8 +1110,8 @@ void update_display_with_data() {
     // Update water widgets with analog input values
     lv_arc_set_value(ui_arcWater1, analog_input_1);
     lv_arc_set_value(ui_arcWater2, analog_input_2);
-    lv_label_set_text_fmt(ui_lblWater1, "%d°C", analog_input_1);
-    lv_label_set_text_fmt(ui_lblWater2, "%d°C", analog_input_2);
+    lv_label_set_text_fmt(ui_lblWater1, "%d%%", analog_input_1);
+    lv_label_set_text_fmt(ui_lblWater2, "%d%%", analog_input_2);
 
     // Update the arcs with the fetched data
     lv_arc_set_value(ui_arcGrup1, analog_input_1);
@@ -1848,24 +1855,30 @@ void check_switches_and_get_dropdown_values_for_dims() {
 
 // Function to check the state of the first 5 switches and update sensorsBuffer
 void check_sensors_and_update_buffer() {
+    // sensorsBuffer[0] = 1;
+    // sensorsBuffer[1] = 1;
+    // sensorsBuffer[2] = 1;
+    // sensorsBuffer[3] = 1;
+    // sensorsBuffer[4] = 1;
+
     // Reset the sensorsBuffer
     memset(sensorsBuffer, 0, sizeof(sensorsBuffer));
 
     numOfSensors = 0; // Initialize numOfSensors
 
-    lv_obj_t* switches[5] = {ui_Checkbox1, ui_Checkbox2, ui_Checkbox3, ui_Checkbox4, ui_Checkbox5};
+    // lv_obj_t* switches[5] = {ui_Checkbox1, ui_Checkbox2, ui_Checkbox3, ui_Checkbox4, ui_Checkbox5};
 
-    for (int i = 0; i < 5; i++) {
-        if (lv_obj_has_state(switches[i], LV_STATE_CHECKED)) {
-            sensorsBuffer[i] = 1; // Indicate that the switch is checked
-            numOfSensors++; // Increment numOfSensors for each checked switch
-        } else {
-            sensorsBuffer[i] = 0; // Indicate that the switch is not checked
-        }
-        ESP_LOGI("SWITCH_CHECK", "Switch %d is checked. Value: %d", i + 1, sensorsBuffer[i]);
-    }
+    // for (int i = 0; i < 5; i++) {
+    //     if (lv_obj_has_state(switches[i], LV_STATE_CHECKED)) {
+    //         sensorsBuffer[i] = 1; // Indicate that the switch is checked
+    //         numOfSensors++; // Increment numOfSensors for each checked switch
+    //     } else {
+    //         sensorsBuffer[i] = 0; // Indicate that the switch is not checked
+    //     }
+    //     ESP_LOGI("SWITCH_CHECK", "Switch %d is checked. Value: %d", i + 1, sensorsBuffer[i]);
+    // }
 
-    ESP_LOGI("SWITCH_CHECK", "Total number of checked switches: %d", numOfSensors);
+    // ESP_LOGI("SWITCH_CHECK", "Total number of checked switches: %d", numOfSensors);
 }
 
 int SaveConfigsCounter = 0; // Counter for save configs bar
@@ -1928,17 +1941,22 @@ void save_theme_settings()
     }
 
 
-    //ui_cbLanguage read current value of that checkbox if checked or not
-    if (!lv_obj_has_state(ui_cbLanguage, LV_STATE_CHECKED)) {
+
+
+    lv_dropdown_get_selected_str(ui_dbLanguage, selected_text, sizeof(selected_text));
+
+    if(strcmp(selected_text, "TURKCE") == 0)
+    {
         panelLanguageType = 1;  // Turkish
-        ESP_LOGI(TAG, "Language set to Turkish");
-        apply_language_settings();
-    } else {
-        panelLanguageType = 0;  // English
-        ESP_LOGI(TAG, "Language set to English");
         apply_language_settings();
     }
-
+    else if(strcmp(selected_text, "ENGLISH") == 0)
+    {
+        panelLanguageType = 0;  // English
+        apply_language_settings();
+        
+    }
+    
     
     ESP_LOGI(TAG, "Wallpaper Enabled, Selected Time: %s-----index = %d panelThemeType =%d panelWallpaperEnable =%d panelWallpaperTime =%d panelLanguageType =%d", selected_text, selected_index,
              panelThemeType, panelWallpaperEnable, panelWallpaperTime, panelLanguageType);
@@ -1987,10 +2005,7 @@ void apply_language_settings()
     // Apply language settings based on panelLanguage
     if (panelLanguageType == 0) {
         // English
-        //if panelLanguageType is 0 make status of ui_cbLanguage unchecked
-        lv_obj_add_state(ui_cbLanguage, LV_STATE_CHECKED);
-        //set ui_lblLanguage to English 
-        lv_label_set_text(ui_lblLanguage, "ENGLISH");
+
 
         lv_label_set_text(ui_lblPanelSettingsB, "PANEL\nSETTINGS");
         lv_label_set_text(ui_lblThemeSettingsB, "THEME\nSETTINGS");
@@ -2015,12 +2030,6 @@ void apply_language_settings()
         lv_label_set_text(ui_lblPnlGrup1Sicaklik2, "\n\nIn. Temp.");
         lv_label_set_text(ui_Label12, "SAVING CONFIGURATIONS...\n   DEVICE WILL RESTART");
         lv_label_set_text(ui_lblPanelSettings, "PANEL SETTINGS");
-        lv_checkbox_set_text(ui_Checkbox1, "An1-Internal Temperature");
-        lv_checkbox_set_text(ui_Checkbox2, "An2-External Temperature");
-        lv_checkbox_set_text(ui_Checkbox3, "An3-Clean Water");
-        lv_checkbox_set_text(ui_Checkbox4, "An4-Gray Water");
-        lv_checkbox_set_text(ui_Checkbox5, "An5-Dirty Water");
-        lv_label_set_text(ui_lblSensors, "Sensors");
         lv_label_set_text(ui_lblDimmableOutputs, "Dimmable Outputs");
 
         //set lblBtnNames_TR with for loop that has numberofOutputs
@@ -2061,12 +2070,6 @@ void apply_language_settings()
         lv_label_set_text(ui_lblPnlGrup1Sicaklik2, "\n\nDis Sicak.");
         lv_label_set_text(ui_Label12, "AYARLAR KAYDEDILIYOR...\nCIHAZ YENIDEN BASLAYACAK");
         lv_label_set_text(ui_lblPanelSettings, "PANEL AYARLARI");
-        lv_checkbox_set_text(ui_Checkbox1, "An1-Ic Sicaklik");
-        lv_checkbox_set_text(ui_Checkbox2, "An2-Dis Sicaklik");
-        lv_checkbox_set_text(ui_Checkbox3, "An3-Temiz Su");
-        lv_checkbox_set_text(ui_Checkbox4, "An4-Gri Su");
-        lv_checkbox_set_text(ui_Checkbox5, "An5-Kirli Su");
-        lv_label_set_text(ui_lblSensors, "Sensorler");
         lv_label_set_text(ui_lblDimmableOutputs, "Dim Cikislari");
 
         //set lblBtnNames_TR with for loop that has numberofOutputs
@@ -2103,11 +2106,10 @@ void apply_language_settings()
     uint8_t b = color32.ch.blue;
 
     can_data[0] = r;  // İlk byte veri
-    can_data[1] = g;  // İlk byte veri
-    can_data[2] = b;  // İlk byte veri
+    can_data[1] = b;  // İlk byte veri
+    can_data[2] = g;  // İlk byte veri
     can_data[3] = rgbEna;
     send_can_frame(0x740, can_data);  // RGB için CAN ID: 0x740
-    
 }
 
 // Callback function for color changes
@@ -2308,6 +2310,7 @@ void display_manager_init() {
     lv_timer_t * updateScreentimer = lv_timer_create(timer_updateTimer_callback, 150, NULL);
     lv_timer_t * wallpaperTimer = lv_timer_create(wallpaper_update_timer_callback, 1000, NULL);
     lv_timer_t * initTim = lv_timer_create(init_timer, 100, NULL);
+    lv_timer_t * sendMotorDataTimer = lv_timer_create(sendMotorDataPeriodic_timer, 200, NULL);
     
     // Create communication animation timer (1 second interval)
     comm_animation_timer = lv_timer_create(comm_animation_timer_callback, 1000, NULL);

@@ -10,6 +10,7 @@
 
 // External function declarations
 extern void dim_events(lv_event_t* e);
+extern int motorData;
 
 void slMutfakValueChanged(lv_event_t * e)
 {
@@ -275,3 +276,28 @@ void selectLanguagecallback(lv_event_t * e)
 {
 	save_theme_settings();
 }	
+
+void motorMoveBackwardReleased(lv_event_t * e)
+{
+	motorData = 0;
+}
+void motorMoveBackwardPressed(lv_event_t * e)
+{
+	motorData = 2;
+}
+void motorMoveForwardReleased(lv_event_t * e)
+{
+	motorData = 0;
+}
+void motorMoveForwardPressed(lv_event_t * e)
+{
+	motorData = 1;
+}
+
+
+
+
+
+
+
+
