@@ -1104,7 +1104,13 @@ void update_display_with_data() {
     } else {
         int before_comma_volt = (int)batarya_volt;
         int after_comma_volt = (int)((batarya_volt - before_comma_volt) * 100);
+        if(panelLanguageType == 0) {
+            // Turkish
+            snprintf(batarya_volt_str, sizeof(batarya_volt_str), "Battery: %d,%02dV", before_comma_volt, after_comma_volt);
+        } else {
+            // English  
         snprintf(batarya_volt_str, sizeof(batarya_volt_str), "Battery: %d,%02dV", before_comma_volt, after_comma_volt);
+        }
     }
 
     // Convert current to string with comma
