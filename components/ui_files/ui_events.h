@@ -27,6 +27,9 @@ void applyRGBColor(lv_event_t * e);
 void btnSaveThemeFunc(lv_event_t * e);
 void btnThemeWhiteFunc(lv_event_t * e);
 void btnBlackThemeFunc(lv_event_t * e);
+void sendCanFrameRGB_R(lv_event_t * e);
+void sendCanFrameRGB_G(lv_event_t * e);
+void sendCanFrameRGB_B(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

@@ -7354,7 +7354,8 @@
                 "InheritedType": 4
               }
             ],
-            "saved_objtypeKey": "CONTAINER"
+            "saved_objtypeKey": "CONTAINER",
+            "tree_closed": true
           }
         ],
         "isPage": true,
@@ -25638,7 +25639,7 @@
                   {
                     "nid": -1958815703,
                     "strtype": "LABEL/Text",
-                    "strval": "Back",
+                    "strval": "Save",
                     "InheritedType": 10
                   },
                   {
@@ -27156,7 +27157,8 @@
                 "InheritedType": 4
               }
             ],
-            "saved_objtypeKey": "SWITCH"
+            "saved_objtypeKey": "SWITCH",
+            "tree_closed": true
           },
           {
             "guid": "GUID44745575-938681S176744358",
@@ -30716,7 +30718,7 @@
     "theme_color1": 5,
     "theme_color2": 0,
     "custom_variable_prefix": "uic",
-    "backup_cnt": 5593,
+    "backup_cnt": 5600,
     "autosave_cnt": 0,
     "group_color_cnt": 0,
     "lvgl_version": "8.3.11",
@@ -30726,7 +30728,7 @@
     "naming": "Name",
     "naming_force_lowercase": false,
     "naming_add_subcomponent": false,
-    "nidcnt": 1001847,
+    "nidcnt": 1001857,
     "BitDepth": 16,
     "Name": "SquareLine_Project"
   }

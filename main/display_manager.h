@@ -22,6 +22,7 @@ void save_panel_configuration_to_nvs(int totalOutps, int buffer1[16], int totalS
 void apply_rgb_data_to_wheel(uint8_t r, uint8_t g, uint8_t b);
 void set_rgb_to_white();
 void set_RGBTurnONOFF(int val);
+void set_RGB_color(int rr, int gg, int bb); 
 
 // Output buttons creation function
 void create_output_buttons_on_screen(void);

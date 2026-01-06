@@ -96,6 +96,10 @@ extern lv_obj_t* ui_cbxDim2;
 extern lv_obj_t* ui_cbxDim3;
 extern lv_obj_t* ui_cbxDim4;
 
+extern lv_obj_t* ui_cbRSelect;
+extern lv_obj_t* ui_cbGSelect;
+extern lv_obj_t* ui_cbBSelect;
+
 // Dim slider widgets
 extern lv_obj_t* ui_slDim1;
 extern lv_obj_t* ui_slDim2;
@@ -382,6 +386,10 @@ int panelWallpaperEnableCounter = 1;
 int panelLanguageType = 0; // 
 int motorData = 0;
 int pnlConnectionLostTimeout = 0;
+int selected_R = 0;
+int selected_G = 1;
+int selected_B = 2;
+extern int rgbCalibration = 0;
 
 
 void parse_read_data(cJSON* json);
@@ -486,6 +494,10 @@ void my_btnThemeWhiteFunc(void)
     lv_obj_set_style_text_color(ui_lblSensorsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblWaterLevelsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblRGBsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     for (int i = 0; i < numOfDims; i++) {
         lv_obj_set_style_text_color(lblDims[i], lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -563,6 +575,10 @@ void my_btnBlackThemeFunc(void)
     lv_obj_set_style_text_color(ui_lblSensorsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblWaterLevelsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblRGBsB, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     for (int i = 0; i < numOfDims; i++) {
         lv_obj_set_style_text_color(lblDims[i], lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -629,6 +645,7 @@ void button_events(lv_event_t* e) {
     can_data[1] = val;  // İlk byte veri
     send_can_frame(0x720, can_data);  // Output için CAN ID: 0x720
     ESP_LOGI(DISPLAY_TAG, "Button index: %d val: %d", btn_index, val);
+    panelWallpaperEnableCounter = 0;
 }
 
 // Function to toggle dimmer value based on current value
@@ -671,6 +688,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
 
     lv_obj_t* dimcheckboxes[4] = {ui_swDim1, ui_swDim2, ui_swDim3, ui_swDim4};
     lv_obj_t* dimdropdowns[4] = {ui_cbxDim1, ui_cbxDim2, ui_cbxDim3, ui_cbxDim4};
+    
 
     // Adjust button size and spacing if numOfOutputs is greater than 8
     if (numOfOutputs > 8) {
@@ -841,6 +859,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
     apply_theme_settings();
     apply_language_settings();
     lv_obj_set_style_transform_zoom(ui_lblScreenClock, 1024, 0); // 256 = 1x, 512 = 2x
+    lv_dropdown_set_selected(ui_dbLanguage, 1 - panelLanguageType);
     
 
 }
@@ -858,7 +877,11 @@ void set_device_image(bool connected) {
         lv_obj_clear_flag(ui_imgsconnected, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(ui_imgsnotconnected, LV_OBJ_FLAG_HIDDEN);
 
-        lv_timer_del(ConnectionLostPopupTimer);
+        if (ConnectionLostPopupTimer != NULL)
+        {
+            lv_timer_del(ConnectionLostPopupTimer);
+            ConnectionLostPopupTimer = NULL;
+        }
         ConnectionLostPopupTimer = NULL;   // recommended
 
         condition = true;
@@ -1145,6 +1168,22 @@ void update_display_with_data() {
         lv_obj_clear_flag(ui_lblScreenClock, LV_OBJ_FLAG_HIDDEN);     /// Flags
         lv_obj_add_flag(ui_imgScreenLogo, LV_OBJ_FLAG_HIDDEN);     /// Flags
     }
+
+    if(rgbCalibration != 0){
+        if(rgbCalibration == 1){
+            set_RGB_color(255, 0, 0);
+        }
+        else if(rgbCalibration == 2){
+            set_RGB_color(0, 255, 0);
+        }
+        else if(rgbCalibration == 3){
+            set_RGB_color(0, 0, 255);
+        }   
+        rgbCalibration = 0;
+    }
+
+    parse_ble_data((const char*)get_spp_cmd_buff());
+    reset_spp_cmd_buff();
 
 
 
@@ -1695,6 +1734,7 @@ void save_panel_configuration_to_nvs(int totalOutps, int buffer1[16], int totalS
         snprintf(key, sizeof(key), "dimsBuf%d", i);
         nvs_write_int(key, buffer3[i]);
     }
+
 }
 
 void save_theme_configuration_to_nvs(int16_t* themeType, uint16_t* wallpaperEnabled, uint16_t* wallpaperTimeIndex, int16_t* lngType) {
@@ -1776,6 +1816,20 @@ void load_panel_configuration_from_nvs(int *totalOutpts, int buffer1[16], int *t
         }
     }
 
+    // Read totalSensors from NVS
+    if (nvs_read_int("selR", &selected_R) != ESP_OK || selected_R < 0 || selected_R > 2) {
+        selected_R = 0; // Set to default value if out of range
+    }
+
+    // Read totalSensors from NVS
+    if (nvs_read_int("selG", &selected_G) != ESP_OK || selected_G < 0 || selected_G > 2) {
+        selected_G = 1; // Set to default value if out of range
+    }
+    // Read totalSensors from NVS
+    if (nvs_read_int("selB", &selected_B) != ESP_OK || selected_B < 0 || selected_B > 2) {
+        selected_B = 2; // Set to default value if out of range
+    }
+
 }
 
 
@@ -1835,8 +1889,12 @@ void check_switches_and_get_dropdown_values() {
     }
 
 }
+static bool has_duplicate(int a, int b, int c)
+{
+    return (a == b) || (a == c) || (b == c);
+}
 
-
+static const int default_values[3] = {0, 1, 2};
 // Function to check switches and get corresponding dropdown values
 void check_switches_and_get_dropdown_values_for_dims() {
     // Reset the outputsBuffer
@@ -1846,6 +1904,7 @@ void check_switches_and_get_dropdown_values_for_dims() {
     // Apply numOfOutputs and outputsBuffer to swO1-swO16 and cbxO1-cbxO16
     lv_obj_t* dimcheckboxes[4] = {ui_swDim1, ui_swDim2, ui_swDim3, ui_swDim4};
     lv_obj_t* dimdropdowns[4] = {ui_cbxDim1, ui_cbxDim2, ui_cbxDim3, ui_cbxDim4};
+    lv_obj_t* rgbdropdowns[3] = {ui_cbRSelect, ui_cbGSelect, ui_cbBSelect};
 
     for (int i = 0; i < 4; i++) {
         if (lv_obj_has_state(dimcheckboxes[i], LV_STATE_CHECKED)) {
@@ -1856,6 +1915,22 @@ void check_switches_and_get_dropdown_values_for_dims() {
             dimsBuffer[i] = 0; // Indicate that the switch is not checked
         }
     }
+
+    selected_R = lv_dropdown_get_selected(ui_cbRSelect);
+    selected_G = lv_dropdown_get_selected(ui_cbGSelect);
+    selected_B = lv_dropdown_get_selected(ui_cbBSelect);
+
+    if(has_duplicate(selected_R, selected_G, selected_B))
+    {
+        selected_R = default_values[0];
+        selected_G = default_values[1];
+        selected_B = default_values[2];
+    }
+
+    nvs_write_int("selR", selected_R);
+    nvs_write_int("selG", selected_G);
+    nvs_write_int("selB", selected_B);
+    ESP_LOGI(TAG, "-------------------2222Loaded Panel Configuration: R=%d, G=%d, B=%d",selected_R, selected_G, selected_B);
 
 }
 
@@ -2038,6 +2113,14 @@ void apply_language_settings()
         lv_label_set_text(ui_Label12, "SAVING CONFIGURATIONS...\n   DEVICE WILL RESTART");
         lv_label_set_text(ui_lblPanelSettings, "PANEL SETTINGS");
         lv_label_set_text(ui_lblDimmableOutputs, "Dimmable Outputs");
+        lv_label_set_text_fmt(ui_lblDim1, "%s:", lblDimBtnNames[dimsBuffer[0] - 1]);
+        lv_label_set_text_fmt(ui_lblDim2, "%s:", lblDimBtnNames[dimsBuffer[1] - 1]);
+        lv_label_set_text_fmt(ui_lblDim3, "%s:", lblDimBtnNames[dimsBuffer[2] - 1]);
+        lv_label_set_text_fmt(ui_lblDim4, "%s:", lblDimBtnNames[dimsBuffer[3] - 1]);
+        lv_label_set_text(ui_lblUnderArcTemperature1, "Internal Temperature");
+        lv_label_set_text(ui_lblUnderArcTemperature2, "External Temperature");
+        lv_label_set_text(ui_lblUnderArcWater1, "Clean Water");
+        lv_label_set_text(ui_lblUnderArcWater2, "Dirty Water");
 
         //set lblBtnNames_TR with for loop that has numberofOutputs
         for (int i = 0; i < numOfOutputs; i++) {
@@ -2078,6 +2161,14 @@ void apply_language_settings()
         lv_label_set_text(ui_Label12, "AYARLAR KAYDEDILIYOR...\nCIHAZ YENIDEN BASLAYACAK");
         lv_label_set_text(ui_lblPanelSettings, "PANEL AYARLARI");
         lv_label_set_text(ui_lblDimmableOutputs, "Dim Cikislari");
+        lv_label_set_text_fmt(ui_lblDim1, "%s:", lblDimBtnNames_TR[dimsBuffer[0] - 1]);
+        lv_label_set_text_fmt(ui_lblDim2, "%s:", lblDimBtnNames_TR[dimsBuffer[1] - 1]);
+        lv_label_set_text_fmt(ui_lblDim3, "%s:", lblDimBtnNames_TR[dimsBuffer[2] - 1]);
+        lv_label_set_text_fmt(ui_lblDim4, "%s:", lblDimBtnNames_TR[dimsBuffer[3] - 1]);
+        lv_label_set_text(ui_lblUnderArcTemperature1, "Ic Sicaklik");
+        lv_label_set_text(ui_lblUnderArcTemperature2, "Dis Sicaklik");
+        lv_label_set_text(ui_lblUnderArcWater1, "Temiz Su");
+        lv_label_set_text(ui_lblUnderArcWater2, "Kirli Su");
 
         //set lblBtnNames_TR with for loop that has numberofOutputs
         for (int i = 0; i < numOfOutputs; i++) {
@@ -2089,9 +2180,24 @@ void apply_language_settings()
             lv_label_set_text(lblDims[i], lblDimBtnNames_TR[dimsBuffer[i] - 1]);
         }
         set_language_for_dropdowns_TR();
-
-
     }
+
+    lv_obj_t* dropdowns[16] = {ui_cbxO1, ui_cbxO2, ui_cbxO3, ui_cbxO4, ui_cbxO5, ui_cbxO6, ui_cbxO7, ui_cbxO8, ui_cbxO9, ui_cbxO10, ui_cbxO11, ui_cbxO12, ui_cbxO13, ui_cbxO14, ui_cbxO15, ui_cbxO16};
+    lv_obj_t* dimdropdowns[4] = {ui_cbxDim1, ui_cbxDim2, ui_cbxDim3, ui_cbxDim4};
+    for (int i = 0; i < numOfOutputs; i++) {
+        lv_dropdown_set_selected(dropdowns[i], outputsBuffer[i] - 1); // Set the dropdown value
+        ESP_LOGI("LANGUAGE_APPLY", "Dropdown %d set to index %d", i + 1, outputsBuffer[i] - 1);
+    }
+
+    for(int i = 0; i < numOfDims; i++) {
+        lv_dropdown_set_selected(dimdropdowns[i], dimsBuffer[i] - 1); // Set the dropdown value
+        ESP_LOGI("LANGUAGE_APPLY", "Dim Dropdown %d set to index %d", i + 1, dimsBuffer[i] - 1);
+    }
+
+        /* Conflict detected → restore defaults */
+        lv_dropdown_set_selected(ui_cbRSelect, 2);
+        lv_dropdown_set_selected(ui_cbGSelect, 1);
+        lv_dropdown_set_selected(ui_cbBSelect, 0);
 }
 
 
@@ -2112,10 +2218,22 @@ void apply_language_settings()
     uint8_t g = color32.ch.green;
     uint8_t b = color32.ch.blue;
 
-    can_data[0] = r;  // İlk byte veri
-    can_data[1] = b;  // İlk byte veri
-    can_data[2] = g;  // İlk byte veri
+    can_data[selected_R] = r;  // İlk byte veri
+    can_data[selected_G] = g;  // İlk byte veri
+    can_data[selected_B] = b;  // İlk byte veri
     can_data[3] = rgbEna;
+    send_can_frame(0x740, can_data);  // RGB için CAN ID: 0x740
+}
+
+// Callback function for color changes
+ void set_RGB_color(int rr, int gg, int bb) {
+    uint8_t can_data[8] = {0}; // CAN verisi için buffer
+
+    can_data[0] = rr;  // İlk byte veri
+    can_data[1] = bb;  // İlk byte veri
+    can_data[2] = gg;  // İlk byte veri
+    can_data[3] = 1;
+    ESP_LOGI(DISPLAY_TAG, "SET RGB COLOR R:%d G:%d B:%d", rr, gg, bb);
     send_can_frame(0x740, can_data);  // RGB için CAN ID: 0x740
 }
 
@@ -2166,28 +2284,56 @@ void initialize_dim_widgets_visibility(void)
         lv_obj_clear_flag(ui_slDim1, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDim1, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDimLevel1, LV_OBJ_FLAG_HIDDEN);
-        lv_label_set_text_fmt(ui_lblDim1, "%s:", lblDimBtnNames[dimsBuffer[0] - 1]);
+        if(panelLanguageType == 0)
+        {
+            lv_label_set_text_fmt(ui_lblDim1, "%s:", lblDimBtnNames[dimsBuffer[0] - 1]);
+        }
+        else
+        {
+            lv_label_set_text_fmt(ui_lblDim1, "%s:", lblDimBtnNames_TR[dimsBuffer[0] - 1]);
+        }    
         lv_obj_add_event_cb(ui_slDim1, dim_events, LV_EVENT_RELEASED, (void*)0);
     }
     if (numOfDims >= 2) {
         lv_obj_clear_flag(ui_slDim2, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDim2, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDimLevel2, LV_OBJ_FLAG_HIDDEN);
-        lv_label_set_text_fmt(ui_lblDim2, "%s:", lblDimBtnNames[dimsBuffer[1] - 1]);
+        if(panelLanguageType == 0)
+        {
+            lv_label_set_text_fmt(ui_lblDim2, "%s:", lblDimBtnNames[dimsBuffer[1] - 1]);
+        }
+        else
+        {
+            lv_label_set_text_fmt(ui_lblDim2, "%s:", lblDimBtnNames_TR[dimsBuffer[1] - 1]);
+        }  
         lv_obj_add_event_cb(ui_slDim2, dim_events, LV_EVENT_RELEASED, (void*)1);
     }
     if (numOfDims >= 3) {
         lv_obj_clear_flag(ui_slDim3, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDim3, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDimLevel3, LV_OBJ_FLAG_HIDDEN);
-        lv_label_set_text_fmt(ui_lblDim3, "%s:", lblDimBtnNames[dimsBuffer[2] - 1]);
+        if(panelLanguageType == 0)
+        {
+            lv_label_set_text_fmt(ui_lblDim3, "%s:", lblDimBtnNames[dimsBuffer[2] - 1]);
+        }
+        else
+        {
+            lv_label_set_text_fmt(ui_lblDim3, "%s:", lblDimBtnNames_TR[dimsBuffer[2] - 1]);
+        }  
         lv_obj_add_event_cb(ui_slDim3, dim_events, LV_EVENT_RELEASED, (void*)2);
     }
     if (numOfDims >= 4) {
         lv_obj_clear_flag(ui_slDim4, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDim4, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(ui_lblDimLevel4, LV_OBJ_FLAG_HIDDEN);
-        lv_label_set_text_fmt(ui_lblDim4, "%s:", lblDimBtnNames[dimsBuffer[3] - 1]);
+        if(panelLanguageType == 0)
+        {
+            lv_label_set_text_fmt(ui_lblDim4, "%s:", lblDimBtnNames[dimsBuffer[3] - 1]);
+        }
+        else
+        {
+            lv_label_set_text_fmt(ui_lblDim4, "%s:", lblDimBtnNames_TR[dimsBuffer[3] - 1]);
+        }  
         lv_obj_add_event_cb(ui_slDim4, dim_events, LV_EVENT_RELEASED, (void*)3);
     }
     

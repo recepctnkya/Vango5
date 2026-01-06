@@ -174,3 +174,8 @@ void motorMoveForwardReleased(lv_event_t * e)
 {
 	// Your code here
 }
+
+void sendCanFrameRGB(lv_event_t * e)
+{
+	// Your code here
+}
