@@ -52,7 +52,7 @@ uint16_t outputs = 0;
 uint16_t inputs = 0;
 uint8_t analog_inputs[5] = {0};
 uint8_t dimmable_outputs[4] = {0};
-uint8_t rgb_values[3] = {0};
+uint8_t rgb_values[4] = {0};
 uint8_t rgb_enabled = 0; // RGB'nin aktif olup olmadığını tutar
 uint8_t canbusConnection = 0;
 
