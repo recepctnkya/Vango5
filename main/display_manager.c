@@ -1263,10 +1263,11 @@ char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors,
     cJSON_AddItemToObject(json, "dDB", dims);
 
 
-    // Fetch sensorsBuffer from regs_data
-    for (int i = 0; i < numOfSensors; i++) {
-        buf[i] = get_analog_input(i);
-    }
+        buf[0] = get_analog_input(3);
+        buf[1] = get_analog_input(4);
+        buf[2] = get_analog_input(0);
+        buf[3] = get_analog_input(2);
+        buf[4] = get_analog_input(1);
     cJSON *sensors = cJSON_CreateIntArray(buf, numOfSensors);
     cJSON_AddItemToObject(json, "sDB", sensors);
 
@@ -2475,6 +2476,12 @@ void display_manager_init() {
     comm_animation_timer = lv_timer_create(comm_animation_timer_callback, 1000, NULL);
 
      load_panel_configuration_from_nvs(&numOfOutputs, outputsBuffer, &numOfSensors, sensorsBuffer, &numOfDims, dimsBuffer);
+    sensorsBuffer[0] = 1;//temperature 1
+    sensorsBuffer[1] = 1;//temperature 2
+    sensorsBuffer[2] = 1;
+    sensorsBuffer[3] = 0;
+    sensorsBuffer[4] = 1;
+    numOfSensors = 5;
      load_theme_configuration_from_nvs(&panelThemeType, &panelWallpaperEnable, &panelWallpaperTime, &panelLanguageType);
 
             // Debug log the loaded configuration
