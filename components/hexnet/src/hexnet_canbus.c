@@ -85,7 +85,7 @@ uint8_t get_dimmable_output(uint8_t index) {
 }
 
 uint8_t get_rgb_value(uint8_t index) {
-    if (index < 3) {
+    if (index < 4) {
         return rgb_values[index];
     }
     return 0;  // Hatalı index
