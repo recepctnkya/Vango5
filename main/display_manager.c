@@ -703,7 +703,6 @@ void create_dynamic_ui(lv_obj_t* parent) {
         int row = i / 4;
         int col = i % 4;
 
-
         btnIO[i] = lv_btn_create(parent);
         lv_obj_set_width(btnIO[i], btn_width);
         lv_obj_set_height(btnIO[i], btn_height);
@@ -715,6 +714,9 @@ void create_dynamic_ui(lv_obj_t* parent) {
         lv_obj_set_style_radius(btnIO[i], 10, LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_bg_color(btnIO[i], lv_color_hex(0x5A5A5A), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_bg_opa(btnIO[i], 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_border_color(btnIO[i], lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_border_opa(btnIO[i], 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_border_width(btnIO[i], 5, LV_PART_MAIN | LV_STATE_DEFAULT);
 
         lblIO[i] = lv_label_create(btnIO[i]);
         lv_obj_set_width(lblIO[i], LV_SIZE_CONTENT);   /// 1
