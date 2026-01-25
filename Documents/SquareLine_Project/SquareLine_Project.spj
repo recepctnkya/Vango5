@@ -2251,6 +2251,44 @@
                       }
                     ],
                     "InheritedType": 10
+                  },
+                  {
+                    "nid": 1001965,
+                    "strtype": "_event/action",
+                    "strval": "CALL FUNCTION",
+                    "childs": [
+                      {
+                        "nid": 1001966,
+                        "strtype": "CALL FUNCTION/Name",
+                        "strval": "CALL FUNCTION",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001967,
+                        "strtype": "CALL FUNCTION/Call",
+                        "strval": "<{Function_name}>( event_struct )",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001968,
+                        "strtype": "CALL FUNCTION/CallC",
+                        "strval": "<{Function_name}>( e );",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001969,
+                        "strtype": "CALL FUNCTION/Function_name",
+                        "strval": "btnMenuCallback",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1001970,
+                        "strtype": "CALL FUNCTION/Dont_export_function",
+                        "strval": "False",
+                        "InheritedType": 2
+                      }
+                    ],
+                    "InheritedType": 10
                   }
                 ],
                 "InheritedType": 4
@@ -22262,8 +22300,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  12,
-                  142
+                  -12,
+                  144
                 ],
                 "InheritedType": 7
               },
@@ -23120,7 +23158,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  3,
+                  -17,
                   -37
                 ],
                 "InheritedType": 7
@@ -23529,13 +23567,12 @@
                       {
                         "nid": 1001890,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "FADE_ON",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1001891,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 500,
                         "InheritedType": 6
                       },
                       {
@@ -26968,6 +27005,12 @@
                 "nid": 90,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
+              },
+              {
+                "nid": 100,
+                "strtype": "OBJECT/Hidden",
+                "strval": "True",
+                "InheritedType": 2
               },
               {
                 "nid": 225,
@@ -30474,6 +30517,12 @@
                 "InheritedType": 1
               },
               {
+                "nid": 100,
+                "strtype": "IMAGE/Hidden",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 150,
                 "strtype": "OBJECT/Adv_hittest",
                 "strval": "True",
@@ -31131,7 +31180,7 @@
     }
   ],
   "selected_theme": "Default",
-  "selected_screen": "GUID10653366-981802S51599476",
+  "selected_screen": "GUID58918178-625253S4563216",
   "info": {
     "name": "SquareLine_Project.spj",
     "depth": 1,
@@ -31159,7 +31208,7 @@
     "custom_variable_prefix": "uic",
     "separate_screen_save": false,
     "hierarchy_state_save": false,
-    "backup_cnt": 5617,
+    "backup_cnt": 5621,
     "autosave_cnt": 0,
     "group_color_cnt": 0,
     "imagebytearrayprefix": null,
@@ -31170,7 +31219,7 @@
     "naming": "Name",
     "naming_force_lowercase": false,
     "naming_add_subcomponent": false,
-    "nidcnt": 1001965,
+    "nidcnt": 1001971,
     "BitDepth": 16,
     "Name": "SquareLine_Project"
   }

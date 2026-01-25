@@ -153,6 +153,7 @@ void ui_scrTheme_screen_init(void)
     lv_obj_set_x(ui_rlrTime, -8);
     lv_obj_set_y(ui_rlrTime, 135);
     lv_obj_set_align(ui_rlrTime, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_rlrTime, LV_OBJ_FLAG_HIDDEN);     /// Flags
     lv_obj_set_style_text_font(ui_rlrTime, &lv_font_montserrat_26, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_swEnableWallpaper = lv_switch_create(ui_scrTheme);

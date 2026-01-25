@@ -382,6 +382,7 @@ int dimsBuffer[4] = {0};
 int rgbBuffer[3] = {0};
 int btn_index = 0;
 uint8_t rgbEna = 0; // RGB LED enable variable
+uint8_t fromBleConfig = 0;
 int panelWallpaperEnableCounter = 1;
 int panelLanguageType = 0; // 
 int motorData = 0;
@@ -494,10 +495,10 @@ void my_btnThemeWhiteFunc(void)
     lv_obj_set_style_text_color(ui_lblSensorsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblWaterLevelsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lblRGBsB, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_lblDimLevel1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_lblDimLevel2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_lblDimLevel3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_lblDimLevel4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel3, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_lblDimLevel4, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     for (int i = 0; i < numOfDims; i++) {
         lv_obj_set_style_text_color(lblDims[i], lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -866,7 +867,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
 
 }
 
-static void connectionLostPopupTimer(lv_timer_t * timer) {
+static void connectionLostPopupTimerr(lv_timer_t * timer) {
     lv_obj_add_flag(ui_pnlConnectionLost, LV_OBJ_FLAG_HIDDEN);     /// Flags
 }
 
@@ -878,13 +879,6 @@ void set_device_image(bool connected) {
     if (connected) {
         lv_obj_clear_flag(ui_imgsconnected, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(ui_imgsnotconnected, LV_OBJ_FLAG_HIDDEN);
-
-        if (ConnectionLostPopupTimer != NULL)
-        {
-            lv_timer_del(ConnectionLostPopupTimer);
-            ConnectionLostPopupTimer = NULL;
-        }
-        ConnectionLostPopupTimer = NULL;   // recommended
 
         condition = true;
 
@@ -898,7 +892,7 @@ void set_device_image(bool connected) {
             lv_obj_clear_flag(ui_pnlConnectionLost, LV_OBJ_FLAG_HIDDEN);     /// Flags
             lv_obj_move_foreground(ui_pnlConnectionLost);
             lv_label_set_text(ui_Label1, "IO Module Connection Lost!");
-            ConnectionLostPopupTimer = lv_timer_create(connectionLostPopupTimer, 60000, NULL);
+            ConnectionLostPopupTimer = lv_timer_create(connectionLostPopupTimerr, 60000, NULL);
         }
         
     }  
@@ -922,7 +916,7 @@ void set_bluetooth_icon(bool connected) {
             lv_obj_move_foreground(ui_pnlConnectionLost);
             lv_label_set_text(ui_Label1, "Bluetooth Connection Lost!");
             ESP_LOGI(DISPLAY_TAG, "Bluetooth Connection Lost Popup Shown");
-            ConnectionLostPopupTimer = lv_timer_create(connectionLostPopupTimer, 60000, NULL);
+            ConnectionLostPopupTimer = lv_timer_create(connectionLostPopupTimerr, 60000, NULL);
         }
     }
 }
@@ -989,6 +983,21 @@ static void timer_updateTimer_callback(lv_timer_t * timer) {
 
 }
 
+static void wallpaper_update_timer_callback(lv_timer_t * timer) {
+    if (panelWallpaperEnable) {
+        if (panelWallpaperEnableCounter == panelWallpaperTime) {
+            lv_scr_load(ui_scrWallpaper);
+            panelWallpaperEnableCounter = 0;
+
+        }
+        panelWallpaperEnableCounter++;
+    }
+    else {
+        panelWallpaperEnableCounter = 0;
+    }
+    
+}
+
 
 // Timer callback for communication animation
 static void comm_animation_timer_callback(lv_timer_t * timer) {
@@ -1039,20 +1048,7 @@ static void comm_animation_timer_callback(lv_timer_t * timer) {
     }
 }
 
-static void wallpaper_update_timer_callback(lv_timer_t * timer) {
-    if (panelWallpaperEnable) {
-        if (panelWallpaperEnableCounter == panelWallpaperTime) {
-            lv_scr_load(ui_scrWallpaper);
-            panelWallpaperEnableCounter = 0;
 
-        }
-        panelWallpaperEnableCounter++;
-    }
-    else {
-        panelWallpaperEnableCounter = 0;
-    }
-    
-}
 
 
 // Function to set the button color based on the value
@@ -1128,16 +1124,16 @@ void update_display_with_data() {
 
 
     // Update the display labels with the fetched data
-    lv_label_set_text_fmt(ui_lblPnlGrup1SicaklikDeger1, "%d°C", analog_input_4);
-    lv_label_set_text_fmt(ui_lblPnlGrup1SicaklikDeger2, "%d°C", analog_input_5);
+    lv_label_set_text_fmt(ui_lblPnlGrup1SicaklikDeger1, "%d°C", (uint16_t)get_sensorTemp());
+    lv_label_set_text_fmt(ui_lblPnlGrup1SicaklikDeger2, "%d%%", (uint16_t)get_sensorHum());
     lv_label_set_text_fmt(ui_lblGrup1Oran1, "%d%%", analog_input_1);
     lv_label_set_text_fmt(ui_lblGrup1Oran2, "%d%%", analog_input_2);
     
     // Update temperature widgets with analog input values
-    lv_arc_set_value(ui_arcTemperature1, analog_input_4);
-    lv_arc_set_value(ui_arcTemperature2, analog_input_5);
-    lv_label_set_text_fmt(ui_lblTemperature1, "%d°C", analog_input_4);
-    lv_label_set_text_fmt(ui_lblTemperature2, "%d°C", analog_input_5);
+    lv_arc_set_value(ui_arcTemperature1, get_sensorTemp());
+    lv_arc_set_value(ui_arcTemperature2, get_sensorHum());
+    lv_label_set_text_fmt(ui_lblTemperature1, "%d°C", get_sensorTemp());
+    lv_label_set_text_fmt(ui_lblTemperature2, "%d%%", get_sensorHum());
     
     // Update water widgets with analog input values
     lv_arc_set_value(ui_arcWater1, analog_input_1);
@@ -1278,7 +1274,7 @@ char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors,
     rgbBuffer[1] = get_rgb_value(1);
     rgbBuffer[2] = get_rgb_value(2);
     rgbBuffer[3] = get_rgb_value(3);
-    ESP_LOGI(TAG, "RGB Values: %d, %d, %d, %d", get_rgb_value(0), get_rgb_value(1), get_rgb_value(2), get_rgb_value(3));
+    //ESP_LOGI(TAG, "RGB Values: %d, %d, %d, %d", get_rgb_value(0), get_rgb_value(1), get_rgb_value(2), get_rgb_value(3));
     // Add rgbBuffer to the JSON object
     cJSON *rgb = cJSON_CreateIntArray(rgbBuffer, 4);
     cJSON_AddItemToObject(json, "RGBDB", rgb);
@@ -1289,7 +1285,7 @@ char* create_json_data_packet(int numOfOutputs, int numOfDims, int numOfSensors,
 
     // Convert JSON object to string
     char *json_str = cJSON_PrintUnformatted(json);
-    ESP_LOGI("JSON_DATA_PACKET", "%s", json_str);
+    //ESP_LOGI("JSON_DATA_PACKET", "%s", json_str);
 
     // Free the JSON object
     cJSON_Delete(json);
@@ -1465,7 +1461,13 @@ void parse_read_data(cJSON* json) {
     // Merge time, date, and batarya_volt
     char merged_str[128];
     lv_label_set_text(ui_lblScreenClock, time->valuestring);
+    if(panelLanguageType == 0) {
+        // Turkish
+        snprintf(merged_str, sizeof(merged_str), "Batarya:  %.2fV  Tarih:  %s   Saat:  %s",batarya_volt, date->valuestring, time->valuestring);
+    } else {
+        // English  
     snprintf(merged_str, sizeof(merged_str), "Battery:  %.2fV  Date:  %s   Time:  %s",batarya_volt, date->valuestring, time->valuestring);
+    }
 
     // Set the combined value to ui_lblDateAndTime
     lv_label_set_text(ui_lblDateAndTime, merged_str);
@@ -1527,7 +1529,31 @@ void parse_read_data(cJSON* json) {
 
 
 }
+typedef struct {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t ena;
+} rgb_ui_data_t;
 
+static void rgb_ui_update_cb(void *data)
+{
+    rgb_ui_data_t *d = (rgb_ui_data_t *)data;
+
+    if(d->ena) {
+        lv_color_t slc = lv_color_make(d->r, d->g, d->b);
+        lv_obj_set_style_bg_color(ui_btnRGBColor, slc, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_add_state(ui_swRGBTurnON, LV_STATE_CHECKED);
+        lv_obj_clear_flag(ui_Colorwheel1, LV_OBJ_FLAG_HIDDEN);
+    } else {
+        lv_color_t slc = lv_color_make(128, 128, 128);
+        lv_obj_set_style_bg_color(ui_btnRGBColor, slc, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_clear_state(ui_swRGBTurnON, LV_STATE_CHECKED);
+        lv_obj_add_flag(ui_Colorwheel1, LV_OBJ_FLAG_HIDDEN);
+    }
+
+    lv_mem_free(d);
+}
 
 
 // Function to parse Write data
@@ -1562,20 +1588,38 @@ void parse_write_data(cJSON* json) {
         } else if (strcmp(writeDataType->valuestring, "RGB") == 0) {
             cJSON* rgbArray = cJSON_GetObjectItem(json, "writeData");
             if (rgbArray && cJSON_IsArray(rgbArray) && cJSON_GetArraySize(rgbArray) == 4) {
-                can_data[0] = (uint8_t)cJSON_GetArrayItem(rgbArray, 0)->valueint; // Red
-                can_data[1] = (uint8_t)cJSON_GetArrayItem(rgbArray, 1)->valueint; // Green
-                can_data[2] = (uint8_t)cJSON_GetArrayItem(rgbArray, 2)->valueint; // Blue
+                can_data[selected_R] = (uint8_t)cJSON_GetArrayItem(rgbArray, 0)->valueint; // Red
+                can_data[selected_G] = (uint8_t)cJSON_GetArrayItem(rgbArray, 1)->valueint; // Green
+                can_data[selected_B] = (uint8_t)cJSON_GetArrayItem(rgbArray, 2)->valueint; // Blue
                 can_data[3] = (uint8_t)cJSON_GetArrayItem(rgbArray, 3)->valueint; // Alpha
                 ESP_LOGI("PARSE_WRITE_DATA", "RGB Values: R=%d, G=%d, B=%d, A=%d", can_data[0], can_data[1], can_data[2], can_data[3]);
                 send_can_frame(0x740, can_data);  // RGB için CAN ID: 0x740
+                rgbEna = can_data[3];
+
+                rgb_ui_data_t *d = lv_mem_alloc(sizeof(rgb_ui_data_t));
+                d->r = can_data[selected_R];
+                d->g = can_data[selected_G];
+                d->b = can_data[selected_B];
+                d->ena = rgbEna;
+
+                lv_async_call(rgb_ui_update_cb, d);
+
             } else {
                 ESP_LOGE("PARSE_WRITE_DATA", "RGB writeData must be an array of 3 values.");
             }
-        } else {
+        }else if (strcmp(writeDataType->valuestring, "Motor") == 0) {
+            if (writeData && cJSON_IsNumber(writeData)) {
+                ESP_LOGI("PARSE_WRITE_DATA", "Motor Value: %d", writeData->valueint);
+                can_data[0] = (uint8_t)writeNo->valueint;  // İlk byte veri
+                can_data[1] = (uint8_t)writeData->valueint;  // İlk byte veri
+                send_can_frame(0x750, can_data);  // Motor için CAN ID: 0x750
+            }
+        }else {
             ESP_LOGI("PARSE_WRITE_DATA", "Unknown writeDataType: %s", writeDataType->valuestring);
         }
     }
 }
+
 
 void set_rgb_to_white() {
     uint8_t can_data[8] = {0}; // CAN verisi için buffer
@@ -1585,6 +1629,15 @@ void set_rgb_to_white() {
     can_data[2] = 255; // Blue
     can_data[3] = rgbEna;   // Unused byte
     send_can_frame(0x740, can_data);  // RGB için CAN ID: 0x740
+}
+
+// Timer callback for BLE-triggered restart
+static void ble_restart_timer_callback(lv_timer_t * timer)
+{
+    ESP_LOGI("BLE_RESTART", "BLE restart timer callback called");
+    save_panel_settings();
+    ESP_LOGI("BLE_RESTART", "save_panel_settings() called");
+    lv_timer_del(timer); // Delete the timer after use
 }
 
 
@@ -1653,6 +1706,16 @@ void parse_configuration_data(cJSON* json) {
     }
 
     save_panel_configuration_to_nvs(numOfOutputs->valueint, outputsBuf, numOfSensors->valueint, sensorsBuf, numOfDims->valueint, dimsBuf);
+    fromBleConfig = 1;
+    ESP_LOGI("BLE_CONFIG", "Creating restart timer for BLE configuration");
+    // Create a one-shot timer to show restart panel in LVGL task context
+    lv_timer_t * restart_timer = lv_timer_create(ble_restart_timer_callback, 100, NULL);
+    if (restart_timer == NULL) {
+        ESP_LOGE("BLE_CONFIG", "Failed to create restart timer!");
+    } else {
+        lv_timer_set_repeat_count(restart_timer, 1); // Run only once
+        ESP_LOGI("BLE_CONFIG", "Restart timer created successfully");
+    }
 }
 // Function to parse Rules data
 void parse_rules_data(cJSON* json) {
@@ -1825,6 +1888,8 @@ void load_panel_configuration_from_nvs(int *totalOutpts, int buffer1[16], int *t
         }
     }
 
+
+
     // Read totalSensors from NVS
     if (nvs_read_int("selR", &selected_R) != ESP_OK || selected_R < 0 || selected_R > 2) {
         selected_R = 0; // Set to default value if out of range
@@ -1838,7 +1903,7 @@ void load_panel_configuration_from_nvs(int *totalOutpts, int buffer1[16], int *t
     if (nvs_read_int("selB", &selected_B) != ESP_OK || selected_B < 0 || selected_B > 2) {
         selected_B = 2; // Set to default value if out of range
     }
-
+    ESP_LOGI(TAG, "-------------------Loaded Panel Configuration: R=%d, G=%d, B=%d",selected_R, selected_G, selected_B);
 }
 
 
@@ -1869,7 +1934,7 @@ void load_theme_configuration_from_nvs(int* themeType, int* wallpaperEnabled, in
 
 
     // Log the loaded configuration
-    ESP_LOGI(DISPLAY_TAG, "Loaded Theme Configuration: Theme=%d, WallpaperEnabled=%d, WallpaperTimeIndex=%d, LanguageType=%d",
+    ESP_LOGI(TAG, "Loaded Theme Configuration: Theme=%d, WallpaperEnabled=%d, WallpaperTimeIndex=%d, LanguageType=%d",
              *themeType, *wallpaperEnabled, *wallpaperTimeIndex, *panelLanguageType);
 
 }
@@ -1946,11 +2011,7 @@ void check_switches_and_get_dropdown_values_for_dims() {
 
 // Function to check the state of the first 5 switches and update sensorsBuffer
 void check_sensors_and_update_buffer() {
-    // sensorsBuffer[0] = 1;
-    // sensorsBuffer[1] = 1;
-    // sensorsBuffer[2] = 1;
-    // sensorsBuffer[3] = 1;
-    // sensorsBuffer[4] = 1;
+
 
     // Reset the sensorsBuffer
     memset(sensorsBuffer, 0, sizeof(sensorsBuffer));
@@ -1973,27 +2034,99 @@ void check_sensors_and_update_buffer() {
 }
 
 int SaveConfigsCounter = 0; // Counter for save configs bar
+lv_obj_t* current_progress_bar = NULL; // Global reference to the current progress bar
 static void save_configsbar_timer(lv_timer_t * timer)
 {
-    lv_bar_set_value(ui_pbSaveConfigs, SaveConfigsCounter, LV_ANIM_OFF);  // 0 → 100 in steps of 10
-    SaveConfigsCounter += 3; // Increment the counter by 10
+    if (current_progress_bar != NULL) {
+        lv_bar_set_value(current_progress_bar, SaveConfigsCounter, LV_ANIM_OFF);  // 0 → 100 in steps of 3
+    }
+    SaveConfigsCounter += 3; // Increment the counter by 3
     if(SaveConfigsCounter >= 100) {
         check_switches_and_get_dropdown_values();
         check_sensors_and_update_buffer();
         check_switches_and_get_dropdown_values_for_dims();
-        save_panel_configuration_to_nvs(numOfOutputs, outputsBuffer, numOfSensors, sensorsBuffer, numOfDims, dimsBuffer);
         // Save the panel settings to NVS
-        ESP_LOGI(DISPLAY_TAG, "##### Panel Settings Saved Successfully! #####");
+        if(fromBleConfig == 1) {
+            ESP_LOGI(TAG, "##### Saving Panel Settings from BLE Configuration #####");
+            
+            fromBleConfig = 0; // Reset the flag
+        } else {
+            ESP_LOGI(TAG, "##### Saving Panel Settings from UI Configuration #####");
+            save_panel_configuration_to_nvs(numOfOutputs, outputsBuffer, numOfSensors, sensorsBuffer, numOfDims, dimsBuffer);
+        }
+        ESP_LOGI(TAG, "##### Panel Settings Saved Successfully! #####");
         esp_restart();
     }
 }
 
 void save_panel_settings()
 {
-    lv_obj_clear_flag(ui_pnlSaveConfigs, LV_OBJ_FLAG_HIDDEN);     /// Flags
-    lv_obj_move_foreground(ui_pnlSaveConfigs);
+    // Create restart panel as overlay on current screen
+    lv_obj_t * current_screen = lv_scr_act();
+    if (current_screen == NULL) {
+        ESP_LOGE("SAVE_PANEL", "No active screen!");
+        return;
+    }
+    
+    ESP_LOGI("SAVE_PANEL", "Creating restart panel overlay on current screen");
+    
+    // Create the restart panel as a child of the current screen
+    lv_obj_t * restart_panel = lv_obj_create(current_screen);
+    lv_obj_set_width(restart_panel, 545);
+    lv_obj_set_height(restart_panel, 125);
+    lv_obj_set_align(restart_panel, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(restart_panel, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_set_style_bg_color(restart_panel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(restart_panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(restart_panel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(restart_panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(restart_panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(restart_panel, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(restart_panel, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_spread(restart_panel, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_ofs_x(restart_panel, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_ofs_y(restart_panel, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+    
+    // Create the text labels
+    lv_obj_t * label1 = lv_label_create(restart_panel);
+    lv_obj_set_align(label1, LV_ALIGN_TOP_MID);
+    lv_obj_set_y(label1, -20);
+    lv_label_set_text(label1, "Device will restart");
+    lv_obj_set_style_text_color(label1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(label1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(label1, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);
+    
+    lv_obj_t * label2 = lv_label_create(restart_panel);
+    lv_obj_set_align(label2, LV_ALIGN_CENTER);
+    lv_label_set_text(label2, "Please wait...");
+    lv_obj_set_style_text_color(label2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(label2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(label2, &lv_font_montserrat_22, LV_PART_MAIN | LV_STATE_DEFAULT);
+    
+    // Create progress bar
+    lv_obj_t * progress_bar = lv_bar_create(restart_panel);
+    lv_obj_set_width(progress_bar, 173);
+    lv_obj_set_height(progress_bar, 10);
+    lv_obj_set_align(progress_bar, LV_ALIGN_BOTTOM_MID);
+    lv_obj_set_y(progress_bar, -10);
+    lv_bar_set_range(progress_bar, 0, 100);
+    lv_bar_set_value(progress_bar, 0, LV_ANIM_OFF);
+    
+    // Set the global progress bar reference for the timer
+    current_progress_bar = progress_bar;
+    
+    // Reset counter for new restart
+    SaveConfigsCounter = 0;
+    
+    // Move panel to foreground
+    lv_obj_move_foreground(restart_panel);
+    
+    // Force LVGL to refresh the display
+    lv_refr_now(NULL);
+    
+    // Create timer with the new progress bar
     lv_timer_t * initTim = lv_timer_create(save_configsbar_timer, 100, NULL);
-
+    ESP_LOGI("SAVE_PANEL", "Restart panel overlay created and visible");
 }
 
 void save_theme_settings()
@@ -2032,8 +2165,6 @@ void save_theme_settings()
     }
 
 
-
-
     lv_dropdown_get_selected_str(ui_dbLanguage, selected_text, sizeof(selected_text));
 
     if(strcmp(selected_text, "TURKCE") == 0)
@@ -2047,13 +2178,17 @@ void save_theme_settings()
         apply_language_settings();
         
     }
+    else
+    {
+        panelLanguageType = 0;  // Default to English
+        apply_language_settings();
+    }
     
     
     ESP_LOGI(TAG, "Wallpaper Enabled, Selected Time: %s-----index = %d panelThemeType =%d panelWallpaperEnable =%d panelWallpaperTime =%d panelLanguageType =%d", selected_text, selected_index,
              panelThemeType, panelWallpaperEnable, panelWallpaperTime, panelLanguageType);
     save_theme_configuration_to_nvs((int16_t*)&panelThemeType, (uint16_t*)&panelWallpaperEnable, (uint16_t*)&panelWallpaperTime, (int16_t*)&panelLanguageType);
 }
-
 
 void apply_theme_settings()
 {
@@ -2097,7 +2232,6 @@ void apply_language_settings()
     if (panelLanguageType == 0) {
         // English
 
-
         lv_label_set_text(ui_lblPanelSettingsB, "PANEL\nSETTINGS");
         lv_label_set_text(ui_lblThemeSettingsB, "THEME\nSETTINGS");
         lv_label_set_text(ui_lblConnectionSettingsB, "CONNECTION\nSETTINGS");
@@ -2117,17 +2251,13 @@ void apply_language_settings()
         lv_label_set_text(ui_lblWallpaper, "Wallpaper: ");
         lv_label_set_text(ui_lblGrup1, "Clean Water");
         lv_label_set_text(ui_lblGrup2, "Dirty Water");
-        lv_label_set_text(ui_lblPnlGrup1Sicaklik1, "\n\nEx. Temp.");
-        lv_label_set_text(ui_lblPnlGrup1Sicaklik2, "\n\nIn. Temp.");
+        lv_label_set_text(ui_lblPnlGrup1Sicaklik1, "\n\n Temp");
+        lv_label_set_text(ui_lblPnlGrup1Sicaklik2, "\n\nHumidity");
         lv_label_set_text(ui_Label12, "SAVING CONFIGURATIONS...\n   DEVICE WILL RESTART");
         lv_label_set_text(ui_lblPanelSettings, "PANEL SETTINGS");
         lv_label_set_text(ui_lblDimmableOutputs, "Dimmable Outputs");
-        lv_label_set_text_fmt(ui_lblDim1, "%s:", lblDimBtnNames[dimsBuffer[0] - 1]);
-        lv_label_set_text_fmt(ui_lblDim2, "%s:", lblDimBtnNames[dimsBuffer[1] - 1]);
-        lv_label_set_text_fmt(ui_lblDim3, "%s:", lblDimBtnNames[dimsBuffer[2] - 1]);
-        lv_label_set_text_fmt(ui_lblDim4, "%s:", lblDimBtnNames[dimsBuffer[3] - 1]);
-        lv_label_set_text(ui_lblUnderArcTemperature1, "Internal Temperature");
-        lv_label_set_text(ui_lblUnderArcTemperature2, "External Temperature");
+        lv_label_set_text(ui_lblUnderArcTemperature1, "Temperature");
+        lv_label_set_text(ui_lblUnderArcTemperature2, "Humidity");
         lv_label_set_text(ui_lblUnderArcWater1, "Clean Water");
         lv_label_set_text(ui_lblUnderArcWater2, "Dirty Water");
 
@@ -2165,19 +2295,18 @@ void apply_language_settings()
         lv_label_set_text(ui_lblWallpaper, "Duvar Kagidi: ");
         lv_label_set_text(ui_lblGrup1, "Temiz Su");
         lv_label_set_text(ui_lblGrup2, "Kirli Su");
-        lv_label_set_text(ui_lblPnlGrup1Sicaklik1, "\n\nIc Sicak.");
-        lv_label_set_text(ui_lblPnlGrup1Sicaklik2, "\n\nDis Sicak.");
+        lv_label_set_text(ui_lblPnlGrup1Sicaklik1, "\n\n Sicaklik");
+        lv_label_set_text(ui_lblPnlGrup1Sicaklik2, "\n\n   Nem");
         lv_label_set_text(ui_Label12, "AYARLAR KAYDEDILIYOR...\nCIHAZ YENIDEN BASLAYACAK");
         lv_label_set_text(ui_lblPanelSettings, "PANEL AYARLARI");
         lv_label_set_text(ui_lblDimmableOutputs, "Dim Cikislari");
-        lv_label_set_text_fmt(ui_lblDim1, "%s:", lblDimBtnNames_TR[dimsBuffer[0] - 1]);
-        lv_label_set_text_fmt(ui_lblDim2, "%s:", lblDimBtnNames_TR[dimsBuffer[1] - 1]);
-        lv_label_set_text_fmt(ui_lblDim3, "%s:", lblDimBtnNames_TR[dimsBuffer[2] - 1]);
-        lv_label_set_text_fmt(ui_lblDim4, "%s:", lblDimBtnNames_TR[dimsBuffer[3] - 1]);
-        lv_label_set_text(ui_lblUnderArcTemperature1, "Ic Sicaklik");
-        lv_label_set_text(ui_lblUnderArcTemperature2, "Dis Sicaklik");
+        lv_label_set_text(ui_lblUnderArcTemperature1, "Sicaklik");
+        lv_label_set_text(ui_lblUnderArcTemperature2, "Nem");
         lv_label_set_text(ui_lblUnderArcWater1, "Temiz Su");
         lv_label_set_text(ui_lblUnderArcWater2, "Kirli Su");
+
+
+
 
         //set lblBtnNames_TR with for loop that has numberofOutputs
         for (int i = 0; i < numOfOutputs; i++) {
@@ -2190,6 +2319,8 @@ void apply_language_settings()
         }
         set_language_for_dropdowns_TR();
     }
+
+
 
     lv_obj_t* dropdowns[16] = {ui_cbxO1, ui_cbxO2, ui_cbxO3, ui_cbxO4, ui_cbxO5, ui_cbxO6, ui_cbxO7, ui_cbxO8, ui_cbxO9, ui_cbxO10, ui_cbxO11, ui_cbxO12, ui_cbxO13, ui_cbxO14, ui_cbxO15, ui_cbxO16};
     lv_obj_t* dimdropdowns[4] = {ui_cbxDim1, ui_cbxDim2, ui_cbxDim3, ui_cbxDim4};
