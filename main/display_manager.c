@@ -379,6 +379,7 @@ cJSON* notifications = NULL;
 int outputsBuffer[16] = {0};
 int sensorsBuffer[5] = {0};
 int dimsBuffer[4] = {0};
+int safeDimsBuffer[4] = {0};  // Safe backup for dimsBuffer
 int rgbBuffer[3] = {0};
 int btn_index = 0;
 uint8_t rgbEna = 0; // RGB LED enable variable
@@ -1107,7 +1108,7 @@ void update_display_with_data() {
             snprintf(batarya_volt_str, sizeof(batarya_volt_str), "Battery: %d,%02dV", before_comma_volt, after_comma_volt);
         } else {
             // English  
-        snprintf(batarya_volt_str, sizeof(batarya_volt_str), "Battery: %d,%02dV", before_comma_volt, after_comma_volt);
+        snprintf(batarya_volt_str, sizeof(batarya_volt_str), "Batarya: %d,%02dV", before_comma_volt, after_comma_volt);
         }
     }
 
@@ -1463,10 +1464,10 @@ void parse_read_data(cJSON* json) {
     lv_label_set_text(ui_lblScreenClock, time->valuestring);
     if(panelLanguageType == 0) {
         // Turkish
-        snprintf(merged_str, sizeof(merged_str), "Batarya:  %.2fV  Tarih:  %s   Saat:  %s",batarya_volt, date->valuestring, time->valuestring);
+        snprintf(merged_str, sizeof(merged_str), "Battery:  %.2fV  Date:  %s   Time:  %s",batarya_volt, date->valuestring, time->valuestring);
     } else {
         // English  
-    snprintf(merged_str, sizeof(merged_str), "Battery:  %.2fV  Date:  %s   Time:  %s",batarya_volt, date->valuestring, time->valuestring);
+        snprintf(merged_str, sizeof(merged_str), "Batarya:  %.2fV  Tarih:  %s   Saat:  %s",batarya_volt, date->valuestring, time->valuestring);
     }
 
     // Set the combined value to ui_lblDateAndTime
@@ -2306,17 +2307,30 @@ void apply_language_settings()
         lv_label_set_text(ui_lblUnderArcWater2, "Kirli Su");
 
 
-
-
         //set lblBtnNames_TR with for loop that has numberofOutputs
         for (int i = 0; i < numOfOutputs; i++) {
             lv_label_set_text(lblIO[i], lblBtnNames_TR[outputsBuffer[i] - 1]);
         }
 
-        //do it for dims as well
-        for (int i = 0; i < numOfDims; i++) {
-            lv_label_set_text(lblDims[i], lblDimBtnNames_TR[dimsBuffer[i] - 1]);
+        // printf("DEBUG: numOfDims = %d\n", numOfDims);
+        // printf("DEBUG: dimsBuffer[0] = %d\n", dimsBuffer[0]);
+        // printf("DEBUG: dimsBuffer[1] = %d\n", dimsBuffer[1]);
+        // printf("DEBUG: dimsBuffer[2] = %d\n", dimsBuffer[2]);
+        // printf("DEBUG: dimsBuffer[3] = %d\n", dimsBuffer[3]);
+
+        // Update safe buffer RIGHT BEFORE using it to prevent corruption
+        memcpy(safeDimsBuffer, dimsBuffer, sizeof(dimsBuffer));
+        
+        // printf("DEBUG: safeDimsBuffer[0] = %d\n", safeDimsBuffer[0]);
+        // printf("DEBUG: safeDimsBuffer[1] = %d\n", safeDimsBuffer[1]);
+        // printf("DEBUG: safeDimsBuffer[2] = %d\n", safeDimsBuffer[2]);
+        // printf("DEBUG: safeDimsBuffer[3] = %d\n", safeDimsBuffer[3]);
+
+        for (int i = 0; i < numOfDims; i++) 
+        { 
+            lv_label_set_text(lblDims[i], lblDimBtnNames_TR[safeDimsBuffer[i] - 1]); 
         }
+
         set_language_for_dropdowns_TR();
     }
 
@@ -2609,6 +2623,7 @@ void display_manager_init() {
     comm_animation_timer = lv_timer_create(comm_animation_timer_callback, 1000, NULL);
 
      load_panel_configuration_from_nvs(&numOfOutputs, outputsBuffer, &numOfSensors, sensorsBuffer, &numOfDims, dimsBuffer);
+    memcpy(safeDimsBuffer, dimsBuffer, sizeof(dimsBuffer));  // Backup dimsBuffer to safeDimsBuffer
     sensorsBuffer[0] = 1;//temperature 1
     sensorsBuffer[1] = 1;//temperature 2
     sensorsBuffer[2] = 1;

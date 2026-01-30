@@ -138,3 +138,7 @@ def motorMoveForwardReleased(event_struct):
 def motorMoveForwardPressed(event_struct):
     return
 
+
+def btnMenuCallback(event_struct):
+    return
+

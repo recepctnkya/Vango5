@@ -425,8 +425,8 @@ void ui_scrMain_screen_init(void)
     lv_img_set_src(ui_imgWForecast, &ui_img_weatherforecast2_png);
     lv_obj_set_width(ui_imgWForecast, 32);
     lv_obj_set_height(ui_imgWForecast, 38);
-    lv_obj_set_x(ui_imgWForecast, -315);
-    lv_obj_set_y(ui_imgWForecast, -275);
+    lv_obj_set_x(ui_imgWForecast, -334);
+    lv_obj_set_y(ui_imgWForecast, -273);
     lv_obj_set_align(ui_imgWForecast, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_imgWForecast, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_imgWForecast, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
