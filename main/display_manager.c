@@ -1061,7 +1061,7 @@ void set_button_color(lv_obj_t *btn, uint16_t value, int connected) {
     if (value == 1) {
         lv_obj_set_style_bg_color(btn, lv_color_hex(0x37C600), LV_PART_MAIN | LV_STATE_DEFAULT); // Green
     } else if (value == 0) {
-        lv_obj_set_style_bg_color(btn, lv_color_hex(0x5A5A5A), LV_PART_MAIN | LV_STATE_DEFAULT); // Gray
+        lv_obj_set_style_bg_color(btn, lv_color_hex(0x1A1A1A), LV_PART_MAIN | LV_STATE_DEFAULT); // Gray
     } else if (value == 2) {
         lv_obj_set_style_bg_color(btn, lv_color_hex(0xC60000), LV_PART_MAIN | LV_STATE_DEFAULT); // Red
     }
