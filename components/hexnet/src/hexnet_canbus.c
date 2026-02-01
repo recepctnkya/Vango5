@@ -16,8 +16,15 @@
 
 /* --------------------- Definitions and static variables ------------------ */
 //Example Configuration
-#define TX_GPIO_NUM             15
-#define RX_GPIO_NUM             16
+
+//#define DISPLAY_5_INCH 1
+#if DISPLAY_5_INCH
+    #define TX_GPIO_NUM             15
+    #define RX_GPIO_NUM             16
+#else
+    #define TX_GPIO_NUM             20
+    #define RX_GPIO_NUM             19
+#endif
 #define EXAMPLE_TAG             "TWAI Master"
 
 static bool driver_installed = false;
