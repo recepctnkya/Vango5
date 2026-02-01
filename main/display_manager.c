@@ -714,7 +714,7 @@ void create_dynamic_ui(lv_obj_t* parent) {
         lv_obj_add_flag(btnIO[i], LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
         lv_obj_clear_flag(btnIO[i], LV_OBJ_FLAG_SCROLLABLE);      /// Flags
         lv_obj_set_style_radius(btnIO[i], 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_bg_color(btnIO[i], lv_color_hex(0x5A5A5A), LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_bg_color(btnIO[i], lv_color_hex(0x1A1A1A), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_bg_opa(btnIO[i], 255, LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_border_color(btnIO[i], lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_border_opa(btnIO[i], 255, LV_PART_MAIN | LV_STATE_DEFAULT);
